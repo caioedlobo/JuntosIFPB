@@ -1,9 +1,63 @@
+main {
+  background-image: linear-gradient(to bottom right, #2f6933, #28b00a);
+}
+
 .left {
-  /* background-color: black; */
-  width: "100vw";
-  height: "100vh";
-  justify-content: "space-between";
-  align-items: "center";
-  background-image: "linear-gradient(to right, green, green)";
-  display: "flex";
+  width: 70vw;
+  height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+
+  display: flex;
+}
+
+.right {
+  width: 30vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  flex-direction: column;
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  height: max-content;
+  padding: 102px 40px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  min-width: 360px;
+}
+
+.mainImage {
+  width: 1024px;
+}
+
+@media screen and (max-width: 1750px) {
+  .mainImage {
+    min-width: 480px;
+    max-width: 768px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1365px) {
+  .left {
+    flex-direction: column;
+    justify-content: center;
+    width: 60vw;
+  }
+  .mainImage {
+    min-width: 240px;
+    max-width: 480px;
+    /* display: none; */
+  }
+  .right {
+    width: 40vw;
+  }
 }

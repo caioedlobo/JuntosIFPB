@@ -4,7 +4,11 @@ import ButtonGroupLogin from "./ButtonGroupLogin";
 
 const LoginButton = (props) => {
   //console.log(props.classes.root)
-  return <ButtonUI className={props.classes.root}>Log in</ButtonUI>;
+  return (
+    <ButtonUI className={props.classes.root} fullWidth>
+      Entrar
+    </ButtonUI>
+  );
 };
 
 export default LoginButton;

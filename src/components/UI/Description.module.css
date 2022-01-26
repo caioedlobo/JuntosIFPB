@@ -1,9 +1,13 @@
+.box {
+  width: 520px;
+  color: white;
+  margin: 0 auto;
+}
+
 .title {
-  width: 420px;
-  /* //height: 10; */
-  /* padding-top: 100px; */
+  margin-bottom: 0;
+  font-size: 62px;
 }
 .desc {
-  width: 420px;
-  /* height: 10; */
+  font-size: 28px;
 }

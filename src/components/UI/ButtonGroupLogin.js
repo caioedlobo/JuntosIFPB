@@ -12,11 +12,12 @@ const useStyles = makeStyles({
   root: {
     //background: "linear-gradient(45deg, #7b1fa2, #ce93d8)",
     /* background: "#4461f2", */
-    background: "#2f6933",
+    //background: "#2f6933",
     border: 0,
     borderRadius: 8,
     color: "white",
     width: "100%",
+    background: "linear-gradient(to bottom right, #2f6933, #28b00a)",
 
     //padding: "0 30px",
   },
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
 const ButtonGroupLogin = (props) => {
   const classes = useStyles();
   return (
-    <ButtonGroup>
+    <ButtonGroup fullWidth>
       <LoginButton classes={classes}></LoginButton>
       {/* <RegisterButton classes={classes}></RegisterButton> */}
     </ButtonGroup>
