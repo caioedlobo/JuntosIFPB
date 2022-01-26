@@ -1,62 +1,64 @@
 import { Button, TextField } from "@material-ui/core";
-import "./App.css";
 import ButtonGroupLogin from "./components/UI/ButtonGroupLogin";
 import Description from "./components/UI/Description";
 import LogoImg from "./components/UI/LogoImg";
-import { Grid } from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 import image from "./assets/undraw_team_collaboration_re_ow29-1.svg";
 import imageLogin from "./assets/undraw_sign_in_re_o58h.svg";
+import classes from "./App.module.css";
+import LoginText from "./components/UI/LoginText";
+import PasswordText from "./components/UI/PasswordText";
+//Home,
 function App() {
   return (
     <div>
       <header></header>
       <main>
-        <Grid container style={{ minHeight: "100vh" }}>
-          <Grid item xs={12} sm={6}>
-            {/* <Description /> */}
+        <Box sx={{ display: "flex" }}>
+          <div className={classes.left}>
+            <Description />
             <img
               src={image}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              style={{
+                //width: "60%",
+                width: "768px",
+              }}
               alt="logoImg"
             />
-          </Grid>
+          </div>
 
-          <Grid
-            container
-            item
-            xs={12}
-            sm={6}
-            alignItems="center"
-            style={{ padding: 10 }}
-            direction="column"
-            justifyContent="space-between"
+          <div
+            style={{
+              width: "30vw",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
-            <div />
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                maxWidth: 400,
-                minWidth: 300,
+                maxWidth: "400px",
+                minWidth: "300px",
               }}
             >
-              <Grid container justify="center">
-                <img src={imageLogin} width={200}></img>
-              </Grid>
-              <TextField
-                label="Usuário"
-                margin="normal"
-                color="secondary"
-              ></TextField>
-              <TextField label="Senha" margin="normal"></TextField>
+              <div>
+                <img src={imageLogin} width={"200px"}></img>
+              </div>
+              <LoginText />
+              <PasswordText />
+
               <div style={{ height: 20 }} />
+
               <ButtonGroupLogin>Entrar</ButtonGroupLogin>
+
               <div style={{ height: 20 }} />
+
               <Button>Não possui conta? Registre-se</Button>
             </div>
-            <div />
-          </Grid>
-        </Grid>
+          </div>
+        </Box>
       </main>
     </div>
   );
