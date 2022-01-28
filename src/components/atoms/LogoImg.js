@@ -1,6 +1,5 @@
 import React from "react";
-import image from "../assets/undraw_team_collaboration_re_ow29-3.svg";
-
+import image from "../../assets/undraw_team_collaboration_re_ow29-3.svg";
 import classes from "../Pages/stylesheet/Home.module.css";
 
 const LogoImg = () => {

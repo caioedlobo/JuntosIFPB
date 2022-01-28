@@ -1,5 +1,5 @@
-import Home from "./Pages/Home";
-import Ranking from "./Pages/Ranking";
+import Home from "./components/Pages/Home";
+import Ranking from "./components/Pages/Ranking";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {

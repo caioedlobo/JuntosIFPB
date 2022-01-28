@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/UI/Navbar";
+import Navbar from "../atoms/Navbar";
 import MTable from "../organisms/MTable";
 
 const Ranking = () => {

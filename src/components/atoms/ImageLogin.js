@@ -1,5 +1,5 @@
 import React from "react";
-import imageLogin from "../assets/undraw_sign_in_re_o58h.svg";
+import imageLogin from "../../assets/undraw_sign_in_re_o58h.svg";
 
 const ImageLogin = () => {
   return (
