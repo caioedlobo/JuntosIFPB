@@ -1,9 +1,9 @@
 import React from "react";
-import classes from "./Description.module.css";
+import classes from "./stylesheet/Description.module.css";
 
 const Description = () => {
   return (
-    <div className={classes.box}>
+    <div className={classes.box} data-testid="description">
       <h2 className={classes.title}>Bem-vindo ao Juntos pelo IFPB</h2>
 
       {/* <p className={classes.desc}>

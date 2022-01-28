@@ -1,4 +1,3 @@
-import Navbar from "./components/UI/Navbar";
 import Home from "./Pages/Home";
 import Ranking from "./Pages/Ranking";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

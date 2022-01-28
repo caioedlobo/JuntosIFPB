@@ -1,0 +1,64 @@
+{
+  "folderTemplates.structures": [
+    {
+      "name": "React Component",
+      "omitParentDirectory": true,
+      "structure": [
+        {
+          "fileName": "<FTName>.js",
+          "template": "Functional Component"
+        },
+        {
+          "fileName": "<FTName>.spec.js",
+          "template": "React Unit Test"
+        }
+      ]
+    },
+    {
+      "name": "Unit Test",
+      "omitParentDirectory": true,
+      "structure": [
+        {
+          "fileName": "<FTName>.spec.js",
+          "template": "React Unit Test"
+        }
+      ]
+    }
+  ],
+  "folderTemplates.fileTemplates": {
+    "Functional Component": [
+      "import React from 'react'",
+      "",
+      "const <FTName> = () => {",
+      "  return <div data-testid='<FTName % kebabcase>' style={{ width: '100%' }}></div>",
+      "}",
+      "",
+      "export default <FTName>"
+    ],
+    "React Unit Test": [
+      "import { cleanup, render, screen } from '@testing-library/react'",
+      "import React from 'react'",
+      "import <FTName> from './<FTName>'",
+      "import { MemoryRouter, Route, Routes } from 'react-router-dom';",
+      "",
+      "describe('<FTName>', () => {",
+      "  afterEach(() => {",
+      "    cleanup()",
+      "  })",
+      "",
+      "  it('renders correctly', () => {",
+      "     render(",
+      "        <MemoryRouter>",
+      "          <Routes location=\"/\">",
+      "            <Route path=\"/\" element={<<FTName> />} />",
+      "         </Routes>",
+      "       </MemoryRouter>",
+      "     );",
+      "    const <FTName % camelcase> = screen.getByTestId('<FTName % kebabcase>')",
+      "",
+      "    expect(<FTName % camelcase>).toBeInTheDocument()",
+      "  })",
+      "})"
+    ]
+  }
+}

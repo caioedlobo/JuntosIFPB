@@ -1,12 +1,7 @@
 import React from "react";
 import LoginButton from "./LoginButton";
-import RegisterButton from "./RegisterButton";
 import { ButtonGroup } from "@material-ui/core";
-import {
-  makeStyles,
-  ThemeProvider,
-  createTheme,
-} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   root: {

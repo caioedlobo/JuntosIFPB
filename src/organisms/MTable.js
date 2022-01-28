@@ -82,6 +82,7 @@ const MTable = () => {
 
   const classes = useStyles();
   return (
+    <div data-testid="m-table">
     <Paper options={{ filtering: true }}>
       <SearchBar
         label="Teste"
@@ -168,6 +169,7 @@ const MTable = () => {
         </Table>
       </TableContainer>
     </Paper>
+    </div>
   );
 };
 

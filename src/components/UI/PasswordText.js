@@ -3,12 +3,14 @@ import { TextField } from "@material-ui/core";
 
 const PasswordText = () => {
   return (
-    <TextField
-      label="Senha"
-      margin="normal"
-      fullWidth
-      color="primary"
-    ></TextField>
+    <div data-testid="password-text" style={{ width: "100%" }}>
+      <TextField
+        label="Senha"
+        margin="normal"
+        fullWidth
+        color="primary"
+      ></TextField>
+    </div>
   );
 };
 
