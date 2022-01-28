@@ -14,7 +14,8 @@ const useStyles = makeStyles({
     /* background: "#4461f2", */
     //background: "#2f6933",
     border: 0,
-    borderRadius: 8,
+    //borderRadius: 8,
+    borderRadius: "15px",
     color: "white",
     width: "100%",
     background: "linear-gradient(to bottom right, #2f6933, #28b00a)",

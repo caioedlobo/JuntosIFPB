@@ -7,7 +7,7 @@ const PasswordText = () => {
       label="Senha"
       margin="normal"
       fullWidth
-      color="black"
+      color="primary"
     ></TextField>
   );
 };

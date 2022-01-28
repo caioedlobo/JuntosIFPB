@@ -1,0 +1,33 @@
+.typo {
+  padding: 12px 24px;
+  cursor: pointer;
+  color: white;
+  opacity: 1;
+  font-size: 22px;
+  justify-content: space-between;
+  font-weight: 600;
+  /* background-color: red; */
+  text-decoration: none;
+}
+.typo:not(:last-child) {
+  margin-right: 28px;
+}
+
+.registerButton {
+  opacity: 1;
+  background-color: rgba(194, 199, 194, 0.794);
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  width: 100%;
+  /* background: linear-gradient(to bottom right, #2f6933, #28b00a); */
+}
+
+.ifImg {
+  width: 40%;
+  padding-top: 10px;
+}
+
+.typo:hover {
+  color: #d0d0d0;
+}
