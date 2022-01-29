@@ -3,7 +3,7 @@
   cursor: pointer;
   color: white;
   opacity: 1;
-  font-size: 22px;
+  font-size: 17.6px;
   justify-content: space-between;
   font-weight: 600;
   /* background-color: red; */
@@ -24,7 +24,8 @@
 }
 
 .ifImg {
-  width: 40%;
+  margin-left: 15px;
+  width: 30%;
   padding-top: 10px;
 }
 

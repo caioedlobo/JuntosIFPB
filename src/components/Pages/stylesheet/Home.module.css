@@ -28,14 +28,15 @@ main {
   align-items: center;
   background-color: white;
   height: max-content;
-  padding: 102px 40px;
+  padding: 90px 30px;
   border-radius: 16px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   min-width: 360px;
 }
 
 .mainImage {
-  width: 1024px;
+  /* width: 1024px; */
+  width: 820px;
 }
 
 @media screen and (max-width: 1750px) {
