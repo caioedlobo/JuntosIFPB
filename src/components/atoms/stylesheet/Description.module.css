@@ -1,13 +1,13 @@
 .box {
-  width: 480px;
+  width: 360px;
   color: white;
   /* margin-left: 85px; */
   margin: 0 auto;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .title {
-  margin-bottom: 25px;
+  margin-bottom: 40px;
   font-size: 49px;
 }
 .desc {

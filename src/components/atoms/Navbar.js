@@ -35,10 +35,10 @@ const Navbar = (props) => {
             >
               {/* <IconButton> */}
               {/* <MenuOutlinedIcon /> */}
-              <img
+              {/* <img
                 className={classes.ifImg}
                 src="https://avatars.githubusercontent.com/u/2523928?s=280&v=4"
-              ></img>
+              ></img> */}
               {/* </IconButton> */}
             </Box>
             <Box

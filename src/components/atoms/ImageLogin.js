@@ -4,7 +4,14 @@ import imageLogin from "../../assets/undraw_sign_in_re_o58h.svg";
 const ImageLogin = () => {
   return (
     <div data-testid="image-login">
-      <img src={imageLogin} width={"200px"}></img>
+      <img
+        /* src={imageLogin}  */
+        src={"https://avatars.githubusercontent.com/u/2523928?s=280&v=4"}
+        width={"100px"}
+        style={{ marginTop: "-25px" }}
+
+        /* width={"200px"} */
+      ></img>
     </div>
   );
 };
