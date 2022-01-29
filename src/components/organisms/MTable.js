@@ -8,8 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { makeStyles, ThemeProvider, useTheme } from "@material-ui/core/styles";
-import { borderRadius } from "@mui/system";
+import { makeStyles } from "@material-ui/core/styles";
+
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
@@ -83,92 +83,96 @@ const MTable = () => {
   const classes = useStyles();
   return (
     <div data-testid="m-table">
-    <Paper options={{ filtering: true }}>
-      <SearchBar
-        label="Teste"
-        value={searched}
-        onChange={(searchVal) => requestSearch(searchVal)}
-        onCancelSearch={() => cancelSearch()}
-      />
-      <TableContainer
-        component={Paper}
-        className={classes.tableContainer}
-        options={{ filtering: true }}
-      >
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell
-                options={{ filtering: true }}
-                className={classes.tableHeaderCell}
-              >
-                Usuario
-              </TableCell>
-              <TableCell className={classes.tableHeaderCell}>Demanda</TableCell>
-              <TableCell className={classes.tableHeaderCell}>Setor</TableCell>
-
-              <TableCell className={classes.tableHeaderCell}>
-                Data de solicitação
-              </TableCell>
-              <TableCell className={classes.tableHeaderCell}>Status</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.name}
-                /* sx={{ "&:last-child td, &:last-child th": { border: 0 } }} */
-              >
-                {/* <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell> */}
-                <TableCell>
-                  <Grid container>
-                    <Grid item lg={2}>
-                      <Avatar
-                        className={classes.avatar}
-                        alt={row.name}
-                        src="."
-                      />
-                    </Grid>
-                    <Grid item lg={10}>
-                      <Typography className={classes.name}>
-                        {row.name}
-                      </Typography>
-                      <Typography color="textSecondary" variant="body2">
-                        {row.email}
-                      </Typography>
-                      <Typography color="textSecondary" variant="body2">
-                        {row.name}
-                      </Typography>
-                    </Grid>
-                  </Grid>
+      <Paper options={{ filtering: true }}>
+        <SearchBar
+          label="Teste"
+          value={searched}
+          onChange={(searchVal) => requestSearch(searchVal)}
+          onCancelSearch={() => cancelSearch()}
+        />
+        <TableContainer
+          component={Paper}
+          className={classes.tableContainer}
+          options={{ filtering: true }}
+        >
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell
+                  options={{ filtering: true }}
+                  className={classes.tableHeaderCell}
+                >
+                  Usuario
                 </TableCell>
-                <TableCell>{row.job}</TableCell>
-                {/* <TableCell>{row.email}</TableCell> */}
-                <TableCell>{row.job}</TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  Demanda
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>Setor</TableCell>
 
-                <TableCell>{row.joinDate}</TableCell>
-                <TableCell>
-                  <Typography
-                    className={classes.status}
-                    style={{
-                      backgroundColor:
-                        (row.status === "Resolvido" && "green") ||
-                        (row.status === "Não Resolvido" && "red") ||
-                        (row.status === "Em análise" && "#B8860B") ||
-                        (row.status === "Em validação" && "#556B2F"),
-                    }}
-                  >
-                    {row.status}
-                  </Typography>
+                <TableCell className={classes.tableHeaderCell}>
+                  Data de solicitação
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  Status
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.name}
+                  /* sx={{ "&:last-child td, &:last-child th": { border: 0 } }} */
+                >
+                  {/* <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell> */}
+                  <TableCell>
+                    <Grid container>
+                      <Grid item lg={2}>
+                        <Avatar
+                          className={classes.avatar}
+                          alt={row.name}
+                          src="."
+                        />
+                      </Grid>
+                      <Grid item lg={10}>
+                        <Typography className={classes.name}>
+                          {row.name}
+                        </Typography>
+                        <Typography color="textSecondary" variant="body2">
+                          {row.email}
+                        </Typography>
+                        <Typography color="textSecondary" variant="body2">
+                          {row.name}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </TableCell>
+                  <TableCell>{row.job}</TableCell>
+                  {/* <TableCell>{row.email}</TableCell> */}
+                  <TableCell>{row.job}</TableCell>
+
+                  <TableCell>{row.joinDate}</TableCell>
+                  <TableCell>
+                    <Typography
+                      className={classes.status}
+                      style={{
+                        backgroundColor:
+                          (row.status === "Resolvido" && "green") ||
+                          (row.status === "Não Resolvido" && "red") ||
+                          (row.status === "Em análise" && "#B8860B") ||
+                          (row.status === "Em validação" && "#556B2F"),
+                      }}
+                    >
+                      {row.status}
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
     </div>
   );
 };

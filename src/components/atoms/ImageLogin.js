@@ -1,5 +1,5 @@
 import React from "react";
-import imageLogin from "../../assets/undraw_sign_in_re_o58h.svg";
+/* import imageLogin from "../../assets/undraw_sign_in_re_o58h.svg"; */
 
 const ImageLogin = () => {
   return (
@@ -7,6 +7,7 @@ const ImageLogin = () => {
       <img
         /* src={imageLogin}  */
         src={"https://avatars.githubusercontent.com/u/2523928?s=280&v=4"}
+        alt="ifLogo"
         width={"100px"}
         style={{ marginTop: "-25px" }}
 
