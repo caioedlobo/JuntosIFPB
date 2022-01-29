@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import faker from "@faker-js/faker";
+import faker from "faker";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
