@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let USERS = [];
+/* let USERS = [];
 let STATUSES = [
   "Em validação",
   "Em análise",
@@ -67,15 +67,15 @@ for (let i = 0; i < 14; i++) {
     joinDate: faker.date.past().toLocaleDateString("pt-BR"),
     status: STATUSES[Math.floor(Math.random() * STATUSES.length)],
   };
-}
+} */
 
 const MTable = (props) => {
-  const [rows, setRows] = useState(USERS);
+  /* const [rows, setRows] = useState(props.USERS);
   const [searched, setSearched] = useState("");
-  /* const [selectedFilter, setSelectedFilter] = useState(""); */
+   const [selectedFilter, setSelectedFilter] = useState(""); 
 
   const requestSearch = (searchedVal) => {
-    const filteredRows = USERS.filter((row) => {
+    const filteredRows = props.USERS.filter((row) => {
       return row.job.toLowerCase().includes(searchedVal.toLowerCase());
     });
     setRows(filteredRows);
@@ -83,7 +83,8 @@ const MTable = (props) => {
   const cancelSearch = () => {
     setSearched("");
     requestSearch(searched);
-  };
+  }; */
+
   /* setSelectedFilter(selectedFilter); */
   /* console.log(selectedFilter); */
   /* const selectedFilter = "";
@@ -102,18 +103,6 @@ const MTable = (props) => {
     <div data-testid="m-table">
       <Paper>
         <div className={classes2.table}>
-          <div className={classes2.searchFilter}>
-            <SearchBar
-              className={classes2.searchBar}
-              label="Teste"
-              value={searched}
-              onChange={(searchVal) => requestSearch(searchVal)}
-              onCancelSearch={() => cancelSearch()}
-            />
-
-            {/* <FilterButton></FilterButton> */}
-            <FilterSelect selectedFilter={props.filter}></FilterSelect>
-          </div>
           <TableContainer component={Paper} className={classes.tableContainer}>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
@@ -137,7 +126,7 @@ const MTable = (props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {props.rows.map((row) => (
                   <TableRow
                     key={row.name}
                     /* sx={{ "&:last-child td, &:last-child th": { border: 0 } }} */
