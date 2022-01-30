@@ -15,6 +15,7 @@ import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import SearchBar from "material-ui-search-bar";
 import classes2 from "./stylesheet/MTable.module.css";
+import FilterSelect from "../atoms/FilterSelect";
 
 import FilterButton from "../atoms/FilterButton";
 const useStyles = makeStyles((theme) => ({
@@ -97,7 +98,8 @@ const MTable = () => {
               onCancelSearch={() => cancelSearch()}
             />
 
-            <FilterButton></FilterButton>
+            {/* <FilterButton></FilterButton> */}
+            <FilterSelect></FilterSelect>
           </div>
           <TableContainer component={Paper} className={classes.tableContainer}>
             <Table className={classes.table} aria-label="simple table">
