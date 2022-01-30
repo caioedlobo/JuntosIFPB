@@ -9,7 +9,7 @@ const ImageLogin = () => {
         src={"https://avatars.githubusercontent.com/u/2523928?s=280&v=4"}
         alt="ifLogo"
         width={"100px"}
-        style={{ marginTop: "-25px" }}
+        style={{ marginTop: "60px" }}
 
         /* width={"200px"} */
       ></img>

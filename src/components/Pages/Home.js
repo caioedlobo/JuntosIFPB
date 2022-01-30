@@ -26,6 +26,7 @@ const Home = () => {
         <div className={classes.right}>
           <div className={classes.form}>
             <ImageLogin />
+
             <LoginText />
             <PasswordText />
             <HeightFormHandler />
