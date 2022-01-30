@@ -15,6 +15,8 @@ import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import SearchBar from "material-ui-search-bar";
 import classes2 from "./stylesheet/MTable.module.css";
+
+import FilterButton from "../atoms/FilterButton";
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
@@ -86,24 +88,22 @@ const MTable = () => {
     <div data-testid="m-table">
       <Paper>
         <div className={classes2.table}>
-          <SearchBar
-            label="Teste"
-            value={searched}
-            onChange={(searchVal) => requestSearch(searchVal)}
-            onCancelSearch={() => cancelSearch()}
-          />
-          <TableContainer
-            component={Paper}
-            className={classes.tableContainer}
-            options={{ filtering: true }}
-          >
+          <div className={classes2.searchFilter}>
+            <SearchBar
+              className={classes2.searchBar}
+              label="Teste"
+              value={searched}
+              onChange={(searchVal) => requestSearch(searchVal)}
+              onCancelSearch={() => cancelSearch()}
+            />
+
+            <FilterButton></FilterButton>
+          </div>
+          <TableContainer component={Paper} className={classes.tableContainer}>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell
-                    options={{ filtering: true }}
-                    className={classes.tableHeaderCell}
-                  >
+                  <TableCell className={classes.tableHeaderCell}>
                     Usuario
                   </TableCell>
                   <TableCell className={classes.tableHeaderCell}>

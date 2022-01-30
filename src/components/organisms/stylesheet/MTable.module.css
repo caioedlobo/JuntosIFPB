@@ -1,8 +1,26 @@
 .table {
   background-color: coral;
-  max-width: 1200px;
+  max-width: 1150px;
+  min-width: 50px;
+  /* display: flex; */
+}
+
+.searchBar {
+  width: 60%;
+  background-color: cyan;
+}
+
+.filterButton {
+  width: 30px;
+  color: white;
+  background-color: chartreuse;
+  border-radius: 20px;
   justify-content: center;
   align-items: center;
+}
+
+.searchFilter {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
