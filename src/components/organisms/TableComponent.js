@@ -36,6 +36,7 @@ const TableComponent = (props) => {
     setSearched("");
     requestSearch(searched);
   };
+  console.log(rows);
   return (
     <div data-testid="table-component">
       <div className={classes.searchFilter}>
@@ -48,9 +49,13 @@ const TableComponent = (props) => {
         />
 
         {/* <FilterButton></FilterButton> */}
-        <FilterSelect selectedFilter={props.filter}></FilterSelect>
+        <FilterSelect
+          selectedFilter={props.filter}
+          USERS={USERS}
+          searchedRows={rows}
+        ></FilterSelect>
       </div>
-      <MTable USERS={USERS} rows={rows} />
+      {/* <MTable USERS={USERS} rows={rows} /> */}
     </div>
   );
 };

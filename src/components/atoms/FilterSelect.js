@@ -5,9 +5,11 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import FilterHandler from "./FilterHandler";
+import MTable from "../organisms/MTable";
+import classes from "../organisms/stylesheet/MTable.module.css";
 
 const FilterSelect = (props) => {
-  const [filter, setFilter] = useState("None");
+  const [filter, setFilter] = useState("");
 
   const handleChange = (event) => {
     setFilter(event.target.value);
@@ -15,8 +17,13 @@ const FilterSelect = (props) => {
   console.log(filter);
   /* console.log(selectedFilter); */
 
+  const filteredRows = props.USERS.filter((row) => {
+    return row.job.toLowerCase().includes(filter.toLowerCase());
+  });
+  console.log(filteredRows);
+
   return (
-    <div data-testid="filter-select">
+    <div data-testid="filter-select" className={classes.table}>
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
@@ -28,9 +35,9 @@ const FilterSelect = (props) => {
             onChange={handleChange}
           >
             <MenuItem value={"None"}>Nenhum</MenuItem>
-            <MenuItem value={"Setor 1"}>Setor 1</MenuItem>
-            <MenuItem value={"Setor 2"}>Setor 2</MenuItem>
-            <MenuItem value={"Recentes"}>
+            <MenuItem value={"Forward"}>Setor 1</MenuItem>
+            <MenuItem value={"Product"}>Setor 2</MenuItem>
+            <MenuItem value={"Customer"}>
               Data de Solitação (Mais recentes)
             </MenuItem>
             <MenuItem value={"Antigos"}>
@@ -39,6 +46,11 @@ const FilterSelect = (props) => {
           </Select>
         </FormControl>
       </Box>
+      <MTable
+        USERS={props.USERS}
+        rows={filter != "" ? filteredRows : props.searchedRows}
+        filteredSearch={filter}
+      />
     </div>
   );
 };

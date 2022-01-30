@@ -70,21 +70,6 @@ for (let i = 0; i < 14; i++) {
 } */
 
 const MTable = (props) => {
-  /* const [rows, setRows] = useState(props.USERS);
-  const [searched, setSearched] = useState("");
-   const [selectedFilter, setSelectedFilter] = useState(""); 
-
-  const requestSearch = (searchedVal) => {
-    const filteredRows = props.USERS.filter((row) => {
-      return row.job.toLowerCase().includes(searchedVal.toLowerCase());
-    });
-    setRows(filteredRows);
-  };
-  const cancelSearch = () => {
-    setSearched("");
-    requestSearch(searched);
-  }; */
-
   /* setSelectedFilter(selectedFilter); */
   /* console.log(selectedFilter); */
   /* const selectedFilter = "";
