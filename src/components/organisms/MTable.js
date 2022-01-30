@@ -69,9 +69,10 @@ for (let i = 0; i < 14; i++) {
   };
 }
 
-const MTable = () => {
+const MTable = (props) => {
   const [rows, setRows] = useState(USERS);
   const [searched, setSearched] = useState("");
+  /* const [selectedFilter, setSelectedFilter] = useState(""); */
 
   const requestSearch = (searchedVal) => {
     const filteredRows = USERS.filter((row) => {
@@ -83,6 +84,18 @@ const MTable = () => {
     setSearched("");
     requestSearch(searched);
   };
+  /* setSelectedFilter(selectedFilter); */
+  /* console.log(selectedFilter); */
+  /* const selectedFilter = "";
+  console.log(props.selectedFilter); */
+  /* const requestFilter = (filteredVal) => {
+    const filteredRows = USERS.filter((row) => {
+      if (props.filter === "None") {
+        console.log("FOOIII");
+        return;
+      }
+    });
+  }; */
 
   const classes = useStyles();
   return (
@@ -99,7 +112,7 @@ const MTable = () => {
             />
 
             {/* <FilterButton></FilterButton> */}
-            <FilterSelect></FilterSelect>
+            <FilterSelect selectedFilter={props.filter}></FilterSelect>
           </div>
           <TableContainer component={Paper} className={classes.tableContainer}>
             <Table className={classes.table} aria-label="simple table">

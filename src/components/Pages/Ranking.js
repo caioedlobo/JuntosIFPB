@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../atoms/Navbar";
 import MTable from "../organisms/MTable";
+import TableComponent from "../organisms/TableComponent";
 
 const Ranking = () => {
   return (
@@ -9,7 +10,10 @@ const Ranking = () => {
         <Navbar color="primary" />
       </header>
       <div style={{ paddingTop: "100px" }}>
-        <MTable style={{ paddingTop: "100px" }} options={{ filtering: true }} />
+        <TableComponent
+          style={{ paddingTop: "100px" }}
+          options={{ filtering: true }}
+        />
       </div>
     </div>
   );
