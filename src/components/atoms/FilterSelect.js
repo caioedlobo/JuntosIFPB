@@ -21,7 +21,7 @@ const FilterSelect = (props) => {
   const filteredRows = props.USERS.filter((row) => {
     return row.job.toLowerCase().includes(filter.toLowerCase());
   });
-  console.log(filteredRows);
+  /* console.log(filteredRows); */
 
   if (filter === "None") {
     props.searchedRows = props.USERS; // se marcar None no filtro
