@@ -12,11 +12,12 @@ let STATUSES = [
   "Resolvido",
   "Não Resolvido",
 ];
+let AREAS = ["Manutenção", "Coordenação", "Limpeza", "Administração"];
 for (let i = 0; i < 14; i++) {
   USERS[i] = {
     name: faker.name.findName(),
     email: faker.internet.email(),
-    job: faker.name.jobTitle(),
+    job: AREAS[Math.floor(Math.random() * AREAS.length)],
     joinDate: faker.date.past().toLocaleDateString("pt-BR"),
     status: STATUSES[Math.floor(Math.random() * STATUSES.length)],
     support: faker.random.number({ min: 0, max: 20 }),

@@ -170,7 +170,7 @@ const MTable = (props) => {
                     <TableCell>
                       <div className={classes.support}>
                         {row.support}
-                        <Button>Apoiar</Button>
+                        <Button variant="outlined">Apoiar</Button>
                       </div>
                     </TableCell>
                   </TableRow>

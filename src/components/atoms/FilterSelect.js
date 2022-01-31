@@ -38,8 +38,9 @@ const FilterSelect = (props) => {
           onChange={handleChange}
         >
           <MenuItem value={""}>Nenhum</MenuItem>
-          <MenuItem value={"Forward"}>Setor 1</MenuItem>
-          <MenuItem value={"Product"}>Setor 2</MenuItem>
+          <MenuItem value={"Manutenção"}>Manutenção</MenuItem>
+          <MenuItem value={"Coordenação"}>Coordenação</MenuItem>
+          <MenuItem value={"Limpeza"}>Limpeza</MenuItem>
           <MenuItem value={"Customer"}>
             Data de Solitação (Mais recentes)
           </MenuItem>

@@ -5,11 +5,11 @@ import FilterSelect from "../atoms/FilterSelect";
 import MTable from "./MTable";
 
 const HeaderTable = (props) => {
-  const [rows, setRows] = useState(props.USERS);
+  /* const [rows, setRows] = useState(props.USERS);
   const [searched, setSearched] = useState("");
   /* const [selectedFilter, setSelectedFilter] = useState(""); */
 
-  const requestSearch = (searchedVal) => {
+  /* const requestSearch = (searchedVal) => {
     const filteredRows = props.USERS.filter((row) => {
       return row.job.toLowerCase().includes(searchedVal.toLowerCase());
     });
@@ -17,8 +17,9 @@ const HeaderTable = (props) => {
   };
   const cancelSearch = () => {
     setSearched("");
-    requestSearch(searched);
-  };
+    requestSearch(searched); 
+  }; */
+  const [searched, setSearched] = useState("");
   return (
     <div data-testid="header-table">
       <div className={classes.searchFilter}>
