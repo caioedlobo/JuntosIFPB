@@ -29,27 +29,62 @@ for (let i = 0; i < 14; i++) {
 
 function sortTable(arr, prop) {
   arr.sort(function (a, b) {
-    if (parseInt(a[prop]) > parseInt(b[prop])) {
-      return -1;
-    } else if (parseInt(a[prop]) < parseInt(b[prop])) {
-      return 1;
+    if (prop === "recent") {
+      let dayA = "";
+      let dayB = "";
+      let monthA = "";
+      let monthB = "";
+      let yearA = "";
+      let yearB = "";
+      for (let i = 0; i < 2; i++) {
+        dayA += a.joinDate[i];
+        dayB += b.joinDate[i];
+      }
+      for (let i = 3; i < 5; i++) {
+        monthA += a.joinDate[i];
+        monthB += b.joinDate[i];
+      }
+      for (let i = 6; i < 10; i++) {
+        yearA += a.joinDate[i];
+        yearB += b.joinDate[i];
+      }
+
+      const dateA = yearA + monthA + dayA;
+      const dateB = yearB + monthB + dayB;
+
+      if (parseInt(dateA) >= parseInt(dateB)) {
+        return -1;
+      }
+      if (parseInt(dateB) > parseInt(dateA)) {
+        return 1;
+      }
     } else {
-      return 0;
+      //sort by section
+      if (parseInt(a[prop]) > parseInt(b[prop])) {
+        return -1;
+      } else if (parseInt(a[prop]) < parseInt(b[prop])) {
+        return 1;
+      } else {
+        return 0;
+      }
     }
   });
 }
 
 sortTable(USERS, "support");
+/* sortTable(USERS, "joinDate"); */
 
 const TableComponent = (props) => {
   const [searched, setSearched] = useState("");
   const [filter, setFilter] = useState("");
+  /* const [dateFilter, setDateFilter] = useState(""); */
 
   const onCancelSearchHandler = () => {
     setSearched("");
   };
 
   const onFilterChangeHandler = (event) => {
+    sortTable(USERS, "recent");
     setFilter(event.target.value);
   };
 
@@ -84,10 +119,10 @@ const TableComponent = (props) => {
               <MenuItem value={"Manutenção"}>Manutenção</MenuItem>
               <MenuItem value={"Coordenação"}>Coordenação</MenuItem>
               <MenuItem value={"Limpeza"}>Limpeza</MenuItem>
-              <MenuItem value={"Customer"}>
+              <MenuItem value={"recent"}>
                 Data de Solitação (Mais recentes)
               </MenuItem>
-              <MenuItem value={"Antigos"}>
+              <MenuItem value={"oldest"}>
                 Data de Solitação (Mais antigos)
               </MenuItem>
             </Select>
