@@ -8,7 +8,7 @@ describe("MTable", () => {
   });
 
   it("renders correctly", () => {
-    render(<MTable />);
+    render(<MTable rows={[]} />);
     const mTable = screen.getByTestId("m-table");
 
     expect(mTable).toBeInTheDocument();

@@ -3,7 +3,10 @@ import faker from "faker";
 import React, { useState } from "react";
 import classes from "./stylesheet/MTable.module.css";
 import SearchBar from "material-ui-search-bar";
-import FilterSelect from "../atoms/FilterSelect";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 let USERS = [];
 let STATUSES = [
   "Em validação",
@@ -39,53 +42,60 @@ function sortTable(arr, prop) {
 sortTable(USERS, "support");
 
 const TableComponent = (props) => {
-  const [rows, setRows] = useState(USERS);
   const [searched, setSearched] = useState("");
-  /* const [selectedFilter, setSelectedFilter] = useState(""); */
+  const [filter, setFilter] = useState("");
 
-  const requestSearch = (searchedVal) => {
-    /* const orderedRows = USERS.filter((row) => {
-      return row.support.sort();
-    }); */
-
-    /* console.log("ordered", orderedRows); */
-
-    const filteredRows = USERS.filter((row) => {
-      return row.job.toLowerCase().includes(searchedVal.toLowerCase());
-    });
-    /* const orderedRows = sort.(filteredRows(a, b) {return b-a}); */
-    /*     const orderedRows = USERS.filter((row) => {
-      return sortOn(filteredRows, "support");
-    });
-
-    console.log("testew", orderedRows); */
-    console.log("filtered", filteredRows);
-    setRows(filteredRows);
-  };
-  const cancelSearch = () => {
+  const onCancelSearchHandler = () => {
     setSearched("");
-    requestSearch(searched);
   };
-  /* console.log(rows); */
+
+  const onFilterChangeHandler = (event) => {
+    setFilter(event.target.value);
+  };
+
+  // RegExp é equivalente a row.job.toLowerCase().includes(filter.toLowerCase())
+  const getFilters = () =>
+    USERS.filter((row) =>
+      row.job.match(RegExp(filter !== "" ? filter : searched, "i"))
+    );
+
   return (
     <div data-testid="table-component" className={classes.table}>
       <div className={classes.searchFilter}>
-        <SearchBar
-          className={classes.searchBar}
-          label="Teste"
-          value={searched}
-          onChange={(searchVal) => requestSearch(searchVal)}
-          onCancelSearch={() => cancelSearch()}
-        />
+        <div data-testid="filter-select" className={classes.searchWrapper}>
+          <SearchBar
+            className={classes.searchBar}
+            label="Teste"
+            value={searched}
+            onChange={(searchVal) => setSearched(searchVal)}
+            onCancelSearch={() => onCancelSearchHandler()}
+          />
 
-        {/* <FilterButton></FilterButton> */}
-        <FilterSelect
-          selectedFilter={props.filter}
-          USERS={USERS}
-          searchedRows={rows}
-        ></FilterSelect>
+          <FormControl style={{ width: "33%" }}>
+            <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={filter}
+              label="Filter"
+              onChange={onFilterChangeHandler}
+            >
+              <MenuItem value={""}>Nenhum</MenuItem>
+              <MenuItem value={"Manutenção"}>Manutenção</MenuItem>
+              <MenuItem value={"Coordenação"}>Coordenação</MenuItem>
+              <MenuItem value={"Limpeza"}>Limpeza</MenuItem>
+              <MenuItem value={"Customer"}>
+                Data de Solitação (Mais recentes)
+              </MenuItem>
+              <MenuItem value={"Antigos"}>
+                Data de Solitação (Mais antigos)
+              </MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+
+        <MTable rows={getFilters()} />
       </div>
-      {/* <MTable USERS={USERS} rows={rows} /> */}
     </div>
   );
 };

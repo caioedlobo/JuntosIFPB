@@ -1,13 +1,13 @@
 .table {
   background-color: coral;
-  max-width: 1150px;
-  min-width: 50px;
-  /* display: flex;  */
+  display: flex;
+  justify-content: center;
 }
 
 .searchBar {
-  width: 80% !important;
+  width: 100%;
   background-color: cyan;
+  margin-right: 48px;
 }
 
 .filterButton {
@@ -20,5 +20,13 @@
 }
 
 .searchFilter {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

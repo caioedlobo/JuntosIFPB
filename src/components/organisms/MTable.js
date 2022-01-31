@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import faker from "faker";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,19 +12,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import { Button, Typography } from "@mui/material";
-import SearchBar from "material-ui-search-bar";
 import classes2 from "./stylesheet/MTable.module.css";
-import FilterSelect from "../atoms/FilterSelect";
 
-import FilterButton from "../atoms/FilterButton";
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 650,
+    minWidth: "968px",
   },
   tableContainer: {
     borderRadius: 0,
     margin: "10px 0",
-    maxWidth: 1200,
+    maxWidth: "1280px",
   },
   tableHeaderCell: {
     fontWeight: "bold",
@@ -45,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     color: "white",
     backgroundColor: "grey",
-    borderRadius: 8,
+    borderRadius: "8px",
     padding: "3px 10px",
     display: "inline-block",
   },
