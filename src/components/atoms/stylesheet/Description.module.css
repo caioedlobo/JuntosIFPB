@@ -13,3 +13,14 @@
 .desc {
   font-size: 22px;
 }
+
+@media screen and (max-width: 1281px) {
+  .title {
+    font-size: 28px;
+    width: 20vw;
+  }
+  .desc {
+    font-size: 20px;
+    width: 20vw;
+  }
+}
