@@ -16,6 +16,7 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "faker": "^5",
+    "lint-staged": "^12.3.2",
     "material-ui-search-bar": "^1.0.0-beta.13",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -28,7 +29,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --silent --noStackTrace --maxWorkers=50%",
     "test:ci": "react-scripts test --watchAll=false",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "test:commit": "react-scripts test --watchAll=false --bail --findRelatedTests"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "husky": "^7.0.4"
   }
-  
 }
