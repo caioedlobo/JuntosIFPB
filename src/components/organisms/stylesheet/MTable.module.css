@@ -2,11 +2,11 @@
   background-color: coral;
   max-width: 1150px;
   min-width: 50px;
-  /* display: flex; */
+  /* display: flex;  */
 }
 
 .searchBar {
-  width: 60%;
+  width: 80% !important;
   background-color: cyan;
 }
 
@@ -20,7 +20,5 @@
 }
 
 .searchFilter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: inline-flex;
 }

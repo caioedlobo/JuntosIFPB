@@ -7,6 +7,7 @@ import Select from "@mui/material/Select";
 import FilterHandler from "./FilterHandler";
 import MTable from "../organisms/MTable";
 import classes from "../organisms/stylesheet/MTable.module.css";
+import { maxWidth } from "@mui/system";
 
 const FilterSelect = (props) => {
   const [filter, setFilter] = useState("");
@@ -22,33 +23,35 @@ const FilterSelect = (props) => {
   });
   console.log(filteredRows);
 
+  if (filter === "None") {
+    props.searchedRows = props.USERS; // se marcar None no filtro
+  }
   return (
-    <div data-testid="filter-select" className={classes.table}>
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={filter}
-            label="Filter"
-            onChange={handleChange}
-          >
-            <MenuItem value={"None"}>Nenhum</MenuItem>
-            <MenuItem value={"Forward"}>Setor 1</MenuItem>
-            <MenuItem value={"Product"}>Setor 2</MenuItem>
-            <MenuItem value={"Customer"}>
-              Data de Solitação (Mais recentes)
-            </MenuItem>
-            <MenuItem value={"Antigos"}>
-              Data de Solitação (Mais antigos)
-            </MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
+    <div data-testid="filter-select">
+      <FormControl style={{ width: "10%" }}>
+        <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={filter}
+          label="Filter"
+          onChange={handleChange}
+        >
+          <MenuItem value={""}>Nenhum</MenuItem>
+          <MenuItem value={"Forward"}>Setor 1</MenuItem>
+          <MenuItem value={"Product"}>Setor 2</MenuItem>
+          <MenuItem value={"Customer"}>
+            Data de Solitação (Mais recentes)
+          </MenuItem>
+          <MenuItem value={"Antigos"}>
+            Data de Solitação (Mais antigos)
+          </MenuItem>
+        </Select>
+      </FormControl>
+
       <MTable
         USERS={props.USERS}
-        rows={filter != "" ? filteredRows : props.searchedRows}
+        rows={filter !== "" ? filteredRows : props.searchedRows}
         filteredSearch={filter}
       />
     </div>

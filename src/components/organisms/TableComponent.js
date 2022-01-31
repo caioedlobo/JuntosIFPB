@@ -19,6 +19,7 @@ for (let i = 0; i < 14; i++) {
     job: faker.name.jobTitle(),
     joinDate: faker.date.past().toLocaleDateString("pt-BR"),
     status: STATUSES[Math.floor(Math.random() * STATUSES.length)],
+    support: faker.random.number({ min: 0, max: 20 }),
   };
 }
 const TableComponent = (props) => {
@@ -38,7 +39,7 @@ const TableComponent = (props) => {
   };
   console.log(rows);
   return (
-    <div data-testid="table-component">
+    <div data-testid="table-component" className={classes.table}>
       <div className={classes.searchFilter}>
         <SearchBar
           className={classes.searchBar}

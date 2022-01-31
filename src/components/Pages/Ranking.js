@@ -10,10 +10,7 @@ const Ranking = () => {
         <Navbar color="primary" />
       </header>
       <div style={{ paddingTop: "100px" }}>
-        <TableComponent
-          style={{ paddingTop: "100px" }}
-          options={{ filtering: true }}
-        />
+        <TableComponent style={{ paddingTop: "100px" }} />
       </div>
     </div>
   );

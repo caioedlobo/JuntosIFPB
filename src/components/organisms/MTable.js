@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import SearchBar from "material-ui-search-bar";
 import classes2 from "./stylesheet/MTable.module.css";
 import FilterSelect from "../atoms/FilterSelect";
@@ -48,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 8,
     padding: "3px 10px",
     display: "inline-block",
+  },
+  support: {
+    justifyContent: "center",
+    textAlign: "center",
   },
 }));
 
@@ -108,6 +112,9 @@ const MTable = (props) => {
                   <TableCell className={classes.tableHeaderCell}>
                     Status
                   </TableCell>
+                  <TableCell className={classes.tableHeaderCell}>
+                    Apoios
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -159,6 +166,12 @@ const MTable = (props) => {
                       >
                         {row.status}
                       </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <div className={classes.support}>
+                        {row.support}
+                        <Button>Apoiar</Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
