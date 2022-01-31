@@ -7,7 +7,6 @@ const FilterButton = () => {
       <Button
         className={classes.filterButton}
         style={{
-          backgroundColor: "pink",
           width: "120px",
           height: "45px",
           color: "white",
