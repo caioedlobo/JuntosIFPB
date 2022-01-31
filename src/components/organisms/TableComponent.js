@@ -7,6 +7,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import { height } from "@mui/system";
 let USERS = [];
 let STATUSES = [
   "Em validação",
@@ -84,7 +85,8 @@ const TableComponent = (props) => {
   };
 
   const onFilterChangeHandler = (event) => {
-    sortTable(USERS, "recent");
+    console.log(event.target.value);
+    sortTable(USERS, event.target.value);
     setFilter(event.target.value);
   };
 
@@ -100,13 +102,16 @@ const TableComponent = (props) => {
         <div data-testid="filter-select" className={classes.searchWrapper}>
           <SearchBar
             className={classes.searchBar}
-            label="Teste"
+            label="Pesquisar"
             value={searched}
             onChange={(searchVal) => setSearched(searchVal)}
             onCancelSearch={() => onCancelSearchHandler()}
           />
 
-          <FormControl style={{ width: "33%" }}>
+          <FormControl
+            size="small"
+            style={{ width: "10%", backgroundColor: "white" }}
+          >
             <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
             <Select
               labelId="demo-simple-select-label"

@@ -1,19 +1,19 @@
 .table {
-  background-color: coral;
+  /* background-color: coral; */
   display: flex;
   justify-content: center;
 }
 
 .searchBar {
   width: 100%;
-  background-color: cyan;
+  /* background-color: cyan; */
   margin-right: 48px;
 }
 
 .filterButton {
   width: 30px;
   color: white;
-  background-color: chartreuse;
+  /* background-color: chartreuse; */
   border-radius: 20px;
   justify-content: center;
   align-items: center;
@@ -29,4 +29,5 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  /* background-color: chartreuse; */
 }

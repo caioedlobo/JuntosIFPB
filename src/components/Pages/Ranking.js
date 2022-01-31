@@ -6,10 +6,10 @@ const Ranking = () => {
   return (
     <div data-testid="ranking">
       <header>
-        <Navbar color="primary" />
+        <Navbar />
       </header>
-      <div style={{ paddingTop: "100px" }}>
-        <TableComponent style={{ paddingTop: "100px" }} />
+      <div style={{ paddingTop: "105px" }}>
+        <TableComponent />
       </div>
     </div>
   );

@@ -48,18 +48,22 @@ main {
   }
 }
 
-@media screen and (max-width: 1365px) {
+@media screen and (max-width: 1601px) {
   .left {
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
-    width: 60vw;
+    width: 100vw;
   }
   .mainImage {
+    /*3*/
     min-width: 240px;
     max-width: 480px;
     /* display: none; */
   }
   .right {
-    width: 40vw;
+    width: 60vw;
   }
+  /* .form {
+    width: 10px !important;
+  } */
 }
