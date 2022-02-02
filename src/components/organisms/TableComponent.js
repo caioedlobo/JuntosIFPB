@@ -83,7 +83,7 @@ const TableComponent = (props) => {
             label="Pesquisar"
             value={searched}
             onChange={(searchVal) => setSearched(searchVal)}
-            onCancelSearch={() => onCancelSearchHandler()}
+            onCancelSearch={onCancelSearchHandler}
           />
 
           <FormControl size="small" style={{ width: "10%" }}>
