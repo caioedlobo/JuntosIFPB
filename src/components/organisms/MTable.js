@@ -25,9 +25,13 @@ const useStyles = makeStyles((theme) => ({
   },
   tableHeaderCell: {
     fontWeight: "bold",
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: "#A0A0A0",
     /* color: theme.palette.getContrastText(theme.palette.primary.dark), */
     color: theme.palette.primary.dark,
+    textAlign: "center !important",
+  },
+  tableCell: {
+    textAlign: "center !important",
   },
   avatar: {
     backgroundColor: theme.palette.primary.light,
@@ -62,7 +66,7 @@ const MTable = (props) => {
               <TableHead>
                 <TableRow>
                   <TableCell className={classes.tableHeaderCell}>
-                    Usuario
+                    Usuário
                   </TableCell>
                   <TableCell className={classes.tableHeaderCell}>
                     Demanda
@@ -113,12 +117,18 @@ const MTable = (props) => {
                         </Grid>
                       </Grid>
                     </TableCell>
-                    <TableCell>{row.job}</TableCell>
+                    <TableCell className={classes.tableCell}>
+                      {row.job}
+                    </TableCell>
                     {/* <TableCell>{row.email}</TableCell> */}
-                    <TableCell>{row.job}</TableCell>
+                    <TableCell className={classes.tableCell}>
+                      {row.job}
+                    </TableCell>
 
-                    <TableCell>{row.recent}</TableCell>
-                    <TableCell>
+                    <TableCell className={classes.tableCell}>
+                      {row.recent}
+                    </TableCell>
+                    <TableCell className={classes.tableCell}>
                       <Typography
                         className={classes.status}
                         style={{
@@ -132,7 +142,7 @@ const MTable = (props) => {
                         {row.status}
                       </Typography>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={classes.tableCell}>
                       <div className={classes.support}>
                         {row.support}
                         <Button variant="outlined">Apoiar</Button>
