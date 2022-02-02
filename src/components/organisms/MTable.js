@@ -52,6 +52,8 @@ const useStyles = makeStyles((theme) => ({
   support: {
     justifyContent: "center",
     textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
   },
 }));
 
@@ -145,7 +147,13 @@ const MTable = (props) => {
                     <TableCell className={classes.tableCell}>
                       <div className={classes.support}>
                         {row.support}
-                        <Button variant="outlined">Apoiar</Button>
+                        <Button
+                          variant="outlined"
+                          size="small"
+                          style={{ width: "10px" }}
+                        >
+                          Apoiar
+                        </Button>
                       </div>
                     </TableCell>
                   </TableRow>
