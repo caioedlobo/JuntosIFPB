@@ -51,38 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-/* let USERS = [];
-let STATUSES = [
-  "Em validação",
-  "Em análise",
-  "Não atribuído",
-  "Resolvido",
-  "Não Resolvido",
-];
-for (let i = 0; i < 14; i++) {
-  USERS[i] = {
-    name: faker.name.findName(),
-    email: faker.internet.email(),
-    job: faker.name.jobTitle(),
-    joinDate: faker.date.past().toLocaleDateString("pt-BR"),
-    status: STATUSES[Math.floor(Math.random() * STATUSES.length)],
-  };
-} */
-
 const MTable = (props) => {
-  /* setSelectedFilter(selectedFilter); */
-  /* console.log(selectedFilter); */
-  /* const selectedFilter = "";
-  console.log(props.selectedFilter); */
-  /* const requestFilter = (filteredVal) => {
-    const filteredRows = USERS.filter((row) => {
-      if (props.filter === "None") {
-        console.log("FOOIII");
-        return;
-      }
-    });
-  }; */
-
   const classes = useStyles();
   return (
     <div data-testid="m-table">
@@ -148,7 +117,7 @@ const MTable = (props) => {
                     {/* <TableCell>{row.email}</TableCell> */}
                     <TableCell>{row.job}</TableCell>
 
-                    <TableCell>{row.joinDate}</TableCell>
+                    <TableCell>{row.recent}</TableCell>
                     <TableCell>
                       <Typography
                         className={classes.status}

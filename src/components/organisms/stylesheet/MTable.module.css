@@ -13,7 +13,7 @@
 .filterButton {
   width: 30px;
   color: white;
-  /* background-color: chartreuse; */
+  /* background-color: white; */
   border-radius: 20px;
   justify-content: center;
   align-items: center;
@@ -29,5 +29,6 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
   /* background-color: chartreuse; */
 }
