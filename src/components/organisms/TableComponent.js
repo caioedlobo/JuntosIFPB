@@ -55,7 +55,6 @@ const TableComponent = (props) => {
   const [filter, setFilter] = useState("");
   const [rows, setRows] = useState(USERS);
 
-  const isDateFilter = filter === "Recentes" || filter === "Antigos";
   const jobMatchFilter = (row, type) => row.job.match(RegExp(type, "i"));
 
   const onCancelSearchHandler = () => {
@@ -67,6 +66,7 @@ const TableComponent = (props) => {
   };
 
   useEffect(() => {
+    const isDateFilter = filter === "Recentes" || filter === "Antigos";
     const getFilters = (filter) =>
       sortTable([...USERS], filter)
         .filter((row) => isDateFilter || jobMatchFilter(row, filter))
