@@ -11,18 +11,28 @@ const Contact = () => {
       <header>
         <Navbar />
       </header>
-      <p>
-        Para mais informações sobre o Projeto ou para sugerir melhorias no site,
-        entre em contato através do email abaixo:{" "}
-      </p>
-      <div className={classes.form} style={{ width: "968px" }}>
+
+      <div className={classes.form} style={{ width: "720px", height: "700px" }}>
         <img src={imageContact} style={{ width: "250px" }}></img>
         <Box>
-          <div>
+          <div style={{ paddingTop: "50px" }}>
             Para mais informações sobre o Projeto ou para sugerir melhorias no
             site, entre em contato através do email abaixo:
           </div>
-          <TextField style={{ width: "100%" }} variant="outlined" multiline>
+          <TextField
+            placeholder="Email"
+            variant="outlined"
+            style={{ width: "100%", paddingTop: "50px" }}
+          >
+            Email
+          </TextField>
+          <TextField
+            style={{ width: "100%", paddingTop: "50px" }}
+            placeholder="Comentário"
+            multiline
+            rows={4}
+            variant="outlined"
+          >
             lorem ipsum
           </TextField>
         </Box>
