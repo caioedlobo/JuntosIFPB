@@ -1,6 +1,9 @@
 main {
   background-image: linear-gradient(to bottom right, #2f6933, #28b00a);
 }
+.background {
+  background-image: linear-gradient(to bottom right, #2f6933, #28b00a);
+}
 
 .left {
   width: 70vw;

@@ -8,17 +8,38 @@ import ButtonGroupLogin from "../atoms/ButtonGroupLogin";
 
 const Contact = () => {
   return (
-    <div data-testid="contact">
+    <div
+      data-testid="contact"
+      className={classes.background}
+      style={{ paddingLeft: "30%", paddingTop: "8%" }}
+      style={{
+        justifyContent: "center",
+        display: "flex",
+        paddingTop: "6%",
+        /* position: "relative", */
+      }}
+    >
       <header>
         <Navbar />
       </header>
 
-      <div className={classes.form} style={{ width: "720px", height: "680px" }}>
+      <div
+        className={classes.form}
+        style={{
+          width: "600px",
+          height: "580px",
+          justifyContent: "center",
+
+          /* position: "absolute",
+          top: "50%", */
+        }}
+      >
         <img src={imageContact} style={{ width: "250px" }}></img>
         <Box>
-          <div style={{ paddingTop: "50px" }}>
+          <div style={{ paddingTop: "40px" }}>
             Para mais informações sobre o Projeto ou para sugerir melhorias no
-            site, entre em contato através do email abaixo:
+            site, entre em contato conosco através do email
+            juntosifpb2020@gmail.com ou pelo formulário abaixo:
           </div>
           <TextField
             placeholder="Email"
@@ -34,9 +55,19 @@ const Contact = () => {
             rows={4}
             variant="outlined"
           ></TextField>
-          <ButtonGroupLogin style={{ width: "50%", paddingTop: "50px" }}>
-            Enviar
-          </ButtonGroupLogin>
+          <div
+            style={{
+              width: "30%",
+              justifyContent: "center",
+
+              /* paddingTop: "50px",
+              paddingLeft: "228px", */
+              margin: "auto",
+              paddingTop: "30px",
+            }}
+          >
+            <ButtonGroupLogin>Enviar</ButtonGroupLogin>
+          </div>
         </Box>
       </div>
     </div>
