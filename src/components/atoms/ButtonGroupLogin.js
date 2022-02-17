@@ -21,9 +21,10 @@ const useStyles = makeStyles({
 
 const ButtonGroupLogin = (props) => {
   const classes = useStyles();
+
   return (
     <ButtonGroup fullWidth>
-      <LoginButton classes={classes}></LoginButton>
+      <LoginButton classes={classes}>{props.children}</LoginButton>
       {/* <RegisterButton classes={classes}></RegisterButton> */}
     </ButtonGroup>
   );

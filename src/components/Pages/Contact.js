@@ -4,6 +4,7 @@ import classes from "./stylesheet/Home.module.css";
 import imageContact from "./../../assets/undraw_contact_us_re_4qqt.svg";
 import Box from "@mui/material/Box";
 import { TextField } from "@material-ui/core";
+import ButtonGroupLogin from "../atoms/ButtonGroupLogin";
 
 const Contact = () => {
   return (
@@ -12,7 +13,7 @@ const Contact = () => {
         <Navbar />
       </header>
 
-      <div className={classes.form} style={{ width: "720px", height: "700px" }}>
+      <div className={classes.form} style={{ width: "720px", height: "680px" }}>
         <img src={imageContact} style={{ width: "250px" }}></img>
         <Box>
           <div style={{ paddingTop: "50px" }}>
@@ -32,9 +33,10 @@ const Contact = () => {
             multiline
             rows={4}
             variant="outlined"
-          >
-            lorem ipsum
-          </TextField>
+          ></TextField>
+          <ButtonGroupLogin style={{ width: "50%", paddingTop: "50px" }}>
+            Enviar
+          </ButtonGroupLogin>
         </Box>
       </div>
     </div>

@@ -6,7 +6,7 @@ const LoginButton = (props) => {
   return (
     <div data-testid="login-button" style={{ width: "100%" }}>
       <ButtonUI className={props.classes.root} fullWidth>
-        Entrar
+        {props.children}
       </ButtonUI>
     </div>
   );
