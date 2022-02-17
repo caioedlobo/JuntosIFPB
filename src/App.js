@@ -1,5 +1,6 @@
 import Home from "./components/Pages/Home";
 import Ranking from "./components/Pages/Ranking";
+import Contact from "./components/Pages/Contact";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/ranking" element={<Ranking />} />
+            <Route path="/contato" element={<Contact />} />
           </Routes>
         </main>
       </div>

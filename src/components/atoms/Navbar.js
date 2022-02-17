@@ -58,6 +58,9 @@ const Navbar = (props) => {
                 Ranking
               </Link>
               <p className={classes.typo}>Parceiros</p>
+              <Link to={"/contato"} className={classes.typo}>
+                Contato
+              </Link>
             </Box>
             <Box>
               {/* <Button className={classes.registerButton} variant="outlined">
