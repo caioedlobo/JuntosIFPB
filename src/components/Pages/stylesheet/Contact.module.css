@@ -1,0 +1,11 @@
+.formContact {
+  width: 580px;
+  height: max-content;
+  padding: 28px 24px;
+}
+
+.buttonWrapper {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 28px;
+}

@@ -1,9 +1,6 @@
 main {
   background-image: linear-gradient(to bottom right, #2f6933, #28b00a);
 }
-.background {
-  background-image: linear-gradient(to bottom right, #2f6933, #28b00a);
-}
 
 .left {
   width: 70vw;
@@ -14,6 +11,11 @@ main {
   display: flex;
 }
 
+.formHome {
+  width: 360px;
+  height: 520px;
+}
+
 .right {
   width: 30vw;
   height: 100vh;
@@ -21,21 +23,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.form {
-  flex-direction: column;
-  width: 360px;
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  background-color: white;
-  height: 520px;
-  /* padding: 100px 30px; */
-  border-radius: 16px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-  /* min-width: 360px; */
-  padding: 0 32px;
 }
 
 .mainImage {

@@ -1,0 +1,25 @@
+.form {
+  flex-direction: column;
+  /* width: 360px; */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  background-color: white;
+  /* height: 520px; */
+  /* padding: 100px 30px; */
+  border-radius: 16px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  /* min-width: 360px; */
+  padding: 0 32px;
+}
+.centerUtil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.background {
+  position: relative;
+  min-height: 100vh;
+  background-image: linear-gradient(to bottom right, #2f6933, #28b00a);
+}

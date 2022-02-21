@@ -8,6 +8,7 @@
   width: 100%;
   /* background-color: cyan; */
   margin-right: 48px;
+  border: 1px solid #ccc;
 }
 
 .filterButton {

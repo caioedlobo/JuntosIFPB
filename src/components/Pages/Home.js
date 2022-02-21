@@ -10,6 +10,7 @@ import ImageLogin from "../atoms/ImageLogin";
 import LogoImg from "../atoms/LogoImg";
 import HeightFormHandler from "../atoms/HeightFormHandler";
 import Navbar from "../atoms/Navbar";
+import classesCommon from "./stylesheet/Common.module.css";
 
 const Home = () => {
   return (
@@ -24,7 +25,7 @@ const Home = () => {
         </div>
 
         <div className={classes.right}>
-          <div className={classes.form}>
+          <div className={`${classesCommon.form} ${classes.formHome}`}>
             <ImageLogin />
 
             <LoginText />
