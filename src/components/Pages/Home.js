@@ -9,7 +9,6 @@ import PasswordText from "../atoms/PasswordText";
 import ImageLogin from "../atoms/ImageLogin";
 import LogoImg from "../atoms/LogoImg";
 import HeightFormHandler from "../atoms/HeightFormHandler";
-import Navbar from "../atoms/Navbar";
 import classesCommon from "./stylesheet/Common.module.css";
 import Layout from "../template/Layout";
 

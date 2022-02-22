@@ -4,7 +4,7 @@ main {
 
 .left {
   width: 70vw;
-  height: 100vh;
+  height: 70vh;
   justify-content: space-between;
   align-items: center;
 
@@ -18,7 +18,7 @@ main {
 
 .right {
   width: 30vw;
-  height: 100vh;
+  height: 70vh;
 
   display: flex;
   justify-content: center;
