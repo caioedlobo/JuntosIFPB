@@ -24,7 +24,10 @@ const Navbar = (props) => {
             <Link to={"/"} className={classes.typo}>
               Início
             </Link>
-            <p className={classes.typo}>Sobre</p>
+
+            <Link to={"/sobre"} className={classes.typo}>
+              Sobre
+            </Link>
             <Link to={"/ranking"} className={classes.typo}>
               Ranking
             </Link>
