@@ -1,8 +1,9 @@
 import Home from "./components/Pages/Home";
+import About from "./components/Pages/About";
 import Ranking from "./components/Pages/Ranking";
+import Partners from "./components/Pages/Partners";
 import Contact from "./components/Pages/Contact";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "./components/template/Layout";
 
 function App() {
   return (
@@ -11,9 +12,10 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/sobre" element={<About />} />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/contato" element={<Contact />} />
-            <Route path="/parceiros" element={<Layout />} />
+            <Route path="/parceiros" element={<Partners />} />
           </Routes>
         </main>
       </div>

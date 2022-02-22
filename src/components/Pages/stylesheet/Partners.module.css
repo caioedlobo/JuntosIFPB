@@ -1,0 +1,21 @@
+.row {
+  display: flex;
+
+  margin-bottom: 70px;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+.formPartners {
+  max-width: 80vw;
+  max-height: max-content;
+  padding: 28px 48px;
+}
+
+.partnerImg {
+  margin-right: 32px;
+
+  width: 120px;
+}

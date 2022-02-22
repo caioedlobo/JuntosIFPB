@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../atoms/Navbar";
 import TableComponent from "../organisms/TableComponent";
 import classesCommon from "./stylesheet/Common.module.css";
 import classes from "./stylesheet/Ranking.module.css";
