@@ -3,21 +3,18 @@ import Navbar from "../atoms/Navbar";
 import TableComponent from "../organisms/TableComponent";
 import classesCommon from "./stylesheet/Common.module.css";
 import classes from "./stylesheet/Ranking.module.css";
+import Layout from "../template/Layout";
 
 const Ranking = () => {
   return (
-    <div
-      data-testid="ranking"
-      className={`${classesCommon.background} ${classes.rankingBackground}`}
-    >
-      <header>
-        <Navbar />
-      </header>
-
-      <div className={`${classesCommon.form} ${classes.formRanking}`}>
+    <Layout>
+      <div
+        className={`${classesCommon.form} ${classes.formRanking}`}
+        data-testid="ranking"
+      >
         <TableComponent />
       </div>
-    </div>
+    </Layout>
   );
 };
 

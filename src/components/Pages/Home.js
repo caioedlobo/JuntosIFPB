@@ -11,32 +11,32 @@ import LogoImg from "../atoms/LogoImg";
 import HeightFormHandler from "../atoms/HeightFormHandler";
 import Navbar from "../atoms/Navbar";
 import classesCommon from "./stylesheet/Common.module.css";
+import Layout from "../template/Layout";
 
 const Home = () => {
   return (
     <div data-testid="home">
-      <header>
-        <Navbar />
-      </header>
-      <Box sx={{ display: "flex" }}>
-        <div className={classes.left}>
-          <Description />
-          <LogoImg />
-        </div>
-
-        <div className={classes.right}>
-          <div className={`${classesCommon.form} ${classes.formHome}`}>
-            <ImageLogin />
-
-            <LoginText />
-            <PasswordText />
-            <HeightFormHandler />
-            <ButtonGroupLogin>Entrar</ButtonGroupLogin>
-            <HeightFormHandler />
-            <Button>Não possui conta? Registre-se</Button>
+      <Layout>
+        <Box sx={{ display: "flex" }}>
+          <div className={classes.left}>
+            <Description />
+            <LogoImg />
           </div>
-        </div>
-      </Box>
+
+          <div className={classes.right}>
+            <div className={`${classesCommon.form} ${classes.formHome}`}>
+              <ImageLogin />
+
+              <LoginText />
+              <PasswordText />
+              <HeightFormHandler />
+              <ButtonGroupLogin>Entrar</ButtonGroupLogin>
+              <HeightFormHandler />
+              <Button>Não possui conta? Registre-se</Button>
+            </div>
+          </div>
+        </Box>
+      </Layout>
     </div>
   );
 };
