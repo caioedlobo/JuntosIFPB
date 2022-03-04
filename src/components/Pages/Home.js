@@ -1,19 +1,16 @@
-import React from "react";
-import { Button, Grid } from "@material-ui/core";
-import ButtonGroupLogin from "../atoms/ButtonGroupLogin";
+import { React, useState } from "react";
+import { Grid } from "@material-ui/core";
 import Description from "../atoms/Description";
-import { Box } from "@material-ui/core";
 import classes from "./stylesheet/Home.module.css";
-import LoginText from "../atoms/LoginText";
-import PasswordText from "../atoms/PasswordText";
-import ImageLogin from "../atoms/ImageLogin";
 import LogoImg from "../atoms/LogoImg";
-import HeightFormHandler from "../atoms/HeightFormHandler";
 import classesCommon from "./stylesheet/Common.module.css";
 import Layout from "../template/Layout";
 import LoginForm from "../atoms/LoginForm";
+import RegisterForm from "../atoms/RegisterForm";
 
 const Home = () => {
+  const [isLoginForm, setIsLoginForm] = useState(true);
+
   return (
     <div data-testid="home">
       <Layout>
@@ -41,7 +38,7 @@ const Home = () => {
               xs={9}
               className={`${classesCommon.form} ${classes.formHome}`}
             >
-              <LoginForm />
+              {isLoginForm ? <LoginForm /> : <RegisterForm />}
               {/* <ImageLogin />
 
               <LoginText />
