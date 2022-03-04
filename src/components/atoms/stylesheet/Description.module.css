@@ -14,13 +14,78 @@
   font-size: 22px;
 }
 
-@media screen and (max-width: 1281px) {
+@media screen and (max-width: 1850px) {
   .title {
-    font-size: 28px;
+    font-size: 36px;
     width: 20vw;
   }
   .desc {
     font-size: 20px;
     width: 20vw;
+  }
+  .box {
+    width: 310px;
+  }
+}
+
+@media screen and (max-width: 1367px) {
+  .title {
+    font-size: 26px;
+    width: 20vw;
+  }
+  .desc {
+    font-size: 16px;
+    width: 20vw;
+  }
+  .box {
+    width: 220px;
+  }
+}
+
+@media screen and (max-width: 1072px) {
+  .title {
+    font-size: 26px;
+    width: 35vw;
+  }
+  .desc {
+    font-size: 16px;
+    width: 35vw;
+  }
+  .box {
+    width: 320px;
+  }
+}
+
+@media screen and (max-width: 811px) {
+  .title {
+    font-size: 26px;
+    width: 35vw;
+    padding-left: 40px;
+  }
+  .desc {
+    font-size: 18px;
+    width: 35vw;
+    padding-left: 40px;
+
+    justify-content: center;
+    align-items: center;
+  }
+  .box {
+    width: 620px;
+  }
+}
+
+@media screen and (max-width: 429px) {
+  .title {
+    font-size: 18px;
+    width: 50vw;
+  }
+  .desc {
+    font-size: 14px;
+    width: 50vw;
+    padding-left: 40px;
+
+    justify-content: center;
+    align-items: center;
   }
 }

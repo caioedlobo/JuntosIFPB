@@ -12,7 +12,7 @@ const Contact = () => {
     <Layout>
       <div
         data-testid="contact"
-        className={`${classesCommon.form} ${classesCommon.centerUtil} ${classes.formContact}`}
+        className={`${classesCommon.form} ${classes.formContact}`}
       >
         <img src={imageContact} style={{ width: "350px" }}></img>
 
