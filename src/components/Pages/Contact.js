@@ -14,7 +14,11 @@ const Contact = () => {
         data-testid="contact"
         className={`${classesCommon.form} ${classes.formContact}`}
       >
-        <img src={imageContact} style={{ width: "350px" }}></img>
+        <img
+          src={imageContact}
+          alt="imageContact"
+          style={{ width: "350px" }}
+        ></img>
 
         <div style={{ marginTop: "40px", lineHeight: "1.5" }}>
           Para mais informações sobre o Projeto ou para sugerir melhorias no

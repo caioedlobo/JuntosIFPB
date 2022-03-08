@@ -16,6 +16,7 @@ const Partners = () => {
               <img
                 className={classes.partnerImg}
                 src={"https://juntosifpb.herokuapp.com/img/logoIFPB.png"}
+                alt="logoIFPB"
               ></img>
               <PartnerText>
                 O Instituto Federal da Paraíba - IFPB é uma autarquia federal
@@ -47,6 +48,7 @@ const Partners = () => {
                 src={
                   "https://avatars.githubusercontent.com/u/55359413?s=280&v=4"
                 }
+                alt="GCompi logo"
               ></img>
               <PartnerText>
                 O Grupo de Pesquisa em Comunicações e Processamento de
@@ -82,6 +84,7 @@ const Partners = () => {
                 src={
                   "https://upload.wikimedia.org/wikipedia/commons/2/2e/BrasaoUfersa.png"
                 }
+                alt="UFERSA logo"
                 width="120px"
               ></img>
               <PartnerText>
