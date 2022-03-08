@@ -3,7 +3,7 @@ main {
 }
 
 .content {
-  background-color: gray;
+  /* background-color: gray; */
 }
 
 .left {
@@ -17,7 +17,7 @@ main {
 }
 
 .itemsLeft {
-  background-color: red;
+  /* background-color: red; */
 }
 
 .formHome {
