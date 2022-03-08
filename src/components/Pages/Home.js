@@ -1,57 +1,49 @@
-import { React, useState } from "react";
+import React from "react";
 import { Grid } from "@material-ui/core";
 import Description from "../atoms/Description";
 import classes from "./stylesheet/Home.module.css";
 import LogoImg from "../atoms/LogoImg";
 import classesCommon from "./stylesheet/Common.module.css";
 import Layout from "../template/Layout";
-import LoginForm from "../atoms/LoginForm";
-import RegisterForm from "../atoms/RegisterForm";
+
+import LoginFormHandler from "../atoms/LoginFormHandler";
 
 const Home = () => {
-  const [isLoginForm, setIsLoginForm] = useState(true);
-
   return (
     <div data-testid="home">
       <Layout>
-        {/* <Box sx={{ display: "flex" }}> */}
         <Grid
           container
-          spacing={3}
           className={classes.content}
           alignItems="center"
+          spacing={4}
+          style={{ padding: "0 48px" }}
         >
-          {/*  <div className={classes.content}> */}
-
-          <div className={classes.left}>
-            <Grid item xs={5}>
+          <Grid
+            item
+            container
+            xl={9}
+            lg={9}
+            md={8}
+            sm={4}
+            alignItems="center"
+            spacing={4}
+            className={classes.itemsLeft}
+          >
+            <Grid item xl={4} lg={4} sm={12}>
               <Description />
             </Grid>
-            <Grid item xs={7}>
+
+            <Grid item xl={8} lg={8} sm={0}>
               <LogoImg />
             </Grid>
-          </div>
+          </Grid>
 
-          <div className={classes.right}>
-            <Grid
-              item
-              xs={9}
-              className={`${classesCommon.form} ${classes.formHome}`}
-            >
-              {isLoginForm ? <LoginForm /> : <RegisterForm />}
-              {/* <ImageLogin />
-
-              <LoginText />
-              <PasswordText />
-              <HeightFormHandler />
-              <ButtonGroupLogin>Entrar</ButtonGroupLogin>
-              <HeightFormHandler />
-              <Button>Não possui conta? Registre-se</Button> */}
+          <Grid item container xl={3} lg={3} md={4} /* sm={8} */>
+            <Grid item className={`${classesCommon.form} ${classes.formHome}`}>
+              <LoginFormHandler />
             </Grid>
-          </div>
-
-          {/* </div> */}
-          {/* </Box> */}
+          </Grid>
         </Grid>
       </Layout>
     </div>

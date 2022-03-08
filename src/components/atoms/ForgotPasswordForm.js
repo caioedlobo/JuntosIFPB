@@ -6,10 +6,10 @@ import PasswordText from "./PasswordText";
 import ImageLogin from "./ImageLogin";
 import HeightFormHandler from "./HeightFormHandler";
 
-const LoginForm = (props) => {
+const ForgotPasswordForm = (props) => {
   return (
     <div
-      data-testid="login-form"
+      data-testid="forgot-password-form"
       style={{
         alignItems: "center",
         flexDirection: "column",
@@ -19,18 +19,13 @@ const LoginForm = (props) => {
       <ImageLogin />
 
       <LoginText />
-      <PasswordText />
+
       <HeightFormHandler />
-      <ButtonGroupLogin>Entrar</ButtonGroupLogin>
+      <ButtonGroupLogin>Enviar</ButtonGroupLogin>
       <HeightFormHandler />
-      <Button onClick={props.FormHandlerRegister}>
-        Não possui conta? Registre-se
-      </Button>
-      <Button onClick={props.FormHandlerPassword}>
-        Esqueceu sua senha? Clique aqui
-      </Button>
+      <Button onClick={props.FormHandlerPassword}>Voltar para o Login</Button>
     </div>
   );
 };
 
-export default LoginForm;
+export default ForgotPasswordForm;

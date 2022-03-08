@@ -1,17 +1,20 @@
 .box {
-  width: 360px;
+  width: 100%;
   color: white;
   /* margin-left: 85px; */
   margin: 0 auto;
   /* text-align: center; */
+  background-color: darkkhaki;
 }
 
 .title {
   margin-bottom: 40px;
   font-size: 49px;
+  line-height: 1.2;
 }
 .desc {
   font-size: 22px;
+  line-height: 1.5;
 }
 
 @media screen and (max-width: 1850px) {

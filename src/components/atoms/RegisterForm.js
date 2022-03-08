@@ -6,7 +6,7 @@ import PasswordText from "./PasswordText";
 import ImageLogin from "./ImageLogin";
 import HeightFormHandler from "./HeightFormHandler";
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
   return (
     <div
       data-testid="register-form"
@@ -23,7 +23,9 @@ const RegisterForm = () => {
       <HeightFormHandler />
       <ButtonGroupLogin>Registrar</ButtonGroupLogin>
       <HeightFormHandler />
-      <Button>Já possui conta? Entre</Button>
+      <Button onClick={props.FormHandlerRegister}>
+        Já possui conta? Entre
+      </Button>
     </div>
   );
 };
