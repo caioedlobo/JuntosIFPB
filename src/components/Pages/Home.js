@@ -9,6 +9,13 @@ import Layout from "../template/Layout";
 import LoginFormHandler from "../atoms/LoginFormHandler";
 
 const Home = () => {
+  if (1 === 2) {
+    return (
+      <div data-testid="home">
+        <p>OOII</p>
+      </div>
+    );
+  }
   return (
     <div data-testid="home">
       <Layout>

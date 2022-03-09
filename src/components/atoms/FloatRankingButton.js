@@ -53,7 +53,7 @@ const FloatRankingButton = () => {
           variant="extended"
           onClick={handleClickOpen}
         >
-          <AddIcon />
+          <AddIcon style={{ marginRight: "2px" }} />
           Adicionar
         </Fab>
       </Zoom>
@@ -62,7 +62,7 @@ const FloatRankingButton = () => {
           Formulário de Demanda
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText style={{ marginBottom: "20px" }}>
             Para adicionar uma demanda ao Ranking, por favor preencha as
             informações a seguir.
           </DialogContentText>
@@ -80,6 +80,7 @@ const FloatRankingButton = () => {
               value={demand}
               label="Age"
               onChange={handleChangeDemand}
+              style={{ marginBottom: "20px" }}
             >
               <MenuItem value={1}>Ar-condicionado quebrado</MenuItem>
               <MenuItem value={2}>TV quebrada</MenuItem>
@@ -87,14 +88,22 @@ const FloatRankingButton = () => {
               <MenuItem value={0}>Outra</MenuItem>
             </Select>
           </FormControl>
+
           {demand === 0 ? (
             <TextField
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginBottom: "20px" }}
               label="Digite a sua demanda"
             ></TextField>
           ) : (
             console.log("do nothing")
           )}
+          <TextField
+            style={{ width: "100%", marginBottom: "20px" }}
+            placeholder="Descrição da demanda"
+            multiline
+            rows={3}
+            variant="outlined"
+          ></TextField>
           <ButtonGroupLogin>Enviar</ButtonGroupLogin>
         </DialogContent>
       </Dialog>
