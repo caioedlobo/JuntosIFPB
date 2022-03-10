@@ -7,12 +7,15 @@ import classesCommon from "./stylesheet/Common.module.css";
 import Layout from "../template/Layout";
 
 import LoginFormHandler from "../atoms/LoginFormHandler";
+import LoggedPage from "../organisms/LoggedPage";
 
 const Home = () => {
   if (1 === 2) {
     return (
       <div data-testid="home">
-        <p>OOII</p>
+        <Layout>
+          <LoggedPage />
+        </Layout>
       </div>
     );
   }

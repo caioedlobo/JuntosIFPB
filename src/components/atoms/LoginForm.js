@@ -7,6 +7,9 @@ import ImageLogin from "./ImageLogin";
 import HeightFormHandler from "./HeightFormHandler";
 
 const LoginForm = (props) => {
+  const teste = () => {
+    console.log("clicou");
+  };
   return (
     <div
       data-testid="login-form"
@@ -21,7 +24,7 @@ const LoginForm = (props) => {
       <LoginText />
       <PasswordText />
       <HeightFormHandler />
-      <ButtonGroupLogin>Entrar</ButtonGroupLogin>
+      <ButtonGroupLogin sendLogin={teste}>Entrar</ButtonGroupLogin>
       <HeightFormHandler />
       <Button onClick={props.FormHandlerRegister}>
         Não possui conta? Registre-se

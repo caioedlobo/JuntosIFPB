@@ -16,7 +16,7 @@ const About = () => {
           width={"300px"}
           style={{ marginTop: "30px" }}
         ></img> */}
-        <p className={classes.text}>
+        <p className={classes.text} style={{ paddingBottom: "40px" }}>
           O Projeto tem como objetivo facilitar a transmissão de problemas e
           melhorias para o IFPB. O Projeto tem parceira com o GCOMPI, o IFPB
           Campus Campina Grande e a UFERSA.

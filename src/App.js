@@ -16,6 +16,8 @@ function App() {
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/contato" element={<Contact />} />
             <Route path="/parceiros" element={<Partners />} />
+            <Route path="/conta" element={<Partners />} />
+            <Route path="*" element={<h1>Página não encontrada</h1>} />
           </Routes>
         </main>
       </div>

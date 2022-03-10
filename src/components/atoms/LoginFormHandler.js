@@ -15,6 +15,10 @@ const LoginFormHandler = () => {
     console.log(isForgotPasswordForm);
   };
 
+  const changeToLoggedScreen = () => {
+    console.log("clicou");
+  };
+
   if (isForgotPasswordForm) {
     console.log(isForgotPasswordForm);
     return (
@@ -28,6 +32,7 @@ const LoginFormHandler = () => {
         <LoginForm
           FormHandlerRegister={FormHandler}
           FormHandlerPassword={FormHandlerForgotPassword}
+          SendLogin={changeToLoggedScreen}
         />
       </div>
     );
