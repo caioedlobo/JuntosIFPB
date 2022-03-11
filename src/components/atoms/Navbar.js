@@ -24,10 +24,6 @@ const Navbar = (props) => {
             <Link to={"/"} className={classes.typo}>
               Início
             </Link>
-
-            <Link to={"/sobre"} className={classes.typo}>
-              Sobre
-            </Link>
             <Link to={"/ranking"} className={classes.typo}>
               Ranking
             </Link>
@@ -39,7 +35,7 @@ const Navbar = (props) => {
               Contato
             </Link>
             <Link to={"/conta"} className={classes.typo}>
-              Conta
+              Entrar
             </Link>
           </Box>
         </Toolbar>

@@ -3,10 +3,15 @@ import Layout from "../template/Layout";
 import classesCommon from "./stylesheet/Common.module.css";
 import classes from "./stylesheet/About.module.css";
 import image from "../../assets/undraw_proud_coder_re_exuy.svg";
+import Partners from "./Partners";
+import classesForm from "./stylesheet/Partners.module.css";
 const About = () => {
   return (
     <Layout>
-      <div data-testid="about" className={classesCommon.form}>
+      <div
+        data-testid="about"
+        className={`${classesCommon.form} ${classesForm.formPartners}`}
+      >
         <img src={image} alt="AboutUsImg" className={classes.imgLogo}></img>
         {/* <img
           src={
@@ -21,6 +26,7 @@ const About = () => {
           melhorias para o IFPB. O Projeto tem parceira com o GCOMPI, o IFPB
           Campus Campina Grande e a UFERSA.
         </p>
+        <Partners />
       </div>
     </Layout>
   );
