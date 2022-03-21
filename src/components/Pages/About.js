@@ -28,7 +28,7 @@ const About = () => {
         <p className={classes.text}>
           O Projeto tem como objetivo facilitar a transmissão de problemas e
           melhorias para o IFPB. O Projeto tem parceira com o GCOMPI, o IFPB
-          Campus Campina Grande e a UFERSA.
+          Campus Campina Grande e a UFERSA Campus Pau dos Ferros.
         </p>
 
         <div
@@ -52,7 +52,7 @@ const About = () => {
         <p
           style={{
             fontSize: "36px",
-            paddingTop: "40px",
+            paddingTop: "80px",
             paddingBottom: "30px",
           }}
         >

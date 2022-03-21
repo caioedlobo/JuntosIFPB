@@ -1,9 +1,9 @@
 import React from "react";
-import { AppBar, Toolbar } from "@material-ui/core";
 
 import Box from "@mui/material/Box";
 import classes from "./stylesheet/Navbar.module.css";
 import { Link } from "react-router-dom";
+import { AppBar, Toolbar } from "@mui/material";
 
 const Navbar = (props) => {
   return (

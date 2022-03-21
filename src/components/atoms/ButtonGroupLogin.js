@@ -1,9 +1,8 @@
 import React from "react";
 import LoginButton from "./LoginButton";
-import { ButtonGroup } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { ButtonGroup } from "@mui/material";
 
-const useStyles = makeStyles({
+const sx = {
   root: {
     //background: "linear-gradient(45deg, #7b1fa2, #ce93d8)",
     /* background: "#4461f2", */
@@ -17,14 +16,12 @@ const useStyles = makeStyles({
 
     //padding: "0 30px",
   },
-});
+};
 
 const ButtonGroupLogin = (props) => {
-  const classes = useStyles();
-
   return (
     <ButtonGroup fullWidth>
-      <LoginButton classes={classes}>{props.children}</LoginButton>
+      <LoginButton sx={sx.root}>{props.children}</LoginButton>
       {/* <RegisterButton classes={classes}></RegisterButton> */}
     </ButtonGroup>
   );

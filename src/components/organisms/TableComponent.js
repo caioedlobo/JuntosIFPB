@@ -2,7 +2,7 @@ import MTable from "./MTable";
 import faker from "faker";
 import React, { useState, useEffect } from "react";
 import classes from "./stylesheet/MTable.module.css";
-import SearchBar from "material-ui-search-bar";
+
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
@@ -78,13 +78,13 @@ const TableComponent = (props) => {
     <div data-testid="table-component" className={classes.table}>
       <div className={classes.searchFilter}>
         <div data-testid="filter-select" className={classes.searchWrapper}>
-          <SearchBar
+          {/* <SearchBar
             className={classes.searchBar}
             label="Pesquisar"
             value={searched}
             onChange={(searchVal) => setSearched(searchVal)}
             onCancelSearch={onCancelSearchHandler}
-          />
+          /> */}
 
           <FormControl size="small" style={{ width: "10%" }}>
             <InputLabel id="demo-simple-select-label">Filtro</InputLabel>

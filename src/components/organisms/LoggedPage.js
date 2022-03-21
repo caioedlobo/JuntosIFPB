@@ -7,8 +7,8 @@ import {
   Box,
   TextField,
   Button,
-} from "@material-ui/core";
-import { display, width } from "@material-ui/system";
+  Link,
+} from "@mui/material";
 import React from "react";
 import classesCommon from "../Pages/stylesheet/Common.module.css";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -22,18 +22,19 @@ const LoggedPage = () => {
       <Box
         sx={{
           display: "flex",
-          flexDirection: { md: "column", xs: "row" },
+          flexDirection: { md: "row", xs: "column" },
           width: "98vw",
           maxWidth: "1060px",
           justifyContent: "center",
         }}
       >
         <Card
-          style={{
+          sx={{
             height: "600px",
             flex: "2.5",
 
-            marginRight: "6px",
+            marginRight: { md: "6px", xs: "0" },
+            marginBottom: { md: "0", xs: "6px" },
           }}
         >
           {/* <CardHeader>
@@ -52,31 +53,36 @@ const LoggedPage = () => {
                   display: "flex ",
                   justifyContent: "center",
                   textAlign: "center",
-                  background: "red",
                 }}
               >
                 <Avatar></Avatar>
               </div>
-              <div
-                style={{
+              <Link
+                href="fdsfsd"
+                sx={{
                   display: "flex",
-                  flexDirection: "row",
+                  flexDirection: { md: "row", xs: "column" },
+                  alignItems: { md: "flex-start", xs: "center" },
                 }}
               >
                 <AccountCircleIcon />
                 <Typography>Alterar Dados</Typography>
-                <ArrowForwardIosIcon />
-              </div>
+                <ArrowForwardIosIcon
+                  sx={{
+                    display: { md: "block", xs: "none", marginLeft: "auto" },
+                  }}
+                />
+              </Link>
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <LockOpenIcon />
                 <Typography>Segurança</Typography>
-                <ArrowForwardIosIcon />
+                <ArrowForwardIosIcon sx={{ marginLeft: "auto" }} />
               </div>
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <BookmarkBorderIcon />
                 <Typography>Minhas Publicações</Typography>
 
-                <ArrowForwardIosIcon />
+                <ArrowForwardIosIcon sx={{ marginLeft: "auto" }} />
               </div>
             </div>
           </CardActions>
@@ -92,9 +98,9 @@ const LoggedPage = () => {
         <Card
           style={{
             height: "600px",
-            width: "800px",
+
             display: "flex",
-            justifyContent: "center",
+
             flex: "7.5",
             /*  margin: "0 auto", */
             /* marginLeft: "calc(50vw - 270px - 400px)", */
@@ -105,15 +111,23 @@ const LoggedPage = () => {
               display: "flex",
               flexDirection: "column",
 
-              justifyContent: "space-evenly",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
             }}
           >
-            <Typography style={{ fontSize: "22px" }}>ALTERAR DADOS</Typography>
+            <Typography
+              variant="h6"
+              style={{ fontSize: "22px", marginBottom: "20px" }}
+            >
+              ALTERAR DADOS
+            </Typography>
             <Box
-              style={{
+              sx={{
                 display: "flex",
                 flexDirection: "column",
-                width: "25vw",
+                width: { md: "70%", xs: "90%" },
+                gap: "50px",
               }}
             >
               <TextField
@@ -121,10 +135,10 @@ const LoggedPage = () => {
                 placeholder="Seu nome"
                 fullWidth
               ></TextField>
-              <div style={{ marginBottom: "50px" }}></div>
+
               <TextField variant="outlined" placeholder="Seu email"></TextField>
+              <Button variant="contained">Salvar Alterações</Button>
             </Box>
-            <Button variant="contained">Salvar Alterações</Button>
           </Box>
         </Card>
       </Box>

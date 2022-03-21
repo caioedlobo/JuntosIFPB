@@ -1,12 +1,12 @@
 import React from "react";
-import ButtonUI from "@material-ui/core/Button";
+import ButtonUI from "@mui/material/Button";
 
 const LoginButton = (props) => {
   //console.log(props.classes.root)
 
   return (
     <div data-testid="login-button" style={{ width: "100%" }}>
-      <ButtonUI className={props.classes.root} fullWidth>
+      <ButtonUI sx={props.sx} fullWidth>
         {props.children}
       </ButtonUI>
     </div>

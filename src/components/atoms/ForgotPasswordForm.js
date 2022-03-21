@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import ButtonGroupLogin from "./ButtonGroupLogin";
 import LoginText from "./LoginText";
 import ImageLogin from "./ImageLogin";

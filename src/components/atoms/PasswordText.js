@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField } from "@material-ui/core";
+import { TextField } from "@mui/material";
 
 const PasswordText = () => {
   return (
@@ -9,6 +9,7 @@ const PasswordText = () => {
         margin="normal"
         fullWidth
         color="primary"
+        variant="standard"
       ></TextField>
     </div>
   );
