@@ -50,8 +50,8 @@ function sortTable(arr, prop) {
   });
 }
 
-const TableComponent = (props) => {
-  const [searched, setSearched] = useState("");
+const TableComponent = () => {
+  const [searched /* , setSearched */] = useState("");
   const [filter, setFilter] = useState("");
   const [rows, setRows] = useState(USERS);
 
