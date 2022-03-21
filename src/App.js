@@ -1,7 +1,6 @@
 import Home from "./components/Pages/Home";
 import About from "./components/Pages/About";
 import Ranking from "./components/Pages/Ranking";
-import Partners from "./components/Pages/Partners";
 import Contact from "./components/Pages/Contact";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 

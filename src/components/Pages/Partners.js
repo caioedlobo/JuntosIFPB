@@ -1,6 +1,4 @@
 import React from "react";
-import Layout from "../template/Layout";
-import classesCommon from "./stylesheet/Common.module.css";
 import classes from "./stylesheet/Partners.module.css";
 import PartnerTitle from "../atoms/PartnerTitle";
 import PartnerText from "../atoms/PartnerText";

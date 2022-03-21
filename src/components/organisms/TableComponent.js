@@ -57,9 +57,9 @@ const TableComponent = (props) => {
 
   const jobMatchFilter = (row, type) => row.job.match(RegExp(type, "i"));
 
-  const onCancelSearchHandler = () => {
+  /* const onCancelSearchHandler = () => {
     setSearched("");
-  };
+  }; */
 
   const onFilterChangeHandler = (event) => {
     setFilter(event.target.value);
