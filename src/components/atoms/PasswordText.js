@@ -1,7 +1,12 @@
 import React from "react";
 import { TextField } from "@mui/material";
 
-const PasswordText = () => {
+const PasswordText = (props) => {
+
+  const handleData = (event) => {
+    props.passwordData(event.target.value)
+    
+  }
   return (
     <div data-testid="password-text" style={{ width: "100%" }}>
       <TextField
@@ -10,6 +15,7 @@ const PasswordText = () => {
         fullWidth
         color="primary"
         variant="standard"
+        onChange={handleData}
       ></TextField>
     </div>
   );

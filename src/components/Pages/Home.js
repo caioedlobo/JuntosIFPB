@@ -10,7 +10,7 @@ import LoginFormHandler from "../atoms/LoginFormHandler";
 import LoggedPage from "../organisms/LoggedPage";
 
 const Home = () => {
-  if (1 === 2) {
+  /* if (1 === 1) {
     return (
       <div data-testid="home">
         <Layout>
@@ -18,7 +18,7 @@ const Home = () => {
         </Layout>
       </div>
     );
-  }
+  } */
   return (
     <div data-testid="home">
       <Layout>

@@ -7,26 +7,32 @@ import ImageLogin from "./ImageLogin";
 import HeightFormHandler from "./HeightFormHandler";
 
 const RegisterForm = (props) => {
+
+  const getData = (data) => {
+    console.log(data)
+  }
+  
   return (
-    <div
+    <form
       data-testid="register-form"
       style={{
         alignItems: "center",
         flexDirection: "column",
         display: "flex",
       }}
+      
     >
       <ImageLogin />
 
-      <LoginText />
-      <PasswordText />
+      <LoginText usernameData={getData}/>
+      <PasswordText passwordData={getData}/>
       <HeightFormHandler />
       <ButtonGroupLogin>Registrar</ButtonGroupLogin>
       <HeightFormHandler />
       <Button onClick={props.FormHandlerRegister}>
         Já possui conta? Entre
       </Button>
-    </div>
+    </form>
   );
 };
 

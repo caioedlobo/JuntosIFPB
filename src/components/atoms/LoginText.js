@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField } from "@mui/material";
-const LoginText = () => {
+const LoginText = (props) => {
+
+  /* const [usernameData, setUsernameData] = useState("") */
+
+  const handleData = (event) => {
+    /* setUsernameData(event.target.value) */
+    props.usernameData(event.target.value)
+    
+  }
+  
+  
   return (
     <div data-testid="login-text" style={{ width: "100%" }}>
       <TextField
@@ -8,6 +18,8 @@ const LoginText = () => {
         margin="normal"
         fullWidth
         variant="standard"
+        onChange={handleData}
+        
       ></TextField>
     </div>
   );
