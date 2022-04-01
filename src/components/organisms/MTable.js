@@ -123,6 +123,7 @@ const MTable = (props) => {
                           variant="outlined"
                           size="small"
                           style={{ width: "10px" }}
+                          
                         >
                           Apoiar
                         </Button>
