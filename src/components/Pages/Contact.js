@@ -1,18 +1,43 @@
-import React from "react";
+import React, {useState} from "react";
 
 import classesCommon from "./stylesheet/Common.module.css";
 import classes from "./stylesheet/Contact.module.css";
 import imageContact from "./../../assets/undraw_contact_us_re_4qqt.svg";
-import { TextField } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import ButtonGroupLogin from "../atoms/ButtonGroupLogin";
 import Layout from "../template/Layout";
+import EmailContactField from "../atoms/EmailContactField"
+import DescriptionContactField from "../atoms/DescriptionContactField";
+
+
+import Axios from "axios"
 
 const Contact = () => {
+  
+  const [emailData, setEmailData] = useState();
+  const [descriptionData, setDescriptionData] = useState();
+
+  const getEmailData = (emailData) => {
+    /* console.log(emailData) */
+    setEmailData(emailData)
+  }
+
+  const getDescriptionData = (descriptionData) => {
+    /* console.log(descriptionData) */
+    setDescriptionData(descriptionData)
+  }
+
+
   return (
     <Layout>
-      <div
+      <form
         data-testid="contact"
         className={`${classesCommon.form} ${classes.formContact}`}
+        onSubmit={(e) => {
+          e.preventDefault();
+          Axios.post("https://localhost:3000/api/contato", emailData)
+          .then( (res) => {console.log(res.emailData)});
+        }}  
       >
         <img
           src={imageContact}
@@ -25,24 +50,12 @@ const Contact = () => {
           site, entre em contato conosco através do email
           juntosifpb2020@gmail.com ou pelo formulário abaixo:
         </div>
-        <TextField
-          placeholder="Email"
-          variant="outlined"
-          style={{ width: "100%", marginTop: "50px" }}
-        >
-          Email
-        </TextField>
-        <TextField
-          style={{ width: "100%", marginTop: "28px" }}
-          placeholder="Comentário"
-          multiline
-          rows={4}
-          variant="outlined"
-        ></TextField>
+        <EmailContactField emailData={getEmailData}/>
+        <DescriptionContactField descriptionData={getDescriptionData}/>
         <div className={classes.buttonWrapper}>
-          <ButtonGroupLogin>Enviar</ButtonGroupLogin>
+          <Button type="submit">Enviar</Button>
         </div>
-      </div>
+      </form>
     </Layout>
   );
 };

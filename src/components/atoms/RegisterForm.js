@@ -20,14 +20,17 @@ const RegisterForm = (props) => {
         flexDirection: "column",
         display: "flex",
       }}
-      
+     onSubmit={(e) => {
+       e.preventDefault();
+     }} 
     >
       <ImageLogin />
 
       <LoginText usernameData={getData}/>
       <PasswordText passwordData={getData}/>
       <HeightFormHandler />
-      <ButtonGroupLogin>Registrar</ButtonGroupLogin>
+      <Button type="submit"> Registrar </Button>
+      {/* <ButtonGroupLogin>Registrar</ButtonGroupLogin> */}
       <HeightFormHandler />
       <Button onClick={props.FormHandlerRegister}>
         Já possui conta? Entre
