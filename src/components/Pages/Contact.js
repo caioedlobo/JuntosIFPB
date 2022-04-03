@@ -3,8 +3,7 @@ import React, {useState} from "react";
 import classesCommon from "./stylesheet/Common.module.css";
 import classes from "./stylesheet/Contact.module.css";
 import imageContact from "./../../assets/undraw_contact_us_re_4qqt.svg";
-import { TextField, Button } from "@mui/material";
-import ButtonGroupLogin from "../atoms/ButtonGroupLogin";
+import { Button } from "@mui/material";
 import Layout from "../template/Layout";
 import EmailContactField from "../atoms/EmailContactField"
 import DescriptionContactField from "../atoms/DescriptionContactField";
@@ -27,6 +26,8 @@ const Contact = () => {
     setDescriptionData(descriptionData)
   }
 
+  
+
 
   return (
     <Layout>
@@ -35,8 +36,13 @@ const Contact = () => {
         className={`${classesCommon.form} ${classes.formContact}`}
         onSubmit={(e) => {
           e.preventDefault();
-          Axios.post("https://localhost:3000/api/contato", emailData)
-          .then( (res) => {console.log(res.emailData)});
+          const contactData = {
+            emailData: emailData,
+            descriptionData: descriptionData
+          }
+          
+          Axios.post("https://localhost:3000/api/contato", contactData)
+          .then( (res) => {console.log(res.contactData)});
         }}  
       >
         <img

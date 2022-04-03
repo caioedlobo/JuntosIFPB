@@ -1,6 +1,6 @@
 import React from 'react'
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import {Link, Button} from "@mui/material";
+import {Link} from "@mui/material";
 
 const LayoutUserBar = (props) => {
   console.log(props.linkTo)

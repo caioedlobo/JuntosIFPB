@@ -3,7 +3,6 @@ import UserBar from '../organisms/UserBar'
 import {
   Box,
 } from "@mui/material";
-import Navbar from '../atoms/Navbar';
 import Layout from './Layout';
 
 const LayoutUserPage = (props) => {
