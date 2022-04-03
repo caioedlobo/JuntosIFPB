@@ -17,17 +17,14 @@ const Contact = () => {
   const [descriptionData, setDescriptionData] = useState();
 
   const getEmailData = (emailData) => {
-    /* console.log(emailData) */
+    
     setEmailData(emailData)
   }
 
   const getDescriptionData = (descriptionData) => {
-    /* console.log(descriptionData) */
+    
     setDescriptionData(descriptionData)
   }
-
-  
-
 
   return (
     <Layout>
