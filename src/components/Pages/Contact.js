@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import classesCommon from "./stylesheet/Common.module.css";
 import classes from "./stylesheet/Contact.module.css";
 import imageContact from "./../../assets/undraw_contact_us_re_4qqt.svg";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Layout from "../template/Layout";
 import EmailContactField from "../atoms/EmailContactField"
 import DescriptionContactField from "../atoms/DescriptionContactField";
@@ -28,9 +28,10 @@ const Contact = () => {
 
   return (
     <Layout>
+      <Box sx={{display: "flex", flexDirection: "column", width: {sm:"560px", xs: "350px"}, height: "max-content",/*  padding: "28px 24px" */}}>
       <form
         data-testid="contact"
-        className={`${classesCommon.form} ${classes.formContact}`}
+        className={`${classesCommon.form}`}
         onSubmit={(e) => {
           e.preventDefault();
           
@@ -41,13 +42,17 @@ const Contact = () => {
           .then( (res) => {console.log(res)});
         }}  
       >
+        
+          <Box sx={{textAlign: "center", marginBottom: "15px", backgroundSize: 'contain'}}>
         <img
+        className={classes.imgContact}
           src={imageContact}
           alt="imageContact"
           style={{ width: "350px" }}
         ></img>
+        </Box>
 
-        <div style={{ marginTop: "40px", lineHeight: "1.5" }}>
+        <div style={{lineHeight: "1.5" }}>
           Para mais informações sobre o Projeto ou para sugerir melhorias no
           site, entre em contato conosco através do email
           juntosifpb2020@gmail.com ou pelo formulário abaixo:
@@ -57,7 +62,9 @@ const Contact = () => {
         <div className={classes.buttonWrapper}>
           <Button type="submit">Enviar</Button>
         </div>
+        
       </form>
+      </Box>
     </Layout>
   );
 };

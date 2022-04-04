@@ -1,11 +1,17 @@
-.formContact {
+/* .formContact {
   width: 580px;
   height: max-content;
   padding: 28px 24px;
-}
+  min-width: 100px;
+} */
 
 .buttonWrapper {
-  width: 50%;
+  width: 80%;
   margin: 0 auto;
   margin-top: 28px;
+  margin-bottom: 15px;
+}
+
+.imgContact{
+  width: "350px"
 }
