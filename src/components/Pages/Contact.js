@@ -33,13 +33,12 @@ const Contact = () => {
         className={`${classesCommon.form} ${classes.formContact}`}
         onSubmit={(e) => {
           e.preventDefault();
-          const contactData = {
+          
+          Axios.post("https://localhost:3000/api/contato", {
             emailData: emailData,
             descriptionData: descriptionData
-          }
-          
-          Axios.post("https://localhost:3000/api/contato", contactData)
-          .then( (res) => {console.log(res.contactData)});
+          })
+          .then( (res) => {console.log(res)});
         }}  
       >
         <img
