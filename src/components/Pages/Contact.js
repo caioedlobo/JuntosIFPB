@@ -45,10 +45,9 @@ const Contact = () => {
         
           <Box sx={{textAlign: "center", marginBottom: "15px", backgroundSize: 'contain'}}>
         <img
-        className={classes.imgContact}
           src={imageContact}
           alt="imageContact"
-          style={{ width: "350px" }}
+          style={{ width: "80%", marginTop: "15px" }}
         ></img>
         </Box>
 
