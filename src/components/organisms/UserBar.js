@@ -14,9 +14,46 @@ import {
   Typography,
   Box,
   Toolbar,
+  AppBar,
+  Menu,
+  MenuItem
 } from "@mui/material";
 
+import Drawer from '@mui/material/Drawer';
+import CssBaseline from '@mui/material/CssBaseline';
+import MuiAppBar from '@mui/material/AppBar';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import { styled, useTheme } from '@mui/material/styles';
+import {Link} from "@mui/material";
+
 const UserBar = () => {
+
+
+  const drawerWidth = 240;
+
+  const [anchorEl, setAnchorEl] = React.useState(false);
+
+
+  const openMenu = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(false)
+  }
+
+  const toSecurity = () => {
+
+  }
+
   return <div data-testid='user-bar'>
     
     <Card
@@ -52,11 +89,47 @@ const UserBar = () => {
                   
                 }}
               >
-                <Toolbar sx={{display: {md: "none", sm: "none", xs: "flex"}, /* justifyContent: "flex-start" */}}>
-                 <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+                
+                <Toolbar sx={{display: {md: "none", sm: "none", xs: "flex"}}}>
+                 <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }} onClick={openMenu}>
         <MenuIcon />
       </IconButton>
+      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+
+        <MenuItem>
+        <Link to="/conta">
+        <div style={{display: "flex" }}>
+          <AccountCircleIcon/> 
+          <Typography style={{paddingLeft: "5px"}}>Alterar Dados</Typography>
+          </div>
+          </Link>
+        </MenuItem>
+
+        <MenuItem /* sx={{textAlign: "center", alignSelf: "center"}} */>
+          <Link to="/seguranca">
+            <div style={{display: "flex" }}>
+          <LockOpenIcon />
+          <Typography style={{paddingLeft: "5px"}}>Segurança</Typography>
+          </div>
+          </Link>
+        </MenuItem>
+
+
+        <MenuItem>
+        <Link to="/seguranca">
+        <div style={{display: "flex" }}>
+          <BookmarkBorderIcon />
+          <Typography style={{paddingLeft: "5px"}}>Minhas Contribuições</Typography>
+        </div>
+          </Link>
+          
+        </MenuItem>
+      </Menu>
                  </Toolbar>
+                 
+                
+       
+                 
                  
                  {/* <Box style={{display: "flex", alignSelf: "center", justifyContent: "center", textAlign: "center", flex: 0.7 }}> */}
                 <Avatar sx={{marginBottom: {sm: "50px"}, display: "flex", textAlign: "center", alignSelf: "center"}} ></Avatar>
