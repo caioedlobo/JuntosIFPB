@@ -35,12 +35,24 @@ const Contact = () => {
         onSubmit={(e) => {
           e.preventDefault();
           
-          Axios.post("https://localhost:3000/api/contato", {
-            emailData: emailData,
-            descriptionData: descriptionData
-          })
-          .then( (res) => {console.log(res)});
-        }}  
+         /*  Axios({method: "post",
+          url: 'http://localhost:3001/api/contato',
+          
+          headers: {'Content-Type' : 'application/json' },
+          body: {"testing": "123"}
+         })
+         
+          .then( (res) => {console.log(res)})
+        .catch( (error) =>{
+          console.log(error);
+          
+        }) */
+        Axios.post("http://localhost:3001/api/contato", {
+          email: emailData,
+          description: descriptionData
+        })
+        }}
+         
       >
         
           <Box sx={{textAlign: "center", marginBottom: "15px", backgroundSize: 'contain'}}>
@@ -54,7 +66,7 @@ const Contact = () => {
         <div style={{lineHeight: "1.5" }}>
           Para mais informações sobre o Projeto ou para sugerir melhorias no
           site, entre em contato conosco através do email
-          juntosifpb2020@gmail.com ou pelo formulário abaixo:
+          juntosifpb@gmail.com ou pelo formulário abaixo:
         </div>
         <EmailContactField emailData={getEmailData}/>
         <DescriptionContactField descriptionData={getDescriptionData}/>
