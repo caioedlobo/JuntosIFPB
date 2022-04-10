@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import Description from "../atoms/Description";
 import classes from "./stylesheet/Home.module.css";
 import LogoImg from "../atoms/LogoImg";
@@ -22,39 +22,29 @@ const Home = () => {
   return (
     <div data-testid="home">
       <Layout>
-        <Grid
-          container
-          className={classes.content}
-          alignItems="center"
-          spacing={4}
-          style={{ padding: "0 48px" }}
+        <Box
+          
+          
+          sx={{ background: "blue", padding: "0 48px", display: "flex", flexDirection: "row", alignItems: "center" }}
         >
-          <Grid
-            item
-            container
-            xl={9}
-            lg={9}
-            md={8}
-            sm={4}
-            alignItems="center"
-            spacing={4}
-            className={classes.itemsLeft}
-          >
-            <Grid item xl={4} lg={4} sm={12}>
+          
+            <div>
               <Description />
-            </Grid>
+            </div>
 
-            <Grid item xl={8} lg={8} sm={0}>
+            <div>
               <LogoImg />
-            </Grid>
-          </Grid>
+              </div>
+            
+          
 
-          <Grid item container xl={3} lg={3} md={4} /* sm={8} */>
-            <Grid item className={`${classesCommon.form} ${classes.formHome}`}>
+          
+            <div item className={`${classesCommon.form} ${classes.formHome}`}>
               <LoginFormHandler />
-            </Grid>
-          </Grid>
-        </Grid>
+            </div>
+            </Box>
+          
+        
       </Layout>
     </div>
   );

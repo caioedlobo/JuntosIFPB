@@ -21,7 +21,7 @@ main {
 }
 
 .formHome {
-  width: 100%;
+  width: 280px;
   height: 520px;
   /* min-width: 200px;
   max-height: 320px; */
@@ -38,10 +38,11 @@ main {
 
 .mainImage {
   /* width: 1024px; */
-  width: 820px;
+  width: 700px;
+  padding: 0 30px;
 }
 
-@media screen and (max-width: 1850px) {
+/* @media screen and (max-width: 1850px) {
   .mainImage {
     min-width: 480px;
     max-width: 768px;
@@ -71,8 +72,7 @@ main {
 
 @media screen and (max-width: 961px) {
   .itemsLeft {
-    /* background-color: aqua; */
-    /* display: none !important; */
+    
     display: flex;
     flex-direction: column;
     background-color: blue;
@@ -125,7 +125,9 @@ main {
     align-items: center;
     background-color: blue;
   }
-}
+} */
+
+/* ---------------------------------- */
 
 /*
 @media screen and (max-width: 1601px) {

@@ -17,6 +17,7 @@ const LoginForm = (props) => {
         alignItems: "center",
         flexDirection: "column",
         display: "flex",
+        background: "red"
       }}
     >
       <ImageLogin />

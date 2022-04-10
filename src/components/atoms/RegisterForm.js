@@ -18,6 +18,9 @@ const RegisterForm = (props) => {
         alignItems: "center",
         flexDirection: "column",
         display: "flex",
+        width: "100%",
+        background: "blue",
+        justifyContent: "center"
       }}
      onSubmit={(e) => {
        e.preventDefault();
