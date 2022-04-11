@@ -6,7 +6,7 @@ const LoginText = (props) => {
 
   const handleData = (event) => {
     /* setUsernameData(event.target.value) */
-    props.usernameData(event.target.value)
+    props.emailLoginData(event.target.value)
     
   }
   
@@ -14,7 +14,7 @@ const LoginText = (props) => {
   return (
     <div data-testid="login-text" style={{ width: "100%" }}>
       <TextField
-        label="Usuário"
+        label="E-mail"
         margin="normal"
         fullWidth
         variant="standard"

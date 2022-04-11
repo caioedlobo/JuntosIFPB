@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 const PasswordText = (props) => {
 
   const handleData = (event) => {
-    props.passwordData(event.target.value)
+    props.passwordLoginData(event.target.value)
     
   }
   return (

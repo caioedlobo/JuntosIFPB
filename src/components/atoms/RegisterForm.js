@@ -18,7 +18,7 @@ const RegisterForm = (props) => {
         alignItems: "center",
         flexDirection: "column",
         display: "flex",
-        width: "100%",
+        width: "300px",
         background: "blue",
         justifyContent: "center"
       }}
@@ -29,6 +29,7 @@ const RegisterForm = (props) => {
       <ImageLogin />
 
       <LoginText usernameData={getData}/>
+      <PasswordText passwordData={getData}/>
       <PasswordText passwordData={getData}/>
       <HeightFormHandler />
       <Button type="submit"> Registrar </Button>
