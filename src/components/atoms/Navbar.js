@@ -92,7 +92,7 @@ const Navbar = (props) => {
             <Link to={"/contato"} className={classes.typo}>
               Contato
             </Link>
-            <Link to={"/conta"} className={classes.typo}>
+            <Link to={"/login"} className={classes.typo}>
               Entrar
             </Link>
           </Box>
