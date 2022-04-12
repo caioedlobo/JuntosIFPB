@@ -21,7 +21,7 @@ const LoginForm = (props) => {
 
   const emailValidation = () => {
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
-
+    console.log("Entrou")
     if (regEx.test(emailFormData)){
       console.log("Email válido")
     }
@@ -29,7 +29,7 @@ const LoginForm = (props) => {
       console.log("Email não é válido")
     }
     else{
-      console.log("")
+      console.log("alooo")
     }
   }
 
@@ -46,7 +46,7 @@ const LoginForm = (props) => {
       action="http://localhost:3000/conta"
       method="get"
       onSubmit={(e) => {
-
+        e.preventDefault()
         Axios.post("http://localhost:3001/auth/authenticate", {
           email: emailFormData,
           password: passwordFormData
@@ -58,9 +58,9 @@ const LoginForm = (props) => {
       <LoginText emailLoginData={emailLoginData}/>
       <PasswordText passwordLoginData={passwordLoginData}/>
       <HeightFormHandler />
-      <Button type="submit" onclick={emailValidation} >Entrar</Button>
+      <Button  type="submit" onclick={emailValidation} >Entrar</Button>
       <HeightFormHandler />
-      <Button onClick={props.FormHandlerRegister}>
+      <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerRegister}>
         Não possui conta? Registre-se
       </Button>
       <Button onClick={props.FormHandlerPassword}>
