@@ -23,7 +23,7 @@ const Reset = () => {
       e.preventDefault()
       const token = (e.target.action.split("="))[1];
       console.log(token)
-      Axios.post("http://localhost:3001/auth/reset_password", {
+      Axios.post("https://backend-juntosifpb.herokuapp.com/auth/reset_password", {
           password: resetPassword,
           token: token
         })
