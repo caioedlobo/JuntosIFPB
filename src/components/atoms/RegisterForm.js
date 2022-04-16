@@ -30,10 +30,10 @@ const RegisterForm = (props) => {
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
     console.log("Entrou")
     if (regEx.test(emailFormData)){
-      console.log("Email válido")
+      return true
     }
     else if (!regEx.test(emailFormData) && emailFormData !== ""){
-      console.log("Email não é válido")
+      return false
     }
     else{
       console.log("alooo")
@@ -54,12 +54,17 @@ const RegisterForm = (props) => {
      onSubmit={(e) => {
        e.preventDefault();
       
-      Axios.post("https://backend-juntosifpb.herokuapp.com/auth/register", {
-        name: nameFormData,
-        email: emailFormData,
-        password: passwordFormData, 
-      })
-     }} 
+       if (emailValidation()){
+        Axios.post("https://backend-juntosifpb.herokuapp.com/auth/register", {
+          name: nameFormData,
+          email: emailFormData,
+          password: passwordFormData, 
+        })
+      }
+      else{
+        console.log("Email não é válido");
+     }}
+    }
     >
       <ImageLogin />
 
