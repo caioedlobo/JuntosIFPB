@@ -28,17 +28,33 @@ const RegisterForm = (props) => {
 
   const emailValidation = () => {
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
-    console.log("Entrou")
+    
     if (regEx.test(emailFormData)){
-      return true
+      if( emailFormData.includes('@')){
+        if(emailFormData.split('@')[1] === "academico.ifpb.edu.br" ){
+          return true
+        }
+        else if(emailFormData.split('@')[1] === "ifpb.edu.br" ){
+          return true
+        }
+      }
+      
     }
     else if (!regEx.test(emailFormData) && emailFormData !== ""){
       return false
     }
     else{
-      console.log("alooo")
+      
     }
   }
+  /* const emailValidationIF = () => {
+    
+    if( emailFormData.includes('@')){
+      emailFormData.split('@')
+    }
+    
+    
+  } */
   
   return (
     <form
@@ -55,6 +71,7 @@ const RegisterForm = (props) => {
        e.preventDefault();
       
        if (emailValidation()){
+         
         Axios.post("https://backend-juntosifpb.herokuapp.com/auth/register", {
           name: nameFormData,
           email: emailFormData,
@@ -73,7 +90,7 @@ const RegisterForm = (props) => {
       <PasswordText passwordLoginData={passwordLoginData} label={"Digite a senha"}/>
       
       <HeightFormHandler />
-      <Button type="submit" onClick={emailValidation}> Registrar </Button>
+      <Button type="submit"> Registrar </Button>
       {/* <ButtonGroupLogin>Registrar</ButtonGroupLogin> */}
       <HeightFormHandler />
       <Button onClick={props.FormHandlerRegister}>
