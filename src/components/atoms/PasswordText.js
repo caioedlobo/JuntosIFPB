@@ -10,12 +10,13 @@ const PasswordText = (props) => {
   return (
     <div data-testid="password-text" style={{ width: "100%" }}>
       <TextField
-        label="Senha"
+        label={props.label}
         margin="normal"
         fullWidth
         color="primary"
         variant="standard"
         onChange={handleData}
+        type="password"
       ></TextField>
     </div>
   );

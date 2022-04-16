@@ -25,7 +25,7 @@ const Home = () => {
         <Box
           
           
-          sx={{ background: "blue", padding: "0 48px", display: "flex", flexDirection: "row", alignItems: "center" }}
+          sx={{ padding: "0 48px", display: "flex", flexDirection: "row", alignItems: "center" }}
         >
           
             <div>

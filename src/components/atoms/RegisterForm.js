@@ -1,15 +1,30 @@
-import React from "react";
+import React, {useState} from "react";
 import { Button } from "@mui/material";
 import LoginText from "./LoginText";
 import PasswordText from "./PasswordText";
 import ImageLogin from "./ImageLogin";
 import HeightFormHandler from "./HeightFormHandler";
+import Axios from "axios"
+import NameText from "./NameText";
 
 const RegisterForm = (props) => {
 
-  const getData = (data) => {
-    console.log(data)
-  }
+  const [nameFormData, setNameFormData] = useState()
+  const [emailFormData, setEmailFormData] = useState()
+  const [passwordFormData, setPasswordFormData] = useState()
+  
+
+  const emailLoginData = (e) => {
+    setEmailFormData(e)
+  };
+
+  const passwordLoginData = (e) => {
+    setPasswordFormData(e)
+  };
+
+  const nameLoginData = (e) => {
+    setNameFormData(e)
+  };
   
   return (
     <form
@@ -24,13 +39,20 @@ const RegisterForm = (props) => {
       }}
      onSubmit={(e) => {
        e.preventDefault();
+      
+      Axios.post("https://backend-juntosifpb.herokuapp.com/auth/register", {
+        name: nameFormData,
+        email: emailFormData,
+        password: passwordFormData, 
+      })
      }} 
     >
       <ImageLogin />
 
-      <LoginText usernameData={getData}/>
-      <PasswordText passwordData={getData}/>
-      <PasswordText passwordData={getData}/>
+     <NameText nameLoginData={nameLoginData}/>
+      <LoginText emailLoginData={emailLoginData}/>
+      <PasswordText passwordLoginData={passwordLoginData} label={"Digite a senha"}/>
+      
       <HeightFormHandler />
       <Button type="submit"> Registrar </Button>
       {/* <ButtonGroupLogin>Registrar</ButtonGroupLogin> */}
