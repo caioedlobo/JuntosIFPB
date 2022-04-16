@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
-import ButtonGroupLogin from "./ButtonGroupLogin";
 import LoginText from "./LoginText";
 import PasswordText from "./PasswordText";
 import ImageLogin from "./ImageLogin";
@@ -47,7 +46,7 @@ const LoginForm = (props) => {
       method="get"
       onSubmit={(e) => {
         e.preventDefault()
-        Axios.post("http://localhost:3001/auth/authenticate", {
+        Axios.post("https://backend-juntosifpb.herokuapp.com/auth/authenticate", {
           email: emailFormData,
           password: passwordFormData
         })

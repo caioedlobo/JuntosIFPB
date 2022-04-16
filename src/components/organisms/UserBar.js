@@ -14,7 +14,6 @@ import {
   Typography,
   Box,
   Toolbar,
-  AppBar,
   Menu,
   MenuItem
 } from "@mui/material";
@@ -24,7 +23,7 @@ import {Link} from "@mui/material";
 const UserBar = () => {
 
 
-  const drawerWidth = 240;
+  /* const drawerWidth = 240; */
 
   const [anchorEl, setAnchorEl] = React.useState(false);
 
@@ -37,10 +36,10 @@ const UserBar = () => {
     setAnchorEl(false)
   }
 
-  const toSecurity = () => {
+  /* const toSecurity = () => {
 
   }
-
+ */
   return <div data-testid='user-bar'>
     
     <Card

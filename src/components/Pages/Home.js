@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import Description from "../atoms/Description";
 import classes from "./stylesheet/Home.module.css";
 import LogoImg from "../atoms/LogoImg";

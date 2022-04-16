@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
-import ButtonGroupLogin from "./ButtonGroupLogin";
 import LoginText from "./LoginText";
 import ImageLogin from "./ImageLogin";
 import HeightFormHandler from "./HeightFormHandler";
@@ -26,7 +25,7 @@ const ForgotPasswordForm = (props) => {
         e.preventDefault();
         
         
-        const response = await Axios.post("http://localhost:3001/auth/forgot_password", {
+         await Axios.post("http://localhost:3001/auth/forgot_password", {
           email: emailForgotPasswordData
         })
         
