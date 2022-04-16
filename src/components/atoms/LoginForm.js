@@ -18,19 +18,7 @@ const LoginForm = (props) => {
     setPasswordFormData(e)
   };
 
-  const emailValidation = () => {
-    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
-    console.log("Entrou")
-    if (regEx.test(emailFormData)){
-      console.log("Email válido")
-    }
-    else if (!regEx.test(emailFormData) && emailFormData !== ""){
-      console.log("Email não é válido")
-    }
-    else{
-      console.log("alooo")
-    }
-  }
+  
 
   return (
     <form
@@ -59,7 +47,7 @@ const LoginForm = (props) => {
       <LoginText emailLoginData={emailLoginData}/>
       <PasswordText passwordLoginData={passwordLoginData}/>
       <HeightFormHandler />
-      <Button  type="submit" onClick={emailValidation} >Entrar</Button>
+      <Button  type="submit" >Entrar</Button>
       <HeightFormHandler />
       <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerRegister}>
         Não possui conta? Registre-se
