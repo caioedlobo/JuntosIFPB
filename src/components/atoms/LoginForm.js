@@ -45,6 +45,8 @@ const LoginForm = (props) => {
       action="http://localhost:3000/conta"
       method="get"
       onSubmit={(e) => {
+        console.log(emailFormData)
+        console.log(passwordFormData)
         e.preventDefault()
         Axios.post("https://backend-juntosifpb.herokuapp.com/auth/authenticate", {
           email: emailFormData,
