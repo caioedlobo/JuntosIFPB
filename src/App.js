@@ -21,7 +21,7 @@ function App() {
             <Route path="/conta" element={<Account />} />
             <Route path="/seguranca" element={<Security/>} />
             <Route path="/contribuicoes" element={<Ranking />} />
-            <Route path="/resetar_a_senha/*" element={<Reset />} />
+            <Route path="/resetar_senha/*" element={<Reset />} />
             <Route path="*" element={<h1>Página não encontrada</h1>} />
           </Routes>
         </main>
