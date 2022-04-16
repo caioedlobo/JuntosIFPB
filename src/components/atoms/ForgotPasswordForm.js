@@ -9,6 +9,17 @@ const ForgotPasswordForm = (props) => {
 
   const [emailForgotPasswordData, setEmailForgotPasswordData] = useState()
 
+  function convertStringToHex(str) {
+    
+	const arr1 = [];
+	for (let n = 0, l = str.length; n < l; n ++) 
+     {
+		const hex = Number(str.charCodeAt(n)).toString(16);
+		arr1.push(hex);
+	 }
+	return arr1.join('');
+   }
+
   const emailForgotPassword = (e) => {
     setEmailForgotPasswordData(e)
   }
@@ -24,9 +35,10 @@ const ForgotPasswordForm = (props) => {
       onSubmit={async (e) => {
         e.preventDefault();
         
-        
-         await Axios.post("https://backend-juntosifpb.herokuapp.com/auth/forgot_password", {
-          email: emailForgotPasswordData
+        console.log(convertStringToHex(emailForgotPasswordData))
+         await Axios.post(`https://backend-juntosifpb.herokuapp.com/auth/forgot_password`, {
+          email: emailForgotPasswordData,
+          emailHex: convertStringToHex(emailForgotPasswordData)
         })
         
       }

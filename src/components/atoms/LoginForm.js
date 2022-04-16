@@ -59,7 +59,7 @@ const LoginForm = (props) => {
       <LoginText emailLoginData={emailLoginData}/>
       <PasswordText passwordLoginData={passwordLoginData}/>
       <HeightFormHandler />
-      <Button  type="submit" onclick={emailValidation} >Entrar</Button>
+      <Button  type="submit" onClick={emailValidation} >Entrar</Button>
       <HeightFormHandler />
       <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerRegister}>
         Não possui conta? Registre-se

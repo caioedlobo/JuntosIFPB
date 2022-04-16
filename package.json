@@ -11,6 +11,7 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
+    "Buffer": "^0.0.0",
     "faker": "^5",
     "identity-obj-proxy": "^3.0.0",
     "lint-staged": "^12.3.2",

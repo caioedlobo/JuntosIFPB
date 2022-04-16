@@ -9,9 +9,22 @@ import Axios from "axios";
 const Reset = () => {
 
   const [resetPassword, setResetPassword] = useState()
+  
   const resetPasswordData = (e) => {
     setResetPassword(e)
   }
+
+  function hex_to_ascii(str1)
+ {
+	const hex  = str1.toString();
+	let str = '';
+	for (var n = 0; n < hex.length; n += 2) {
+		str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
+	}
+	return str;
+ }
+  
+
   return(
   <Layout>
   
@@ -21,9 +34,12 @@ const Reset = () => {
     className={`${classesCommon.form}`}
     onSubmit={(e) => {
       e.preventDefault()
+      
+      const email = (e.target.action.split("="))[2];
       const token = (e.target.action.split("="))[1];
-      console.log(token)
+      console.log(hex_to_ascii(email))
       Axios.post("https://backend-juntosifpb.herokuapp.com/auth/reset_password", {
+          email: hex_to_ascii(email),
           password: resetPassword,
           token: token
         })
@@ -42,7 +58,7 @@ const Reset = () => {
         <div style={{lineHeight: "1.5" }}>
           Digite sua nova senha para resetá-la:
         </div>
-        <ResetPasswordText handlePasswordData={resetPasswordData}/>
+        <ResetPasswordText passwordData={resetPasswordData}/>
 
         <Box sx={{width: "70%", marginBottom: "30px"}}>
         <Button type="submit" >Enviar</Button>
