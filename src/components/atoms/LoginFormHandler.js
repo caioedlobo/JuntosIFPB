@@ -12,15 +12,15 @@ const LoginFormHandler = () => {
   const FormHandlerForgotPassword = () => {
     /* setIsLoginForm(!isLoginForm); */
     setIsForgotPasswordForm(!isForgotPasswordForm);
-    console.log(isForgotPasswordForm);
+    /* console.log(isForgotPasswordForm); */
   };
 
-  const changeToLoggedScreen = () => {
+  /* const changeToLoggedScreen = () => {
     console.log("clicou");
-  };
+  }; */
 
   if (isForgotPasswordForm) {
-    console.log(isForgotPasswordForm);
+    /* console.log(isForgotPasswordForm); */
     return (
       <div data-testid="login-form-handler">
         <ForgotPasswordForm FormHandlerPassword={FormHandlerForgotPassword} />
@@ -32,7 +32,7 @@ const LoginFormHandler = () => {
         <LoginForm
           FormHandlerRegister={FormHandler}
           FormHandlerPassword={FormHandlerForgotPassword}
-          SendLogin={changeToLoggedScreen}
+          /* SendLogin={changeToLoggedScreen} testeteste*/
         />
       </div>
     );

@@ -37,7 +37,7 @@ const Reset = () => {
       
       const email = (e.target.action.split("="))[2];
       const token = (e.target.action.split("="))[1];
-      console.log(hex_to_ascii(email))
+      /* console.log(hex_to_ascii(email)) */
       Axios.post("https://backend-juntosifpb.herokuapp.com/auth/reset_password", {
           email: hex_to_ascii(email),
           password: resetPassword,

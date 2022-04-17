@@ -3,7 +3,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {Link} from "@mui/material";
 
 const LayoutUserBar = (props) => {
-  console.log(props.linkTo)
+  /* console.log(props.linkTo) */
   
   return <div data-testid='layout-user-bar'>
 

@@ -78,9 +78,9 @@ const RegisterForm = (props) => {
           password: passwordFormData, 
         })
       }
-      else{
+     /*  else{
         console.log("Email não é válido");
-     }}
+     } */}
     }
     >
       <ImageLogin />
