@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 import { AppBar, Toolbar } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 
 import {
   Typography,
@@ -32,25 +36,43 @@ const Navbar = (props) => {
     <div data-testid="navbar">
       <AppBar color={props.color} elevation={0} position="static" /* sx={{display:  {sm: "flex", xs: "none"} }} */>
         <Toolbar>
-        <IconButton edge="start" color="info" aria-label="menu" sx={{ mr: 2, display:  {sm: "none", xs: "flex"} }} onClick={openMenu}>
+        <IconButton edge="start" color="primary" aria-label="menu" sx={{ mr: 2, display:  {sm: "none", xs: "flex"} }} onClick={openMenu}>
         <MenuIcon />
       </IconButton>
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem>
-        <Link to={"/"}>
+        <Link to={"/"} style={{ textDecoration: 'none', color:"black" }}>
+          <Box sx={{display: "flex", flexDirection: "row", width:"80px", justifyContent: "space-evenly"}}>
+          <HomeOutlinedIcon/>
           <Typography>Início</Typography>
+          </Box>
         </Link>
         </MenuItem>
 
         <MenuItem>
-        <Link to={"/ranking"}>
+        <Link to={"/ranking"} style={{ textDecoration: 'none', color:"black" }}>
+        <Box sx={{display: "flex", flexDirection: "row", width:"100px", justifyContent: "space-evenly"}}>
+          <BarChartOutlinedIcon/>
           <Typography>Ranking</Typography>
+          </Box>
         </Link>
         </MenuItem>
 
         <MenuItem>
-        <Link to={"/contato"}>
+        <Link to={"/contato"} style={{ textDecoration: 'none', color:"black" }}>
+        <Box sx={{display: "flex", flexDirection: "row", width:"95px", justifyContent: "space-evenly"}}>
+          <CallOutlinedIcon/>
           <Typography>Contato</Typography>
+          </Box>
+        </Link>
+        </MenuItem>
+
+        <MenuItem>
+        <Link to={"/login"} style={{ textDecoration: 'none', color:"black" }}>
+        <Box sx={{display: "flex", flexDirection: "row", width:"85px", justifyContent: "space-evenly"}}>
+          <AccountCircleOutlinedIcon/>
+          <Typography>Entrar</Typography>
+          </Box>
         </Link>
         </MenuItem>
       </Menu>
