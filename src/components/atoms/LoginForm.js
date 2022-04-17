@@ -27,32 +27,41 @@ const LoginForm = (props) => {
         alignItems: "center",
         flexDirection: "column",
         display: "flex",
-        background: "red",
+        /* background: "red", */
         width:"300px"
       }}
-      action="http://localhost:3000/conta"
       method="get"
       onSubmit={(e) => {
-        console.log(emailFormData)
-        console.log(passwordFormData)
+        
         e.preventDefault()
-        Axios.post("https://backend-juntosifpb.herokuapp.com/auth/authenticate", {
+        
+        
+        Axios.post("http://localhost:3001/auth/authenticate", {
           email: emailFormData,
           password: passwordFormData
         })
+        .then((response) => {console.log("teste")})
+
+        .catch(error => {
+          console.log("catch")
+          console.log(error)
+        })
+
+      
+
       }}
     >
       <ImageLogin />
 
       <LoginText emailLoginData={emailLoginData}/>
-      <PasswordText passwordLoginData={passwordLoginData}/>
+      <PasswordText passwordLoginData={passwordLoginData} label={"Digite a senha"}/>
       <HeightFormHandler />
       <Button  type="submit" >Entrar</Button>
       <HeightFormHandler />
       <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerRegister}>
         Não possui conta? Registre-se
       </Button>
-      <Button onClick={props.FormHandlerPassword}>
+      <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerPassword}>
         Esqueceu sua senha? Clique aqui
       </Button>
     </form>

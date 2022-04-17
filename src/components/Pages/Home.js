@@ -25,16 +25,42 @@ const Home = () => {
         <Box
           
           
-          sx={{ padding: "0 48px", display: "flex", flexDirection: "row", alignItems: "center" }}
+          sx={{ 
+            padding: "0 48px", 
+            display: "flex", 
+            flexDirection: {lg:"row"}, 
+            alignItems: "center", 
+            
+            
+          }}
         >
-          
-            <div>
+         
+          <Box sx={{
+            display: {sm:"flex", xs: "none"}, 
+            flexDirection: {lg:"row", sm:"column"}, 
+            /* background: "cyan", */
+            justifyContent: "center",
+            alignItems: "center",
+            marginRight: {lg: "0px", md:"70px"}
+            
+            
+            
+            }}>
+             <Box sx={{
+               display:"flex",
+                width: {xl:"310px", sm:"310px"}, 
+                justifyContent: "center", 
+                /* background: "blue", */
+                
+                }}>
               <Description />
-            </div>
+             </Box> 
 
-            <div>
-              <LogoImg />
-              </div>
+            <Box sx={{ padding: "30px 30px", width: {xl: "700px", lg: "500px", sm:"450px"}, display: {md: "flex", xs:"none"} }}>
+              <LogoImg/>
+              </Box>
+          </Box>
+          
             
           
 

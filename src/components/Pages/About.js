@@ -21,7 +21,7 @@ const About = () => {
             paddingBottom: "30px",
           }}
         >
-          Sobre o Juntos pelo IFPB
+          Bem-vindo ao Juntos pelo IFPB
         </p>
         <img src={image} alt="AboutUsImg" className={classes.imgLogo}></img>
 

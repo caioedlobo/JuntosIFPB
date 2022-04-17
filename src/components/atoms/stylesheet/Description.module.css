@@ -11,10 +11,12 @@
   margin-bottom: 40px;
   font-size: 49px;
   line-height: 1.2;
+  width: "100%";
 }
 .desc {
   font-size: 22px;
   line-height: 1.5;
+  width: "100%";
 }
 
 @media screen and (max-width: 1850px) {
