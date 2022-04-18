@@ -3,7 +3,7 @@ import React from "react";
 import classes from "./stylesheet/PartnerTitle.module.css";
 const PartnerTitle = (props) => {
   return (
-    <Box sx={{textAlign: {md: "start", sm:"center"}}}
+    <Box sx={{textAlign: {md: "start", xs:"center"}}}
       data-testid="partner-title"
       className={`${classes.title} ${classes.lineHeight}`}
     >

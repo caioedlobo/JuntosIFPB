@@ -7,13 +7,13 @@ import { Box } from "@mui/material";
 const Partners = () => {
   return (
     <Box data-testid="partners">
-      <Box sx={{display: "flex", flexDirection:"column"}}>
+      <Box sx={{display: "flex", flexDirection: "column"}}>
         <div /* className={classes.partner} */>
           <PartnerTitle>IFPB Campus Campina Grande</PartnerTitle>
           <Box /* className={classes.row} */ 
           sx={{  display: "flex",
-          flexDirection: {md: "row", sm: "column"},
-            marginBottom: "70px", 
+          flexDirection: {md: "row", xs:"column"},
+            marginBottom: "70px",
             justifyContent: "center", 
             alignItems: "center",
           }}>
@@ -48,7 +48,7 @@ const Partners = () => {
           </PartnerTitle>
           <Box /* className={classes.row} */ 
           sx={{  display: "flex",
-          flexDirection: {md: "row", sm: "column"},
+          flexDirection: {md: "row", xs:"column"},
             marginBottom: "70px", 
             justifyContent: "center", 
             alignItems: "center",
@@ -87,7 +87,7 @@ const Partners = () => {
           </PartnerTitle>
           <Box /* className={classes.row} */ 
           sx={{  display: "flex",
-          flexDirection: {md: "row", sm: "column"},
+          flexDirection: {md: "row", xs:"column"},
             marginBottom: "70px", 
             justifyContent: "center", 
             alignItems: "center",
