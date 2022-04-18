@@ -64,7 +64,7 @@ const RegisterForm = (props) => {
         flexDirection: "column",
         display: "flex",
         width: "300px",
-        background: "blue",
+        /* background: "blue", */
         justifyContent: "center"
       }}
      onSubmit={(e) => {
@@ -93,7 +93,7 @@ const RegisterForm = (props) => {
       <Button type="submit"> Registrar </Button>
       {/* <ButtonGroupLogin>Registrar</ButtonGroupLogin> */}
       <HeightFormHandler />
-      <Button onClick={props.FormHandlerRegister}>
+      <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerRegister}>
         Já possui conta? Entre
       </Button>
     </form>

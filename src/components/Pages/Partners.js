@@ -2,14 +2,21 @@ import React from "react";
 import classes from "./stylesheet/Partners.module.css";
 import PartnerTitle from "../atoms/PartnerTitle";
 import PartnerText from "../atoms/PartnerText";
+import { Box } from "@mui/material";
 
 const Partners = () => {
   return (
-    <div data-testid="partners">
-      <div>
-        <div className={classes.partner}>
+    <Box data-testid="partners">
+      <Box sx={{display: "flex", flexDirection:"column"}}>
+        <div /* className={classes.partner} */>
           <PartnerTitle>IFPB Campus Campina Grande</PartnerTitle>
-          <div className={classes.row}>
+          <Box /* className={classes.row} */ 
+          sx={{  display: "flex",
+          flexDirection: {md: "row", sm: "column"},
+            marginBottom: "70px", 
+            justifyContent: "center", 
+            alignItems: "center",
+          }}>
             <img
               className={classes.partnerImg}
               src={"https://juntosifpb.herokuapp.com/img/logoIFPB.png"}
@@ -32,14 +39,20 @@ const Partners = () => {
               construção de uma sociedade inclusiva, justa, sustentável e
               democrática.
             </PartnerText>
-          </div>
+          </Box>
         </div>
         <div className={classes.partner}>
           <PartnerTitle>
             GCOMPI - Grupo de Pesquisa em Comunicações e Processamento de
             Informação
           </PartnerTitle>
-          <div className={classes.row}>
+          <Box /* className={classes.row} */ 
+          sx={{  display: "flex",
+          flexDirection: {md: "row", sm: "column"},
+            marginBottom: "70px", 
+            justifyContent: "center", 
+            alignItems: "center",
+          }}>
             <img
               className={classes.partnerImg}
               src={"https://avatars.githubusercontent.com/u/55359413?s=280&v=4"}
@@ -66,13 +79,19 @@ const Partners = () => {
               ensino e a formação de profissionais capacitados para atuação nas
               áreas científicas e de desenvolvimento tecnológico.
             </PartnerText>
-          </div>
+          </Box>
         </div>
-        <div className={classes.partner}>
+        <Box>
           <PartnerTitle>
             UFERSA - Universidade Federal Rural do Semi-Árido
           </PartnerTitle>
-          <div className={classes.row}>
+          <Box /* className={classes.row} */ 
+          sx={{  display: "flex",
+          flexDirection: {md: "row", sm: "column"},
+            marginBottom: "70px", 
+            justifyContent: "center", 
+            alignItems: "center",
+          }}>
             <img
               className={classes.partnerImg}
               src={
@@ -100,10 +119,10 @@ const Partners = () => {
               reflexiva, preparando profissionais capazes de atender demandas da
               sociedade.
             </PartnerText>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

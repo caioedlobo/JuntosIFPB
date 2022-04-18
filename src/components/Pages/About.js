@@ -40,12 +40,12 @@ const About = () => {
         >
           <img
             src={imagePartners}
-            alt="ParnetsImg"
+            alt="PartnersImg"
             className={classes.imgLogo}
           />
           <img
             src={imagePartners2}
-            alt="Parnets2Img"
+            alt="Partners2Img"
             className={classes.imgLogo}
           />
         </div>

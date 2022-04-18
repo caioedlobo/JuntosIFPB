@@ -9,7 +9,7 @@ const ForgotPasswordForm = (props) => {
 
   const [emailForgotPasswordData, setEmailForgotPasswordData] = useState()
 
-  function convertStringToHex(str) {
+  /* function convertStringToHex(str) {
     
 	const arr1 = [];
 	for (let n = 0, l = str.length; n < l; n ++) 
@@ -18,7 +18,7 @@ const ForgotPasswordForm = (props) => {
 		arr1.push(hex);
 	 }
 	return arr1.join('');
-   }
+   } */
 
   const emailForgotPassword = (e) => {
     setEmailForgotPasswordData(e)
