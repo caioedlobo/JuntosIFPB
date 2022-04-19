@@ -9,9 +9,14 @@ import Axios from "axios";
 const LoginForm = (props) => {
   const [emailFormData, setEmailFormData] = useState()
   const [passwordFormData, setPasswordFormData] = useState()
-  const [errorController, setErrorController] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
+
+  const [errorEmailController, setErrorEmailController] = useState(false)
+  const [errorEmailMessage, setErrorEmailMessage] = useState("")
   let [previousEmail, setPreviousEmail] = useState("")
+
+  const [errorPasswordController, setErrorPasswordController] = useState(false)
+  const [errorPasswordMessage, setErrorPasswordMessage] = useState("")
+  let [previousPassword, setPreviousPassword] = useState("")
 
   const emailLoginData = (e) => {
     setEmailFormData(e)
@@ -22,27 +27,41 @@ const LoginForm = (props) => {
   };
 
   const errorControllerHandler = (e) => {
-    setErrorController(true)
-    setErrorMessage(e)
+    if(e === "Invalid password"){
+      setErrorPasswordController(true)
+      setErrorPasswordMessage(e)
+      setPreviousPassword(passwordFormData)
+    }
+    else{
+    setErrorEmailController(true)
+    setErrorEmailMessage(e)
     setPreviousEmail(emailFormData)
+    }
   }
 
-  /* const erroControllerHandler = (e) => {
-    setErrorController(true)
-    setErrorMessage(e)
-    
-  } */
+  
   const emailErrorHandler = (e) => {
-    /* console.log("alo", errorController, previousEmail) */
     setPreviousEmail("")
     if (previousEmail === e){
-    setErrorController(true)
+    setErrorEmailController(true)
 
     }
     else{
-      /* console.log(errorController, emailErrorController) */
-      setErrorController(false)
-      setErrorMessage("")
+      setErrorEmailController(false)
+      setErrorEmailMessage("")
+    }
+    
+  }
+
+  const passwordErrorHandler = (e) => {
+    setPreviousPassword("")
+    if (previousPassword === e){
+    setErrorPasswordController(true)
+
+    }
+    else{
+      setErrorPasswordController(false)
+      setErrorPasswordMessage("")
     }
     
   }
@@ -70,6 +89,7 @@ const LoginForm = (props) => {
         .then((response) => {console.log(response.error)})
 
         .catch(error => {
+          
           errorControllerHandler(error.response.data.error)
         })
 
@@ -81,11 +101,16 @@ const LoginForm = (props) => {
 
       <LoginText 
       emailLoginData={emailLoginData} 
-      errorMessage={errorMessage} 
-      error={errorController} 
+      errorEmailMessage={errorEmailMessage} 
+      errorEmail={errorEmailController} 
       errorEmailController={emailErrorHandler}
       />
-      <PasswordText passwordLoginData={passwordLoginData} label={"Digite a senha"}/>
+      <PasswordText 
+      passwordLoginData={passwordLoginData} 
+      errorPasswordMessage={errorPasswordMessage} 
+      errorPassword={errorPasswordController} 
+      errorPasswordController={passwordErrorHandler}
+      label={"Digite a senha"}/>
       <HeightFormHandler />
 
       <Button  type="submit" >Entrar</Button>
