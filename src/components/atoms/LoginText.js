@@ -8,8 +8,12 @@ const LoginText = (props) => {
     /* setUsernameData(event.target.value) */
     props.emailLoginData(event.target.value)
     
+    props.errorEmailController(event.target.value)
   }
   
+  const checkErrorText = (event) => {
+    props.errorEmailController(event.target.value)
+  }
   
   return (
     <div data-testid="login-text" style={{ width: "100%" }}>
@@ -18,7 +22,10 @@ const LoginText = (props) => {
         margin="normal"
         fullWidth
         variant="standard"
-        onChange={handleData}
+        onChange={checkErrorText}
+        onBlur={handleData}
+        error= {props.error}
+        helperText={props.errorMessage}
         
       ></TextField>
     </div>

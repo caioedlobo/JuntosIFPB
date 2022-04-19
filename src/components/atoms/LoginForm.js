@@ -9,6 +9,9 @@ import Axios from "axios";
 const LoginForm = (props) => {
   const [emailFormData, setEmailFormData] = useState()
   const [passwordFormData, setPasswordFormData] = useState()
+  const [errorController, setErrorController] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+  let [previousEmail, setPreviousEmail] = useState("")
 
   const emailLoginData = (e) => {
     setEmailFormData(e)
@@ -18,7 +21,31 @@ const LoginForm = (props) => {
     setPasswordFormData(e)
   };
 
-  
+  const errorControllerHandler = (e) => {
+    setErrorController(true)
+    setErrorMessage(e)
+    setPreviousEmail(emailFormData)
+  }
+
+  /* const erroControllerHandler = (e) => {
+    setErrorController(true)
+    setErrorMessage(e)
+    
+  } */
+  const emailErrorHandler = (e) => {
+    /* console.log("alo", errorController, previousEmail) */
+    setPreviousEmail("")
+    if (previousEmail === e){
+    setErrorController(true)
+
+    }
+    else{
+      /* console.log(errorController, emailErrorController) */
+      setErrorController(false)
+      setErrorMessage("")
+    }
+    
+  }
 
   return (
     <form
@@ -40,11 +67,10 @@ const LoginForm = (props) => {
           email: emailFormData,
           password: passwordFormData
         })
-        .then((response) => {console.log("teste")})
+        .then((response) => {console.log(response.error)})
 
         .catch(error => {
-          console.log("catch")
-          console.log(error)
+          errorControllerHandler(error.response.data.error)
         })
 
       
@@ -53,10 +79,17 @@ const LoginForm = (props) => {
     >
       <ImageLogin />
 
-      <LoginText emailLoginData={emailLoginData}/>
+      <LoginText 
+      emailLoginData={emailLoginData} 
+      errorMessage={errorMessage} 
+      error={errorController} 
+      errorEmailController={emailErrorHandler}
+      />
       <PasswordText passwordLoginData={passwordLoginData} label={"Digite a senha"}/>
       <HeightFormHandler />
+
       <Button  type="submit" >Entrar</Button>
+
       <HeightFormHandler />
       <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerRegister}>
         Não possui conta? Registre-se
