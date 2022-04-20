@@ -54,7 +54,7 @@ const FloatRankingButton = () => {
     
     if (demand !== 0){
       console.log(demand, description)
-    Axios.post("https://backend-juntosifpb.herokuapp.com/demands",
+    Axios.post("https://backendjuntosifpb.herokuapp.com/demands",
     {
       title: demand,
       description: description,
@@ -63,7 +63,7 @@ const FloatRankingButton = () => {
   }
   else {
     console.log(otherDemand, description)
-    Axios.post("https://backend-juntosifpb.herokuapp.com/demands",
+    Axios.post("https://backendjuntosifpb.herokuapp.com/demands",
     {
       title: otherDemand,
       description: description,

@@ -36,7 +36,7 @@ const ForgotPasswordForm = (props) => {
         e.preventDefault();
         
         /* console.log(convertStringToHex(emailForgotPasswordData)) */
-         await Axios.post(`https://backend-juntosifpb.herokuapp.com/auth/forgot_password`, {
+         await Axios.post(`https://backendjuntosifpb.herokuapp.com/auth/forgot_password`, {
           email: emailForgotPasswordData,
           
         })

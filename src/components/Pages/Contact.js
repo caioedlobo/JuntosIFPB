@@ -47,7 +47,7 @@ const Contact = () => {
           console.log(error);
           
         }) */
-        Axios.post("https://backend-juntosifpb.herokuapp.com/api/contato", {
+        Axios.post("https://backendjuntosifpb.herokuapp.com/api/contato", {
           email: emailData,
           description: descriptionData
         })
