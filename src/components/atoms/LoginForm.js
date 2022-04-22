@@ -82,7 +82,7 @@ const LoginForm = (props) => {
         e.preventDefault()
         
         
-        Axios.post("http://localhost:3001/auth/authenticate", {
+        Axios.post("https://backendjuntosifpb.herokuapp.com/auth/authenticate", {
           email: emailFormData,
           password: passwordFormData
         })

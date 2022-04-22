@@ -129,7 +129,7 @@ const RegisterForm = (props) => {
       
        if (emailValidation()){
          console.log("teste")
-        Axios.post("http://localhost:3001/auth/register", {
+        Axios.post("https://backendjuntosifpb.herokuapp.com/auth/register", {
           name: nameFormData,
           email: emailFormData,
           password: passwordFormData, 
