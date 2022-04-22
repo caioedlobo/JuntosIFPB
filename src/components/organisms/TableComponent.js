@@ -7,6 +7,10 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import { TextField } from "@mui/material";
+import debounce from 'lodash.debounce';
+
+
 
 const STATUSES = [
   "Em validação",
@@ -51,19 +55,27 @@ function sortTable(arr, prop) {
 }
 
 const TableComponent = () => {
-  const [searched /* , setSearched */] = useState("");
+  const [searched , setSearched] = useState("");
   const [filter, setFilter] = useState("");
   const [rows, setRows] = useState(USERS);
+  
 
   const jobMatchFilter = (row, type) => row.job.match(RegExp(type, "i"));
 
-  /* const onCancelSearchHandler = () => {
+  const onCancelSearchHandler = () => {
     setSearched("");
-  }; */
+  };
 
   const onFilterChangeHandler = (event) => {
     setFilter(event.target.value);
   };
+  const onSearchHandler = event => {
+    setSearched(event)
+  }
+
+  const debouncedChangeHandler = () =>{
+    debounce(onSearchHandler, 200)
+  }
 
   useEffect(() => {
     const isDateFilter = filter === "Recentes" || filter === "Antigos";
@@ -78,13 +90,13 @@ const TableComponent = () => {
     <div data-testid="table-component" className={classes.table}>
       <div className={classes.searchFilter}>
         <div data-testid="filter-select" className={classes.searchWrapper}>
-          {/* <SearchBar
-            className={classes.searchBar}
+           <TextField
+           onChange={debouncedChangeHandler}
+           className={classes.searchBar}
             label="Pesquisar"
-            value={searched}
-            onChange={(searchVal) => setSearched(searchVal)}
+            /* value={searched} */
             onCancelSearch={onCancelSearchHandler}
-          /> */}
+          /> 
 
           <FormControl size="small" style={{ width: "10%" }}>
             <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
