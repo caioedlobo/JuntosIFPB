@@ -17,7 +17,7 @@ function App() {
 
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/contato" element={<Contact />} />
-            <Route path="/login" element={<Home />} />
+            <Route path="/login/*" element={<Home />} />
             <Route path="/conta" element={<Account />} />
             <Route path="/seguranca" element={<Security/>} />
             <Route path="/contribuicoes" element={<Ranking />} />
