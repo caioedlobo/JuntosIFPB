@@ -6,13 +6,14 @@ import ImageLogin from "./ImageLogin";
 import HeightFormHandler from "./HeightFormHandler";
 import Axios from "axios"
 import NameText from "./NameText";
+import completeImage from "../../assets/undraw_completing_re_i7ap.svg";
 
 const RegisterForm = (props) => {
 
   const [nameFormData, setNameFormData] = useState()
   const [emailFormData, setEmailFormData] = useState()
   const [passwordFormData, setPasswordFormData] = useState()
-
+  const [successScreen, setSuccessScreen] = useState(false)
 
   const [errorEmailController, setErrorEmailController] = useState(false)
   const [errorEmailMessage, setErrorEmailMessage] = useState("")
@@ -134,9 +135,14 @@ const RegisterForm = (props) => {
           email: emailFormData,
           password: passwordFormData, 
         })
-        .then((response) => {console.log(response.error)})
+        .then((response) => {
+          setSuccessScreen(true)
+          console.log(successScreen)
+          console.log(response.error)}
+          )
 
         .catch(error => {
+          console.log(successScreen)
           console.log("error:", error.response.data.error)
           errorControllerHandler(error.response.data.error)
       })
@@ -146,7 +152,9 @@ const RegisterForm = (props) => {
     >
       <ImageLogin />
 
-     <NameText nameLoginData={nameLoginData}/>
+    {!successScreen ?
+     <>
+       <NameText nameLoginData={nameLoginData}/>
       <LoginText 
       emailLoginData={emailLoginData}
       errorEmailMessage={errorEmailMessage} 
@@ -162,11 +170,23 @@ const RegisterForm = (props) => {
       
       <HeightFormHandler />
       <Button type="submit"> Registrar </Button>
-      {/* <ButtonGroupLogin>Registrar</ButtonGroupLogin> */}
+      
       <HeightFormHandler />
       <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerRegister}>
         Já possui conta? Entre
       </Button>
+       
+       </>
+       : 
+       <>
+       <p style={{marginTop: "25px"}}>Sua conta foi cadastrada com sucesso. Verifique seu email para verificar sua conta.</p>
+       <img src={completeImage} alt="complete image" style={{width: "180px", marginBottom: "15px"}}></img>
+       <Button  onClick={props.FormHandlerRegister}>
+        Voltar para o login
+      </Button>
+       </>
+      }
+    
     </form>
   );
 };
