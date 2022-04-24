@@ -130,13 +130,15 @@ const RegisterForm = (props) => {
     }
   }
 
-  const passwordValidation = (passwordDataValidation) => {
+  const passwordValidation = async(passwordDataValidation) => {
     if (passwordDataValidation.length < 6){
+      await new Promise((resolve) => setTimeout(resolve, 1000))
       errorControllerHandler("Senha muito curta")
       setDisabledButtonController(true)
       return false
 
     }
+    //await new Promise((resolve) => setTimeout(resolve, 1000))
     setErrorPasswordController(false)
     setErrorPasswordMessage(" ")
     return true
