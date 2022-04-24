@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Button } from "@mui/material";
 import LoginText from "./LoginText";
 import PasswordText from "./PasswordText";
@@ -7,111 +7,173 @@ import HeightFormHandler from "./HeightFormHandler";
 import Axios from "axios"
 import NameText from "./NameText";
 import completeImage from "../../assets/undraw_completing_re_i7ap.svg";
+import debounce from "lodash.debounce";
 
 const RegisterForm = (props) => {
 
-  const [nameFormData, setNameFormData] = useState()
-  const [emailFormData, setEmailFormData] = useState()
-  const [passwordFormData, setPasswordFormData] = useState()
+  const [nameFormData, setNameFormData] = useState("")
+  const [emailFormData, setEmailFormData] = useState("")
+  const [passwordFormData, setPasswordFormData] = useState("")
   const [successScreen, setSuccessScreen] = useState(false)
+
+
+  const [errorNameController, setErrorNameController] = useState(false)
+  const [errorNameMessage, setErrorNameMessage] = useState("")
 
   const [errorEmailController, setErrorEmailController] = useState(false)
   const [errorEmailMessage, setErrorEmailMessage] = useState("")
-  let [previousEmail, setPreviousEmail] = useState("")
+  //let [previousEmail, setPreviousEmail] = useState("")
 
   const [errorPasswordController, setErrorPasswordController] = useState(false)
   const [errorPasswordMessage, setErrorPasswordMessage] = useState("")
-  let [previousPassword, setPreviousPassword] = useState("")
-  
+  //let [previousPassword, setPreviousPassword] = useState("")
+
+  const [disabledButtonController, setDisabledButtonController] = useState(true)
+
+  useEffect(() => {
+    if(nameFormData.length > 1 && emailFormData.length > 0 && passwordFormData.length > 0){
+      if (!errorNameController && !errorEmailController && !errorPasswordController){
+        setDisabledButtonController(false)
+      }
+      else{
+        setDisabledButtonController(true)
+      }
+    }
+    else{
+      setDisabledButtonController(true)
+    }
+  }, [errorNameController, errorEmailController, errorPasswordController])
+
+ 
+  const nameLoginData = (e) => {
+    setNameFormData(e)
+    nameValidation(e)
+  };
 
   const emailLoginData = (e) => {
+    //console.log("entrando")
     setEmailFormData(e)
+    emailValidation(e)
   };
 
   const passwordLoginData = (e) => {
     setPasswordFormData(e)
+    passwordValidation(e)
   };
 
-  const nameLoginData = (e) => {
-    setNameFormData(e)
-  };
 
-  const emailValidation = () => {
+
+  const nameValidation = (nameDataValidation) => {
+    //console.log("entrou nameValidation")
+    if (nameDataValidation.length > 1){
+      //console.log("nome valido")
+      setErrorNameController(false)
+      setErrorNameMessage("")
+      return true
+    }
+    setErrorNameController(true)
+    setErrorNameMessage("Nome Inválido")
+    setDisabledButtonController(true)
+    return false
+  }
+
+  const emailValidation = (emailDataValidation) => {
+    //console.log("entrou emailValidation")
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
-    
-    if (regEx.test(emailFormData)){
-      if( emailFormData.includes('@')){
-        if(emailFormData.split('@')[1] === "academico.ifpb.edu.br" ){
+    //console.log("emailFormData", emailDataValidation)
+    //if (regEx.test(emailDataValidation)){
+      if( emailDataValidation.includes('@')){
+        if(emailDataValidation.split('@')[1] === "academico.ifpb.edu.br" ){
+          //console.log("entrou 1")
+          errorControllerHandler("Válido")
+          //console.log("foooii")
+          //setButtonController(false)
           return true
         }
-        else if(emailFormData.split('@')[1] === "ifpb.edu.br" ){
+        else if(emailDataValidation.split('@')[1] === "ifpb.edu.br" ){
+          //console.log("entrou 2")
+          errorControllerHandler("Válido")
+          //setButtonController(false)
           return true
+          
         }
         else{
-          console.log("erro else 0")
+          //console.log("erro else 0")
           errorControllerHandler("Email inválido")
+          setDisabledButtonController(true)
+          //setButtonController(false)
           return false
         }
       }
       else{
-        console.log("erro else 1")
+        //console.log("erro else 1")
+        //setButtonController(false)
         errorControllerHandler("Email inválido")
+        setDisabledButtonController(true)
         return false
       }
       
-    }
-    else if (!regEx.test(emailFormData) && emailFormData !== ""){
-      console.log("erro else if")
+    //}
+    /* else */ if (!regEx.test(emailFormData) && emailFormData !== ""){
+      //console.log("erro else if")
       errorControllerHandler("Email inválido")
+      setDisabledButtonController(true)
       return false
     }
     else{
-      console.log("erro else 2")
+      //console.log("erro else 2")
       errorControllerHandler("Email inválido")
+      setDisabledButtonController(true)
       return false
     }
+  }
+
+  const passwordValidation = (passwordDataValidation) => {
+    if (passwordDataValidation.length < 6){
+      errorControllerHandler("Senha muito curta")
+      setDisabledButtonController(true)
+      return false
+    }
+    setErrorPasswordController(false)
+    setErrorPasswordMessage("")
+    return true
+      
   }
   
 
   const errorControllerHandler = (e) => {
+    //console.log(e)
     if(e === "Invalid password"){
+      setDisabledButtonController(true)
       setErrorPasswordController(true)
       setErrorPasswordMessage(e)
-      setPreviousPassword(passwordFormData)
+      //setPreviousPassword(passwordFormData)
     }
-    else{
-    setErrorEmailController(true)
-    setErrorEmailMessage(e)
-    setPreviousEmail(emailFormData)
-    }
-  }
 
-  
-  const emailErrorHandler = (e) => {
-    setPreviousEmail("")
-    if (previousEmail === e){
-    setErrorEmailController(true)
-
-    }
-    else{
+    else if (e === "Válido"){
+      
       setErrorEmailController(false)
       setErrorEmailMessage("")
-    }
     
-  }
+    }
 
-  const passwordErrorHandler = (e) => {
-    setPreviousPassword("")
-    if (previousPassword === e){
-    setErrorPasswordController(true)
-
+    else if (e === "Senha muito curta"){
+      setDisabledButtonController(true)
+      console.log("entrooouuu")
+      setErrorPasswordController(true)
+      setErrorPasswordMessage(e)
+      console.log(errorPasswordController, err)
+    
     }
     else{
-      setErrorPasswordController(false)
-      setErrorPasswordMessage("")
+      setDisabledButtonController(true)
+      setErrorEmailController(true)
+      setErrorEmailMessage(e)
+      //setPreviousEmail(emailFormData)
     }
-    
   }
+  
+  //console.log(emailFormData)
   
   return (
     <form
@@ -125,11 +187,11 @@ const RegisterForm = (props) => {
         justifyContent: "center"
       }}
      onSubmit={(e) => {
-       console.log("1")
+       //console.log("1")
        e.preventDefault();
       
-       if (emailValidation()){
-         console.log("teste")
+       //if (emailValidation()){ talvez colocar todas as validações
+         //console.log("teste")
         Axios.post("https://backendjuntosifpb.herokuapp.com/auth/register", {
           name: nameFormData,
           email: emailFormData,
@@ -147,29 +209,36 @@ const RegisterForm = (props) => {
           errorControllerHandler(error.response.data.error)
       })
 
-     }}
+     //}
+    }
     }
     >
       <ImageLogin />
 
     {!successScreen ?
      <>
-       <NameText nameLoginData={nameLoginData}/>
+       <NameText 
+       nameLoginData={nameLoginData}
+       errorNameMessage={errorNameMessage} 
+       errorName={errorNameController}
+       />
       <LoginText 
       emailLoginData={emailLoginData}
       errorEmailMessage={errorEmailMessage} 
-      errorEmail={errorEmailController} 
-      errorEmailController={emailErrorHandler}
+      errorEmail={errorEmailController}
+      data={emailFormData}
+      //registerButtonHandler={registerButtonHandler}
+      //errorEmailController={emailErrorHandler}
       />
       <PasswordText 
       passwordLoginData={passwordLoginData} 
       errorPasswordMessage={errorPasswordMessage} 
       errorPassword={errorPasswordController} 
-      errorPasswordController={passwordErrorHandler}
+      //errorPasswordController={passwordErrorHandler}
       label={"Digite a senha"}/>
       
       <HeightFormHandler />
-      <Button type="submit"> Registrar </Button>
+      <Button type="submit" disabled={disabledButtonController}> Registrar </Button>
       
       <HeightFormHandler />
       <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerRegister}>

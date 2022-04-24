@@ -7,26 +7,29 @@ const LoginText = (props) => {
   const handleData = (event) => {
     /* setUsernameData(event.target.value) */
     props.emailLoginData(event.target.value)
-    
-    props.errorEmailController(event.target.value)
+    //props.registerButtonHandler()
+    //props.errorEmailController(event.target.value)
+    //props.errorEmailController(event.target.value)
   }
   
-  const checkErrorEmailText = (event) => {
+  /* const checkErrorEmailText = (event) => {
     props.errorEmailController(event.target.value)
-  }
-  
+  } */
+  //console.log(props.data)
   return (
     <div data-testid="login-text" style={{ width: "100%" }}>
       <TextField
-      
+        required
         label="Digite o Email"
         margin="normal"
         fullWidth
         variant="standard"
-        onChange={checkErrorEmailText}
-        onBlur={handleData}
+        onChange={handleData}
+        //onChange={checkErrorEmailText}
+        //onBlur={handleData}
         error= {props.errorEmail}
         helperText={props.errorEmailMessage}
+        value={props.data}
         
       ></TextField>
     </div>
