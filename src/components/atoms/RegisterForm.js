@@ -7,7 +7,7 @@ import HeightFormHandler from "./HeightFormHandler";
 import Axios from "axios"
 import NameText from "./NameText";
 import completeImage from "../../assets/undraw_completing_re_i7ap.svg";
-import debounce from "lodash.debounce";
+//import debounce from "lodash.debounce";
 import LoadingButton from '@mui/lab/LoadingButton';
 
 const RegisterForm = (props) => {
