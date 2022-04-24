@@ -8,6 +8,7 @@ import Axios from "axios"
 import NameText from "./NameText";
 import completeImage from "../../assets/undraw_completing_re_i7ap.svg";
 import debounce from "lodash.debounce";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const RegisterForm = (props) => {
 
@@ -18,17 +19,18 @@ const RegisterForm = (props) => {
 
 
   const [errorNameController, setErrorNameController] = useState(false)
-  const [errorNameMessage, setErrorNameMessage] = useState("")
+  const [errorNameMessage, setErrorNameMessage] = useState(" ")
 
   const [errorEmailController, setErrorEmailController] = useState(false)
-  const [errorEmailMessage, setErrorEmailMessage] = useState("")
+  const [errorEmailMessage, setErrorEmailMessage] = useState(" ")
   //let [previousEmail, setPreviousEmail] = useState("")
 
   const [errorPasswordController, setErrorPasswordController] = useState(false)
-  const [errorPasswordMessage, setErrorPasswordMessage] = useState("")
+  const [errorPasswordMessage, setErrorPasswordMessage] = useState(" ")
   //let [previousPassword, setPreviousPassword] = useState("")
 
   const [disabledButtonController, setDisabledButtonController] = useState(true)
+  const [postController, setpostController] = useState(false)
 
   useEffect(() => {
     if(nameFormData.length > 1 && emailFormData.length > 0 && passwordFormData.length > 0){
@@ -68,7 +70,7 @@ const RegisterForm = (props) => {
     if (nameDataValidation.length > 1){
       //console.log("nome valido")
       setErrorNameController(false)
-      setErrorNameMessage("")
+      setErrorNameMessage(" ")
       return true
     }
     setErrorNameController(true)
@@ -133,9 +135,10 @@ const RegisterForm = (props) => {
       errorControllerHandler("Senha muito curta")
       setDisabledButtonController(true)
       return false
+
     }
     setErrorPasswordController(false)
-    setErrorPasswordMessage("")
+    setErrorPasswordMessage(" ")
     return true
       
   }
@@ -153,7 +156,7 @@ const RegisterForm = (props) => {
     else if (e === "Válido"){
       
       setErrorEmailController(false)
-      setErrorEmailMessage("")
+      setErrorEmailMessage(" ")
     
     }
 
@@ -162,7 +165,7 @@ const RegisterForm = (props) => {
       console.log("entrooouuu")
       setErrorPasswordController(true)
       setErrorPasswordMessage(e)
-      console.log(errorPasswordController, err)
+      
     
     }
     else{
@@ -189,8 +192,9 @@ const RegisterForm = (props) => {
      onSubmit={(e) => {
        //console.log("1")
        e.preventDefault();
-      
-       //if (emailValidation()){ talvez colocar todas as validações
+       setDisabledButtonController(true)
+        setpostController(true)
+       if (nameValidation(nameFormData) && emailValidation(emailFormData) && passwordValidation(passwordFormData)){ 
          //console.log("teste")
         Axios.post("https://backendjuntosifpb.herokuapp.com/auth/register", {
           name: nameFormData,
@@ -200,16 +204,20 @@ const RegisterForm = (props) => {
         .then((response) => {
           setSuccessScreen(true)
           console.log(successScreen)
-          console.log(response.error)}
+          console.log(response.error)
+          setpostController(false)
+        }
+          
           )
 
         .catch(error => {
           console.log(successScreen)
           console.log("error:", error.response.data.error)
           errorControllerHandler(error.response.data.error)
+          setpostController(false)
       })
 
-     //}
+     }
     }
     }
     >
@@ -238,21 +246,22 @@ const RegisterForm = (props) => {
       label={"Digite a senha"}/>
       
       <HeightFormHandler />
-      <Button type="submit" disabled={disabledButtonController}> Registrar </Button>
+      <LoadingButton loading={postController} type="submit" disabled={disabledButtonController}> Registrar </LoadingButton>
       
       <HeightFormHandler />
       <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerRegister}>
         Já possui conta? Entre
       </Button>
-       
+      
        </>
        : 
        <>
-       <p style={{marginTop: "25px"}}>Sua conta foi cadastrada com sucesso. Verifique seu email para verificar sua conta.</p>
-       <img src={completeImage} alt="complete image" style={{width: "180px", marginBottom: "15px"}}></img>
-       <Button  onClick={props.FormHandlerRegister}>
+       <p style={{marginTop: "25px"}}>Sua conta foi cadastrada com sucesso. Confira seu email para verificar sua conta.</p>
+       <img src={completeImage} alt="complete" style={{width: "170px", marginBottom: "15px"}}></img>
+       <Button  onClick={props.FormHandlerRegister} style={{marginTop: "15px"}}>
         Voltar para o login
       </Button>
+      
        </>
       }
     

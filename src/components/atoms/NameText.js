@@ -22,6 +22,7 @@ const NameText = (props) => {
         onChange={handleData}
         error= {props.errorName}
         helperText={props.errorNameMessage}
+        style={{ height: "60px"}}
       ></TextField>
   </div>
 }

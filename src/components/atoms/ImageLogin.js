@@ -10,7 +10,7 @@ const ImageLogin = () => {
         alt="ifLogo"
         width={"100px"}
         style={{
-          marginTop: "60px",
+          marginTop: "40px",
         }}
 
         /* width={"200px"} */

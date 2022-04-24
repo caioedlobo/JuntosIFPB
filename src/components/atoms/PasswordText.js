@@ -28,6 +28,7 @@ const PasswordText = (props) => {
         error= {props.errorPassword}
         helperText={props.errorPasswordMessage}
         type="password"
+        style={{ height: "60px"}}
       ></TextField>
     </div>
   );

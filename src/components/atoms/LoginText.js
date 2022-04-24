@@ -29,7 +29,7 @@ const LoginText = (props) => {
         //onBlur={handleData}
         error= {props.errorEmail}
         helperText={props.errorEmailMessage}
-        value={props.data}
+        style={{ height: "60px"}}
         
       ></TextField>
     </div>
