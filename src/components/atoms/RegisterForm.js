@@ -33,6 +33,7 @@ const RegisterForm = (props) => {
   const [postController, setpostController] = useState(false)
 
   useEffect(() => {
+    
     if(nameFormData.length > 1 && emailFormData.length > 0 && passwordFormData.length > 0){
       if (!errorNameController && !errorEmailController && !errorPasswordController){
         setDisabledButtonController(false)
@@ -44,7 +45,9 @@ const RegisterForm = (props) => {
     else{
       setDisabledButtonController(true)
     }
-  }, [errorNameController, errorEmailController, errorPasswordController])
+  }, [errorNameController, errorEmailController, errorPasswordController,
+    nameFormData, emailFormData, passwordFormData
+  ])
 
  
   const nameLoginData = (e) => {
@@ -86,7 +89,7 @@ const RegisterForm = (props) => {
   const emailValidation = async(emailDataValidation) => {
     console.log("emailDataValidation", emailDataValidation )
     //await new Promise((resolve) => setTimeout(resolve, 4000))
-    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
+    //const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
     //console.log("emailFormData", emailDataValidation)
     //if (regEx.test(emailDataValidation)){
       //await new Promise((resolve) => setTimeout(resolve, 2000))
@@ -128,19 +131,8 @@ const RegisterForm = (props) => {
         return false
       }
       
-    //}
-    /* else */ if (!regEx.test(emailFormData) && emailFormData !== ""){
-      //console.log("erro else if")
-      errorControllerHandler("Email inválido")
-      setDisabledButtonController(true)
-      return false
-    }
-    else{
-      //console.log("erro else 2")
-      errorControllerHandler("Email inválido")
-      setDisabledButtonController(true)
-      return false
-    }
+
+    
   }
 
   const passwordValidation = async(passwordDataValidation) => {
