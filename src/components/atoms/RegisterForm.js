@@ -84,16 +84,17 @@ const RegisterForm = (props) => {
   }
 
   const emailValidation = async(emailDataValidation) => {
-    //console.log("entrou emailValidation")
+    console.log("emailDataValidation", emailDataValidation )
     //await new Promise((resolve) => setTimeout(resolve, 4000))
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
     //console.log("emailFormData", emailDataValidation)
     //if (regEx.test(emailDataValidation)){
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      //await new Promise((resolve) => setTimeout(resolve, 2000))
       if( emailDataValidation.includes('@')){
         
         if(emailDataValidation.split('@')[1] === "academico.ifpb.edu.br" ){
           //console.log("entrou 1")
+          await new Promise((resolve) => setTimeout(resolve, 2000))
           errorControllerHandler("Válido")
           //console.log("foooii")
           //setButtonController(false)
@@ -101,6 +102,7 @@ const RegisterForm = (props) => {
         }
         else if(emailDataValidation.split('@')[1] === "ifpb.edu.br" ){
           //console.log("entrou 2")
+          await new Promise((resolve) => setTimeout(resolve, 2000))
           errorControllerHandler("Válido")
           //setButtonController(false)
           return true
@@ -109,7 +111,7 @@ const RegisterForm = (props) => {
         else{
           setDisabledButtonController(true)
           //console.log("erro else 0")
-          await new Promise((resolve) => setTimeout(resolve, 1000))
+          await new Promise((resolve) => setTimeout(resolve, 2000))
           errorControllerHandler("Email inválido")
           /* setDisabledButtonController(true) */
           //setButtonController(false)
