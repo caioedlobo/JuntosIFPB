@@ -88,9 +88,7 @@ const RegisterForm = (props) => {
 
   const emailValidation = async(emailDataValidation) => {
     console.log("emailDataValidation", emailDataValidation )
-    //await new Promise((resolve) => setTimeout(resolve, 4000))
-    //const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
-    //console.log("emailFormData", emailDataValidation)
+
     //if (regEx.test(emailDataValidation)){
       //await new Promise((resolve) => setTimeout(resolve, 2000))
       if( emailDataValidation.includes('@')){
