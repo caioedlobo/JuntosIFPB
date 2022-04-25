@@ -73,7 +73,7 @@ const LoginForm = (props) => {
         alignItems: "center",
         flexDirection: "column",
         display: "flex",
-        /* background: "red", */
+        
         width:"300px"
       }}
       method="get"
