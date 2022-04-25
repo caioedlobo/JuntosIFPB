@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import classes2 from "./stylesheet/MTable.module.css";
 import { theme } from "../../theme";
 
@@ -25,9 +25,10 @@ const sx = {
   },
   tableHeaderCell: {
     fontWeight: "bold",
-    backgroundColor: "#3fa14c",
+    background: "#2d7e27",
     /* color: theme.palette.getContrastText(theme.palette.primary.dark), */
-    color: theme.palette.common.dark,
+    //  color: theme.palette.common.dark,
+    color: "white",
     textAlign: "center !important",
   },
   tableCell: {
@@ -50,10 +51,12 @@ const sx = {
     display: "inline-block",
   },
   support: {
-    justifyContent: "center",
-    textAlign: "center",
+    /* justifyContent: "center",
+    textAlign: "center", */
     display: "flex",
     flexDirection: "column",
+    
+    alignItems: "center"
   },
 };
 
@@ -61,7 +64,7 @@ const MTable = (props) => {
   return (
     <div data-testid="m-table">
       <Paper>
-        <div className={classes2.table}>
+        <Box className={classes2.table}>
           <TableContainer component={Paper} sx={sx.tableContainer}>
             <Table sx={sx.table} aria-label="simple table">
               <TableHead>
@@ -117,7 +120,7 @@ const MTable = (props) => {
                       </Typography>
                     </TableCell>
                     <TableCell sx={sx.tableCell}>
-                      <div sx={sx.support}>
+                      <Box sx={sx.support}>
                         {row.support}
                         <Button
                           variant="outlined"
@@ -127,14 +130,14 @@ const MTable = (props) => {
                         >
                           Apoiar
                         </Button>
-                      </div>
+                      </Box>
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
-        </div>
+        </Box>
       </Paper>
     </div>
   );

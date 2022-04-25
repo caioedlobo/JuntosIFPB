@@ -9,8 +9,8 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { TextField } from "@mui/material";
 import debounce from 'lodash.debounce';
-
-
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 const STATUSES = [
   "Em validação",
@@ -88,17 +88,24 @@ const TableComponent = () => {
 
   return (
     <div data-testid="table-component" className={classes.table}>
-      <div className={classes.searchFilter}>
+      <div className={classes.searchFilter} >
         <div data-testid="filter-select" className={classes.searchWrapper}>
            <TextField
+            style={{marginTop:"10px"}}
            onChange={debouncedChangeHandler}
            className={classes.searchBar}
-            label="Pesquisar"
+            label="Pesquise demandas..."
             /* value={searched} */
             onCancelSearch={onCancelSearchHandler}
+            size="small"
+            
+            InputProps={{
+              endAdornment: <InputAdornment position="end"><SearchOutlinedIcon/></InputAdornment>,
+            }}
+            
           /> 
 
-          <FormControl size="small" style={{ width: "10%" }}>
+          <FormControl size="small" style={{ width: "10%", marginTop:"10px" }}>
             <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
             <Select
               style={{ backgroundColor: "white" }}
