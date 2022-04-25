@@ -78,13 +78,15 @@ const LoginForm = (props) => {
       }}
       method="get"
       onSubmit={(e) => {
-        
         e.preventDefault()
+
+        const token = (e.target.action.split("="))[1];
         
         
         Axios.post("https://backendjuntosifpb.herokuapp.com/auth/authenticate", {
           email: emailFormData,
-          password: passwordFormData
+          password: passwordFormData,
+          token: token
         })
         .then((response) => {console.log(response.error)})
 
