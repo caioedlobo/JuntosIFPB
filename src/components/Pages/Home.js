@@ -26,7 +26,7 @@ const Home = () => {
           
           
           sx={{ 
-            padding: "0 48px", 
+            padding: {sm:"0 48px"}, 
             display: "flex", 
             flexDirection: {lg:"row"}, 
             alignItems: "center", 
