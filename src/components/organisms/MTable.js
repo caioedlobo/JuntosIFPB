@@ -48,7 +48,12 @@ const sx = {
     backgroundColor: "grey",
     borderRadius: "8px",
     padding: "3px 10px",
-    display: "inline-block",
+    display: "flex",
+    
+    justifyContent: "center",
+    
+    /* width:"40px",
+    backgroundr: "blue" */
   },
   support: {
     /* justifyContent: "center",
@@ -114,6 +119,7 @@ const MTable = (props) => {
                             (row.status === "Em análise" && "#B8860B") ||
                             (row.status === "Em validação" && "#556B2F") ||
                             "grey",
+                            
                         }}
                       >
                         {row.status}
@@ -125,7 +131,7 @@ const MTable = (props) => {
                         <Button
                           variant="outlined"
                           size="small"
-                          style={{ width: "10px" }}
+                          style={{ width: "15px", borderRadius: "8px", }}
                           
                         >
                           Apoiar
