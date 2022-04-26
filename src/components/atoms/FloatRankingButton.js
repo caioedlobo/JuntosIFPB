@@ -51,16 +51,6 @@ const FloatRankingButton = () => {
   }
 
   const submitForm = () => {
-    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjcyOWIyNjY2YTMxNTM4MDZhYWYzNyIsImlhdCI6MTY1MDkzNDUyMiwiZXhwIjoxNjUxMDIwOTIyfQ.D0WYTWI8upjNNPCqyKBy10DZVvX1TZUKgZ23Ihx3Gu8"
-    Axios.interceptors.request.use(
-      config => {
-        config.headers.authorization = `Bearer ${accessToken}`;
-        return config;
-      },
-      error => {
-        return Promise.reject(error)
-      }
-    )
 
     if (demand !== 0){
       console.log(demand, description)
