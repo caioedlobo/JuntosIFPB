@@ -88,7 +88,19 @@ const LoginForm = (props) => {
           password: passwordFormData,
           token: token
         })
-        .then((response) => {console.log(response.error)})
+        .then((response) => {
+          const accessToken = response.data.token
+          
+          Axios.interceptors.request.use(
+            config => {
+              config.headers.authorization = `Bearer ${accessToken}`;
+              return config;
+            },
+            error => {
+              return Promise.reject(error)
+            }
+          )
+        })
 
         .catch(error => {
           
