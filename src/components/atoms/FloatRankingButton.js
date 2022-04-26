@@ -51,14 +51,14 @@ const FloatRankingButton = () => {
   }
 
   const submitForm = () => {
-
+    console.log(checkboxController)
     if (demand !== 0){
       console.log(demand, description)
     Axios.post("https://backendjuntosifpb.herokuapp.com/demands",
     {
       title: demand,
       description: description,
-      anonymous: checkboxController
+      isAnonymous: checkboxController
     })
   }
   else {
@@ -67,7 +67,7 @@ const FloatRankingButton = () => {
     {
       title: otherDemand,
       description: description,
-      anonymous: checkboxController
+      isAnonymous: checkboxController
     })
   }
 
