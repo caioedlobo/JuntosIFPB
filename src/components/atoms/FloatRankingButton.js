@@ -51,7 +51,17 @@ const FloatRankingButton = () => {
   }
 
   const submitForm = () => {
-    
+    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjcyOWIyNjY2YTMxNTM4MDZhYWYzNyIsImlhdCI6MTY1MDkzNDUyMiwiZXhwIjoxNjUxMDIwOTIyfQ.D0WYTWI8upjNNPCqyKBy10DZVvX1TZUKgZ23Ihx3Gu8"
+    Axios.interceptors.request.use(
+      config => {
+        config.headers.authorization = `Bearer ${accessToken}`;
+        return config;
+      },
+      error => {
+        return Promise.reject(error)
+      }
+    )
+
     if (demand !== 0){
       console.log(demand, description)
     Axios.post("https://backendjuntosifpb.herokuapp.com/demands",
@@ -73,9 +83,6 @@ const FloatRankingButton = () => {
 
   }
 
-  /* const teste{
-    if (demand === 0)
-  } */
 
   const style = {
     margin: 0,
@@ -86,7 +93,9 @@ const FloatRankingButton = () => {
     position: "fixed",
   };
   return (
-    <div data-testid="float-ranking-button">
+    <div data-testid="float-ranking-button"
+    
+    >
       <Zoom in={true} timeout={{ enter: 500, exit: 500 }} unmountOnExit>
         <Fab
           style={style}
@@ -94,6 +103,7 @@ const FloatRankingButton = () => {
           aria-label="add"
           variant="extended"
           onClick={handleClickOpen}
+          
         >
           <AddIcon style={{ marginRight: "2px" }} />
           Adicionar
