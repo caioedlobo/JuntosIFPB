@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,6 +13,7 @@ import Grid from "@mui/material/Grid";
 import { Box, Button, Typography } from "@mui/material";
 import classes2 from "./stylesheet/MTable.module.css";
 import { theme } from "../../theme";
+import Axios from "axios";
 
 const sx = {
   table: {
@@ -49,9 +50,9 @@ const sx = {
     borderRadius: "8px",
     padding: "3px 10px",
     display: "flex",
-    
+
     justifyContent: "center",
-    
+
     /* width:"40px",
     backgroundr: "blue" */
   },
@@ -60,88 +61,183 @@ const sx = {
     textAlign: "center", */
     display: "flex",
     flexDirection: "column",
-    
-    alignItems: "center"
+
+    alignItems: "center",
   },
 };
 
 const MTable = (props) => {
+  const [data, setData] = useState([]);
+  const [errorHandler, setErrorHandler] = useState(false);
+  const [supportNumberChange, setSupportNumberChange] = useState(false);
+  /* const [supportedController, setSupportedController] = useState(false); */
+  useEffect(() => {
+    getData();
+  }, [props.searched, supportNumberChange]);
+
+  useEffect(() => {
+    getFilter();
+  }, [props.filter]);
+
+  /*   useEffect(() => {
+    setData(data);
+  }, [supportNumberChange]); */
+
+  const getFilter = () => {
+    Axios.get(
+      "https://backendjuntosifpb.herokuapp.com/ranking/findSectorOrder",
+      {
+        params: {
+          sector: props.filter,
+        },
+      }
+    )
+      .then((response) => {
+        console.log(response);
+        setData(response.data.demandsFiltered);
+      })
+      .catch((response) => {
+        console.log(response.error);
+      });
+  };
+
+  const getData = () => {
+    Axios.get("https://backendjuntosifpb.herokuapp.com/ranking/search", {
+      params: {
+        querySearch: props.searched,
+      },
+    })
+      .then((response) => {
+        if (response.data !== "There are no queries found") {
+          setErrorHandler(false);
+          setData(response.data.demandsFiltered);
+        } else {
+          setErrorHandler(true);
+        }
+      })
+      .catch((response) => {
+        console.log(response.error);
+      });
+  };
+
+  /* const supportedHandlerController = (event) => {
+    console.log("event", event);
+    setSupportedController(event);
+  }; */
+
+  const onSupportHandler = (event) => {
+    //console.log(event.target.value);
+    Axios.put(
+      `https://backendjuntosifpb.herokuapp.com/demands/support/${event.target.value}`
+    )
+      .then((response) => {
+        /* supportedHandlerController(!supportedController); */
+        setSupportNumberChange(!supportNumberChange);
+      })
+      .catch((response) => {
+        console.log(response.error);
+      });
+  };
+
   return (
     <div data-testid="m-table">
       <Paper>
         <Box className={classes2.table}>
-          <TableContainer component={Paper} sx={sx.tableContainer}>
-            <Table sx={sx.table} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={sx.tableHeaderCell}>Usuário</TableCell>
-                  <TableCell sx={sx.tableHeaderCell}>Demanda</TableCell>
-                  <TableCell sx={sx.tableHeaderCell}>Setor</TableCell>
+          <TableContainer /* component={Paper} */ sx={sx.tableContainer}>
+            {errorHandler ? (
+              <Typography
+                sx={{
+                  minWidth: "968px",
+                  textAlign: "center",
+                  /* paddingTop: "50px", */
+                  justifyContent: "center",
+                  /* background: "blue", */
+                }}
+                variant="h5"
+              >
+                Não foi encontrada nenhuma demanda
+              </Typography>
+            ) : (
+              <Table sx={sx.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={sx.tableHeaderCell}>Usuário</TableCell>
+                    <TableCell sx={sx.tableHeaderCell}>Demanda</TableCell>
+                    <TableCell sx={sx.tableHeaderCell}>Setor</TableCell>
 
-                  <TableCell sx={sx.tableHeaderCell}>
-                    Data de solicitação
-                  </TableCell>
-                  <TableCell sx={sx.tableHeaderCell}>Status</TableCell>
-                  <TableCell sx={sx.tableHeaderCell}>Apoios</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {props.rows.map((row) => (
-                  <TableRow key={row.name}>
-                    <TableCell>
-                      <Grid container>
-                        <Grid item lg={2}>
-                          <Avatar sx={sx.avatar} alt={row.name} src="." />
-                        </Grid>
-                        <Grid item lg={10}>
-                          <Typography sx={sx.name}>{row.name}</Typography>
-                          <Typography color="textSecondary" variant="body2">
-                            {row.email}
-                          </Typography>
-                          <Typography color="textSecondary" variant="body2">
-                            {row.name}
-                          </Typography>
-                        </Grid>
-                      </Grid>
+                    <TableCell sx={sx.tableHeaderCell}>
+                      Data de solicitação
                     </TableCell>
-                    <TableCell sx={sx.tableCell}>{row.job}</TableCell>
-
-                    <TableCell sx={sx.tableCell}>{row.job}</TableCell>
-
-                    <TableCell sx={sx.tableCell}>{row.recent}</TableCell>
-                    <TableCell sx={sx.tableCell}>
-                      <Typography
-                        sx={sx.status}
-                        style={{
-                          backgroundColor:
-                            (row.status === "Resolvido" && "green") ||
-                            (row.status === "Não Resolvido" && "red") ||
-                            (row.status === "Em análise" && "#B8860B") ||
-                            (row.status === "Em validação" && "#556B2F") ||
-                            "grey",
-                            
-                        }}
-                      >
-                        {row.status}
-                      </Typography>
-                    </TableCell>
-                    <TableCell sx={sx.tableCell}>
-                      <Box sx={sx.support}>
-                        {row.support}
-                        <Button
-                          variant="outlined"
-                          size="small"
-                          style={{ width: "15px", borderRadius: "8px", }}
-                          
-                        >
-                          Apoiar
-                        </Button>
-                      </Box>
-                    </TableCell>
+                    <TableCell sx={sx.tableHeaderCell}>Status</TableCell>
+                    <TableCell sx={sx.tableHeaderCell}>Apoios</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHead>
+                <TableBody>
+                  {data.map((row) => (
+                    <TableRow key={row.name}>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={2}>
+                            <Avatar
+                              sx={sx.avatar}
+                              alt={row.user.name}
+                              src="."
+                            />
+                          </Grid>
+                          <Grid item lg={10}>
+                            <Typography sx={sx.name}>
+                              {row.isAnonymous ? "Anônimo" : row.user.name}
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              {row.isAnonymous ? "" : row.user.email}
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              {row.name}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <TableCell sx={sx.tableCell}>{row.title}</TableCell>
+
+                      <TableCell sx={sx.tableCell}>{row.sector}</TableCell>
+
+                      <TableCell sx={sx.tableCell}>
+                        {row.createdAt.split(" ")[0]}
+                      </TableCell>
+                      <TableCell sx={sx.tableCell}>
+                        <Typography
+                          sx={sx.status}
+                          style={{
+                            backgroundColor:
+                              (row.status === "Resolvido" && "green") ||
+                              (row.status === "Não Resolvido" && "red") ||
+                              (row.status === "Em Análise" && "#B8860B") ||
+                              (row.status === "Em Validação" && "#556B2F") ||
+                              "grey",
+                          }}
+                        >
+                          {row.status}
+                        </Typography>
+                      </TableCell>
+                      <TableCell sx={sx.tableCell}>
+                        <Box sx={sx.support}>
+                          {row.support}
+                          <Button
+                            variant="outlined"
+                            size="small"
+                            style={{ width: "15px", borderRadius: "8px" }}
+                            onClick={onSupportHandler}
+                            value={row._id}
+                          >
+                            Apoiar
+                          </Button>
+                        </Box>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
           </TableContainer>
         </Box>
       </Paper>

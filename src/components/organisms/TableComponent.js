@@ -8,14 +8,14 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { TextField } from "@mui/material";
-import debounce from 'lodash.debounce';
-import InputAdornment from '@mui/material/InputAdornment';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import debounce from "lodash.debounce";
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 const STATUSES = [
-  "Em validação",
-  "Em análise",
-  "Não atribuído",
+  "Em Validação",
+  "Em Análise",
+  "Não Atribuído",
   "Resolvido",
   "Não Resolvido",
 ];
@@ -55,10 +55,9 @@ function sortTable(arr, prop) {
 }
 
 const TableComponent = () => {
-  const [searched , setSearched] = useState("");
+  const [searched, setSearched] = useState("");
   const [filter, setFilter] = useState("");
   const [rows, setRows] = useState(USERS);
-  
 
   const jobMatchFilter = (row, type) => row.job.match(RegExp(type, "i"));
 
@@ -67,15 +66,16 @@ const TableComponent = () => {
   };
 
   const onFilterChangeHandler = (event) => {
+    console.log(event.target.value);
     setFilter(event.target.value);
   };
-  const onSearchHandler = event => {
-    setSearched(event)
-  }
+  const onSearchHandler = (event) => {
+    setSearched(event.target.value);
+  };
 
-  const debouncedChangeHandler = () =>{
-    debounce(onSearchHandler, 200)
-  }
+  const debouncedChangeHandler = (event) => {
+    debounce(onSearchHandler(event), 200);
+  };
 
   useEffect(() => {
     const isDateFilter = filter === "Recentes" || filter === "Antigos";
@@ -88,24 +88,26 @@ const TableComponent = () => {
 
   return (
     <div data-testid="table-component" className={classes.table}>
-      <div className={classes.searchFilter} >
+      <div className={classes.searchFilter}>
         <div data-testid="filter-select" className={classes.searchWrapper}>
-           <TextField
-            style={{marginTop:"10px"}}
-           onChange={debouncedChangeHandler}
-           className={classes.searchBar}
+          <TextField
+            style={{ marginTop: "10px" }}
+            onChange={debouncedChangeHandler}
+            className={classes.searchBar}
             label="Pesquise demandas..."
             /* value={searched} */
             onCancelSearch={onCancelSearchHandler}
             size="small"
-            
             InputProps={{
-              endAdornment: <InputAdornment position="end"><SearchOutlinedIcon/></InputAdornment>,
+              endAdornment: (
+                <InputAdornment position="end">
+                  <SearchOutlinedIcon />
+                </InputAdornment>
+              ),
             }}
-            
-          /> 
+          />
 
-          <FormControl size="small" style={{ width: "10%", marginTop:"10px" }}>
+          <FormControl size="small" style={{ width: "10%", marginTop: "10px" }}>
             <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
             <Select
               style={{ backgroundColor: "white" }}
@@ -129,7 +131,7 @@ const TableComponent = () => {
           </FormControl>
         </div>
 
-        <MTable rows={rows} />
+        <MTable rows={rows} searched={searched} filter={filter} />
       </div>
     </div>
   );
