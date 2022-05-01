@@ -72,12 +72,16 @@ const MTable = (props) => {
   const [supportNumberChange, setSupportNumberChange] = useState(false);
   /* const [supportedController, setSupportedController] = useState(false); */
   useEffect(() => {
+    /* if (props.filter !== "") { */
     getData();
+    //}
   }, [props.searched, supportNumberChange]);
 
   useEffect(() => {
-    getFilter();
-  }, [props.filter]);
+    if (props.searched === "") {
+      getFilter();
+    }
+  }, [props.filter, supportNumberChange]);
 
   /*   useEffect(() => {
     setData(data);
