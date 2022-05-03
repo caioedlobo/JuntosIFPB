@@ -78,10 +78,10 @@ const MTable = (props) => {
         querySearch: props.searched,
       },
     })
-      .then((response) => {
+      .then(async (response) => {
         if (response.data !== "There are no queries found") {
           setErrorHandler(false);
-          setData(response.data.demandsFiltered);
+          setData(await response.data.demandsFiltered);
         } else {
           setErrorHandler(true);
         }

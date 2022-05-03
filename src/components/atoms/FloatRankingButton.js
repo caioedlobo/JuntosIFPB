@@ -12,11 +12,10 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Axios from "axios"
-
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Axios from "axios";
 
 const FloatRankingButton = () => {
   const [open, setOpen] = useState(false);
@@ -39,8 +38,8 @@ const FloatRankingButton = () => {
   };
 
   const descriptionChangeHandler = (event) => {
-    setDescription(event.target.value)
-  }
+    setDescription(event.target.value);
+  };
 
   const handleOtherChangeDemand = (event) => {
     setOtherDemand(event.target.value);
@@ -48,31 +47,42 @@ const FloatRankingButton = () => {
 
   const handleAnonymousCheckbox = () => {
     setCheckboxController(!checkboxController);
-  }
+  };
 
   const submitForm = () => {
-    console.log(checkboxController)
-    if (demand !== 0){
-      console.log(demand, description)
-    Axios.post("https://backendjuntosifpb.herokuapp.com/demands",
-    {
-      title: demand,
-      description: description,
-      isAnonymous: checkboxController
-    })
-  }
-  else {
-    console.log(otherDemand, description)
-    Axios.post("https://backendjuntosifpb.herokuapp.com/demands",
-    {
-      title: otherDemand,
-      description: description,
-      isAnonymous: checkboxController
-    })
-  }
-
-  }
-
+    console.log(checkboxController);
+    if (demand !== 0) {
+      //console.log(demand, description);
+      Axios.post(
+        "https://backendjuntosifpb.herokuapp.com/demands",
+        {
+          title: demand,
+          description: description,
+          isAnonymous: checkboxController,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
+      );
+    } else {
+      //console.log(otherDemand, description);
+      Axios.post(
+        "https://backendjuntosifpb.herokuapp.com/demands",
+        {
+          title: otherDemand,
+          description: description,
+          isAnonymous: checkboxController,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
+      );
+    }
+  };
 
   const style = {
     margin: 0,
@@ -83,24 +93,20 @@ const FloatRankingButton = () => {
     position: "fixed",
   };
   return (
-    <div data-testid="float-ranking-button"
-    
-    >
+    <div data-testid="float-ranking-button">
       <Zoom in={true} timeout={{ enter: 500, exit: 500 }} unmountOnExit>
         <Fab
           style={style}
-          color="white"
+          color="inherit"
           aria-label="add"
           variant="extended"
           onClick={handleClickOpen}
-          
         >
           <AddIcon style={{ marginRight: "2px" }} />
           Adicionar
         </Fab>
       </Zoom>
 
-      
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle style={{ textAlign: "center" }}>
           Formulário de Demanda
@@ -111,7 +117,6 @@ const FloatRankingButton = () => {
             informações a seguir.
           </DialogContentText>
 
-          
           <FormControl fullWidth>
             <InputLabel
               id="demo-simple-select-label"
@@ -126,26 +131,23 @@ const FloatRankingButton = () => {
               label="Age"
               onChange={handleChangeDemand}
               style={{ marginBottom: "20px" }}
-              
             >
-              <MenuItem value={"Ar-condicionado quebrado"}>Ar-condicionado quebrado</MenuItem>
+              <MenuItem value={"Ar-condicionado quebrado"}>
+                Ar-condicionado quebrado
+              </MenuItem>
               <MenuItem value={"TV quebrada"}>TV quebrada</MenuItem>
               <MenuItem value={"Limpeza"}>Limpeza</MenuItem>
               <MenuItem value={0}>Outra</MenuItem>
             </Select>
           </FormControl>
-          
 
           {demand === 0 ? (
             <TextField
               style={{ width: "100%", marginBottom: "20px" }}
               label="Digite a sua demanda"
-              
               onChange={handleOtherChangeDemand}
             ></TextField>
-          ) : (
-            console.log("2")
-          )}
+          ) : null}
           <TextField
             style={{ width: "100%", marginBottom: "20px" }}
             placeholder="Descrição da demanda"
@@ -155,14 +157,18 @@ const FloatRankingButton = () => {
             onChange={descriptionChangeHandler}
           ></TextField>
 
-          <FormGroup sx={{marginBottom: "15px"}}>
-            <FormControlLabel control={<Checkbox onChange={handleAnonymousCheckbox}/>} label="Enviar anonimamente" />
+          <FormGroup sx={{ marginBottom: "15px" }}>
+            <FormControlLabel
+              control={<Checkbox onChange={handleAnonymousCheckbox} />}
+              label="Enviar anonimamente"
+            />
           </FormGroup>
 
-          <Button type="submit" onClick={submitForm}>Enviar</Button>
+          <Button type="submit" onClick={submitForm}>
+            Enviar
+          </Button>
         </DialogContent>
       </Dialog>
-      
     </div>
   );
 };
