@@ -112,8 +112,8 @@ const MTable = (props) => {
     //}
   }, [props.filter, supportNumberChange, supportedController]);
 
-  const onSupportHandler = (event) => {
-    Axios.put(
+  const onSupportHandler = async (event) => {
+    await Axios.put(
       `https://backendjuntosifpb.herokuapp.com/demands/support/${event.target.value}`,
       {},
       {
