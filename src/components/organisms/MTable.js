@@ -71,9 +71,9 @@ const MTable = (props) => {
   const [supportNumberChange, setSupportNumberChange] = useState(false);
   const [supportedController, setSupportedController] = useState(false);
 
-  useEffect(() => {
+  useEffect(async () => {
     /* if (props.filter !== "") { */
-    Axios.get("https://backendjuntosifpb.herokuapp.com/ranking/search", {
+    await Axios.get("https://backendjuntosifpb.herokuapp.com/ranking/search", {
       params: {
         querySearch: props.searched,
       },
@@ -92,9 +92,9 @@ const MTable = (props) => {
     //}
   }, [props.searched, supportNumberChange, supportedController]);
 
-  useEffect(() => {
+  useEffect(async () => {
     //if (props.searched === "") {
-    Axios.get(
+    await Axios.get(
       "https://backendjuntosifpb.herokuapp.com/ranking/findSectorOrder",
       {
         params: {
@@ -102,9 +102,9 @@ const MTable = (props) => {
         },
       }
     )
-      .then((response) => {
-        console.log(response);
-        setData(response.data.demandsFiltered);
+      .then(async (response) => {
+        //console.log(response);
+        await setData(response.data.demandsFiltered);
       })
       .catch((response) => {
         console.log(response.error);
@@ -113,7 +113,7 @@ const MTable = (props) => {
   }, [props.filter, supportNumberChange, supportedController]);
 
   const onSupportHandler = async (event) => {
-    await Axios.put(
+    Axios.put(
       `https://backendjuntosifpb.herokuapp.com/demands/support/${event.target.value}`,
       {},
       {
