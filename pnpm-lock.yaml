@@ -14,6 +14,7 @@ specifiers:
   faker: ^5
   husky: ^7.0.4
   identity-obj-proxy: ^3.0.0
+  ifpb-app: 'link:'
   lint-staged: ^12.3.2
   lodash.debounce: ^4.0.8
   react: ^17.0.2
@@ -36,6 +37,7 @@ dependencies:
   debounce: 1.2.1
   faker: 5.5.3
   identity-obj-proxy: 3.0.0
+  ifpb-app: 'link:'
   lint-staged: 12.3.7
   lodash.debounce: 4.0.8
   react: 17.0.2

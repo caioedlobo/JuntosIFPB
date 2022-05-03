@@ -72,26 +72,47 @@ const MTable = (props) => {
   const [supportedController, setSupportedController] = useState(false);
 
   useEffect(() => {
-    getData();
-  }, []);
-
-  useEffect(() => {
     /* if (props.filter !== "") { */
-    getData();
+    Axios.get("https://backendjuntosifpb.herokuapp.com/ranking/search", {
+      params: {
+        querySearch: props.searched,
+      },
+    })
+      .then((response) => {
+        if (response.data !== "There are no queries found") {
+          setErrorHandler(false);
+          setData(response.data.demandsFiltered);
+        } else {
+          setErrorHandler(true);
+        }
+      })
+      .catch((response) => {
+        console.log(response.error);
+      });
     //}
   }, [props.searched, supportNumberChange, supportedController]);
 
   useEffect(() => {
-    if (props.searched === "") {
-      getFilter();
-    }
+    //if (props.searched === "") {
+    Axios.get(
+      "https://backendjuntosifpb.herokuapp.com/ranking/findSectorOrder",
+      {
+        params: {
+          sector: props.filter,
+        },
+      }
+    )
+      .then((response) => {
+        console.log(response);
+        setData(response.data.demandsFiltered);
+      })
+      .catch((response) => {
+        console.log(response.error);
+      });
+    //}
   }, [props.filter, supportNumberChange, supportedController]);
 
-  /*   useEffect(() => {
-    setData(data);
-  }, [supportNumberChange]); */
-
-  const getFilter = () => {
+  /* const getFilter = () => {
     Axios.get(
       "https://backendjuntosifpb.herokuapp.com/ranking/findSectorOrder",
       {
@@ -126,16 +147,9 @@ const MTable = (props) => {
       .catch((response) => {
         console.log(response.error);
       });
-  };
-
-  const supportedHandlerController = (event) => {
-    console.log("event", event);
-    //setSupportedController(event);
-  };
+  }; */
 
   const onSupportHandler = (event) => {
-    //console.log(event.target.value);
-    //setSupportedController(true);
     Axios.put(
       `https://backendjuntosifpb.herokuapp.com/demands/support/${event.target.value}`,
       {},
