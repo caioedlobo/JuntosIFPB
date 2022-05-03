@@ -112,43 +112,6 @@ const MTable = (props) => {
     //}
   }, [props.filter, supportNumberChange, supportedController]);
 
-  /* const getFilter = () => {
-    Axios.get(
-      "https://backendjuntosifpb.herokuapp.com/ranking/findSectorOrder",
-      {
-        params: {
-          sector: props.filter,
-        },
-      }
-    )
-      .then((response) => {
-        console.log(response);
-        setData(response.data.demandsFiltered);
-      })
-      .catch((response) => {
-        console.log(response.error);
-      });
-  };
-
-  const getData = () => {
-    Axios.get("https://backendjuntosifpb.herokuapp.com/ranking/search", {
-      params: {
-        querySearch: props.searched,
-      },
-    })
-      .then((response) => {
-        if (response.data !== "There are no queries found") {
-          setErrorHandler(false);
-          setData(response.data.demandsFiltered);
-        } else {
-          setErrorHandler(true);
-        }
-      })
-      .catch((response) => {
-        console.log(response.error);
-      });
-  }; */
-
   const onSupportHandler = (event) => {
     Axios.put(
       `https://backendjuntosifpb.herokuapp.com/demands/support/${event.target.value}`,
