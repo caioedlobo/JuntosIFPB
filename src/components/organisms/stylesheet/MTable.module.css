@@ -2,6 +2,7 @@
   /* background-color: coral; */
   display: flex;
   justify-content: center;
+  width: 1200px;
 }
 
 .searchBar {

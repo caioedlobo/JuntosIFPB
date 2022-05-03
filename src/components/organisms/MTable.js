@@ -61,7 +61,6 @@ const sx = {
     textAlign: "center", */
     display: "flex",
     flexDirection: "column",
-
     alignItems: "center",
   },
 };
@@ -70,18 +69,23 @@ const MTable = (props) => {
   const [data, setData] = useState([]);
   const [errorHandler, setErrorHandler] = useState(false);
   const [supportNumberChange, setSupportNumberChange] = useState(false);
-  /* const [supportedController, setSupportedController] = useState(false); */
+  const [supportedController, setSupportedController] = useState(false);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   useEffect(() => {
     /* if (props.filter !== "") { */
     getData();
     //}
-  }, [props.searched, supportNumberChange]);
+  }, [props.searched, supportNumberChange, supportedController]);
 
   useEffect(() => {
     if (props.searched === "") {
       getFilter();
     }
-  }, [props.filter, supportNumberChange]);
+  }, [props.filter, supportNumberChange, supportedController]);
 
   /*   useEffect(() => {
     setData(data);
@@ -124,18 +128,25 @@ const MTable = (props) => {
       });
   };
 
-  /* const supportedHandlerController = (event) => {
+  const supportedHandlerController = (event) => {
     console.log("event", event);
-    setSupportedController(event);
-  }; */
+    //setSupportedController(event);
+  };
 
   const onSupportHandler = (event) => {
     //console.log(event.target.value);
+    //setSupportedController(true);
     Axios.put(
-      `https://backendjuntosifpb.herokuapp.com/demands/support/${event.target.value}`
+      `https://backendjuntosifpb.herokuapp.com/demands/support/${event.target.value}`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      }
     )
       .then((response) => {
-        /* supportedHandlerController(!supportedController); */
+        setSupportedController(!supportedController);
         setSupportNumberChange(!supportNumberChange);
       })
       .catch((response) => {
@@ -226,15 +237,43 @@ const MTable = (props) => {
                       <TableCell sx={sx.tableCell}>
                         <Box sx={sx.support}>
                           {row.support}
-                          <Button
-                            variant="outlined"
-                            size="small"
-                            style={{ width: "15px", borderRadius: "8px" }}
-                            onClick={onSupportHandler}
-                            value={row._id}
-                          >
-                            Apoiar
-                          </Button>
+                          {row.supportUsers.includes(
+                            localStorage.getItem("userId")
+                          ) ? (
+                            <Button
+                              variant="outlined"
+                              size="small"
+                              style={{
+                                maxWidth: "90px",
+                                maxHeight: "30px",
+                                minWidth: "90px",
+                                minHeight: "30px",
+                                borderRadius: "8px",
+                                background:
+                                  "linear-gradient(to bottom right, #204E11, #2F5A22)",
+                              }}
+                              onClick={onSupportHandler}
+                              value={row._id}
+                            >
+                              Desapoiar
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="outlined"
+                              size="small"
+                              style={{
+                                maxWidth: "90px",
+                                maxHeight: "30px",
+                                minWidth: "90px",
+                                minHeight: "30px",
+                                borderRadius: "8px",
+                              }}
+                              onClick={onSupportHandler}
+                              value={row._id}
+                            >
+                              Apoiar
+                            </Button>
+                          )}
                         </Box>
                       </TableCell>
                     </TableRow>
