@@ -7,7 +7,7 @@ describe("MTable", () => {
     cleanup();
   });
 
-  it("renders correctly", () => {
+  it("renders correctly", async () => {
     render(<MTable rows={[]} />);
     const mTable = screen.getByTestId("m-table");
 
