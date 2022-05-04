@@ -61,10 +61,6 @@ const TableComponent = () => {
 
   const jobMatchFilter = (row, type) => row.job.match(RegExp(type, "i"));
 
-  const onCancelSearchHandler = () => {
-    setSearched("");
-  };
-
   const onFilterChangeHandler = (event) => {
     console.log(event.target.value);
     setFilter(event.target.value);
@@ -96,7 +92,7 @@ const TableComponent = () => {
             className={classes.searchBar}
             label="Pesquise demandas..."
             /* value={searched} */
-            onCancelSearch={onCancelSearchHandler}
+            /* onCancelSearch={onCancelSearchHandler} */
             size="small"
             InputProps={{
               endAdornment: (
