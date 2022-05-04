@@ -6,6 +6,7 @@ import Security from "./components/Pages/Security";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Account from "./components/Pages/Account";
 import Reset from "./components/Pages/Reset";
+import Contributions from "./components/Pages/Contributions";
 
 function App() {
   return (
@@ -19,8 +20,8 @@ function App() {
             <Route path="/contato" element={<Contact />} />
             <Route path="/login/*" element={<Home />} />
             <Route path="/conta" element={<Account />} />
-            <Route path="/seguranca" element={<Security/>} />
-            <Route path="/contribuicoes" element={<Ranking />} />
+            <Route path="/seguranca" element={<Security />} />
+            <Route path="/contribuicoes" element={<Contributions />} />
             <Route path="/resetar_senha/*" element={<Reset />} />
             <Route path="*" element={<h1>Página não encontrada</h1>} />
           </Routes>
