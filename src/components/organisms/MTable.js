@@ -133,7 +133,7 @@ const MTable = (props) => {
 
   return (
     <div data-testid="m-table">
-      <Paper>
+      <Paper elevation={0}>
         <Box className={classes2.table}>
           <TableContainer /* component={Paper} */ sx={sx.tableContainer}>
             {errorHandler ? (
