@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
-import LayoutUserBar from "../template/LayoutUserBar"
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import LayoutUserBar from "../template/LayoutUserBar";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import {
   CardActions,
@@ -15,140 +15,154 @@ import {
   Box,
   Toolbar,
   Menu,
-  MenuItem
+  MenuItem,
 } from "@mui/material";
 
-import {Link} from "@mui/material";
+import { Link } from "@mui/material";
 
 const UserBar = () => {
-
-
   /* const drawerWidth = 240; */
 
   const [anchorEl, setAnchorEl] = React.useState(false);
 
-
   const openMenu = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
-    setAnchorEl(false)
-  }
+    setAnchorEl(false);
+  };
 
   /* const toSecurity = () => {
 
   }
  */
-  return <div data-testid='user-bar'>
-    
-    <Card
-          sx={{
-            height: {md: "600px"},
-            flex: "2.5",
-            
+  return (
+    <div data-testid="user-bar">
+      <Card
+        sx={{
+          height: { md: "600px" },
+          flex: "2.5",
 
-            marginRight: { md: "6px", xs: "0" },
-            marginBottom: { md: "0", xs: "6px" },
-          }}
-        >
-          {/* <CardHeader>
+          marginRight: { md: "6px", xs: "0" },
+          marginBottom: { md: "0", xs: "6px" },
+        }}
+      >
+        {/* <CardHeader>
           <Avatar></Avatar>
         </CardHeader> */}
-          <CardActions
-            sx={{
-              background: "primary",
-              display: "flex",
-              flexDirection: "column",
-              
-            }}
-          >
-            <div style={{ width: "100%" }}>
-              <Box
+        <CardActions
+          sx={{
+            background: "primary",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div style={{ width: "100%" }}>
+            <Box
+              sx={{
+                display: "flex ",
+
+                /* background: "blue", */
+                justifyContent: "center",
+                textAlign: "center",
+                alignSelf: "center",
+              }}
+            >
+              <Toolbar sx={{ display: { md: "none", sm: "none", xs: "flex" } }}>
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  sx={{ mr: 2 }}
+                  onClick={openMenu}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem>
+                    <Link to="/conta">
+                      <div style={{ display: "flex" }}>
+                        <AccountCircleIcon />
+                        <Typography style={{ paddingLeft: "5px" }}>
+                          Alterar Dados
+                        </Typography>
+                      </div>
+                    </Link>
+                  </MenuItem>
+
+                  <MenuItem /* sx={{textAlign: "center", alignSelf: "center"}} */
+                  >
+                    <Link to="/seguranca">
+                      <div style={{ display: "flex" }}>
+                        <LockOpenIcon />
+                        <Typography style={{ paddingLeft: "5px" }}>
+                          Segurança
+                        </Typography>
+                      </div>
+                    </Link>
+                  </MenuItem>
+
+                  <MenuItem>
+                    <Link to="/contribuicoes">
+                      <div style={{ display: "flex" }}>
+                        <BookmarkBorderIcon />
+                        <Typography style={{ paddingLeft: "5px" }}>
+                          Minhas Contribuições
+                        </Typography>
+                      </div>
+                    </Link>
+                  </MenuItem>
+                </Menu>
+              </Toolbar>
+
+              {/* <Box style={{display: "flex", alignSelf: "center", justifyContent: "center", textAlign: "center", flex: 0.7 }}> */}
+              <Avatar
                 sx={{
-                  display: "flex ",
-                  
-                  /* background: "blue", */
-                  justifyContent: "center",
+                  marginBottom: { sm: "50px" },
+                  display: "flex",
                   textAlign: "center",
                   alignSelf: "center",
-                  
                 }}
-              >
-                
-                <Toolbar sx={{display: {md: "none", sm: "none", xs: "flex"}}}>
-                 <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }} onClick={openMenu}>
-        <MenuIcon />
-      </IconButton>
-      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-
-        <MenuItem>
-        <Link to="/conta">
-        <div style={{display: "flex" }}>
-          <AccountCircleIcon/> 
-          <Typography style={{paddingLeft: "5px"}}>Alterar Dados</Typography>
-          </div>
-          </Link>
-        </MenuItem>
-
-        <MenuItem /* sx={{textAlign: "center", alignSelf: "center"}} */>
-          <Link to="/seguranca">
-            <div style={{display: "flex" }}>
-          <LockOpenIcon />
-          <Typography style={{paddingLeft: "5px"}}>Segurança</Typography>
-          </div>
-          </Link>
-        </MenuItem>
-
-
-        <MenuItem>
-        <Link to="/seguranca">
-        <div style={{display: "flex" }}>
-          <BookmarkBorderIcon />
-          <Typography style={{paddingLeft: "5px"}}>Minhas Contribuições</Typography>
-        </div>
-          </Link>
-          
-        </MenuItem>
-      </Menu>
-                 </Toolbar>
-                 
-                
-       
-                 
-                 
-                 {/* <Box style={{display: "flex", alignSelf: "center", justifyContent: "center", textAlign: "center", flex: 0.7 }}> */}
-                <Avatar sx={{marginBottom: {sm: "50px"}, display: "flex", textAlign: "center", alignSelf: "center"}} ></Avatar>
-                {/* </Box> */}
-              </Box>
-              <Box sx={{
-                
+              ></Avatar>
+              {/* </Box> */}
+            </Box>
+            <Box
+              sx={{
                 display: "flex",
-                flexDirection: {md: "column", sm: "row"},
+                flexDirection: { md: "column", sm: "row" },
                 justifyContent: "space-around",
                 /* background: "red" */
-                
-               }}>
-                 {/* <Toolbar sx={{display: {md: "none", sm: "none", xs: "block"}}}>
+              }}
+            >
+              {/* <Toolbar sx={{display: {md: "none", sm: "none", xs: "block"}}}>
                  <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
         <MenuIcon />
       </IconButton>
                  </Toolbar> */}
-                 
+
               <LayoutUserBar linkTo={"/conta"}>
-                <AccountCircleIcon/>
-                <Typography style={{paddingLeft: "5px"}}>Alterar Dados</Typography>
-                
+                <AccountCircleIcon />
+                <Typography style={{ paddingLeft: "5px" }}>
+                  Alterar Dados
+                </Typography>
               </LayoutUserBar>
 
               <LayoutUserBar linkTo={"/seguranca"}>
-              <LockOpenIcon />
-                <Typography sx={{paddingLeft: "5px"}}>Segurança</Typography>
+                <LockOpenIcon />
+                <Typography sx={{ paddingLeft: "5px" }}>Segurança</Typography>
               </LayoutUserBar>
 
               <LayoutUserBar linkTo={"/contribuicoes"}>
-              <BookmarkBorderIcon />
-                <Typography style={{paddingLeft: "5px"}}>Minhas Contribuições</Typography>
+                <BookmarkBorderIcon />
+                <Typography style={{ paddingLeft: "5px" }}>
+                  Minhas Contribuições
+                </Typography>
               </LayoutUserBar>
               {/* <Link 
               href="seguranca"
@@ -175,10 +189,11 @@ const UserBar = () => {
                 <Typography style={{paddingLeft: "5px"}}>Minhas Contribuições</Typography>
               </LayoutUserBar> */}
             </Box>
-            </div>
-          </CardActions>
-        </Card>
-  </div>
-}
+          </div>
+        </CardActions>
+      </Card>
+    </div>
+  );
+};
 
-export default UserBar
+export default UserBar;
