@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -49,11 +49,9 @@ const CpfForm = (props) => {
           }
         )
           .then(() => {
-            {
-              localStorage.setItem("cpfValue", cpfValue);
-              setPostController(false);
-              props.CpfHandler();
-            }
+            localStorage.setItem("cpfValue", cpfValue);
+            setPostController(false);
+            props.CpfHandler();
           })
           .catch((err) => {
             //Mensagem de erro
