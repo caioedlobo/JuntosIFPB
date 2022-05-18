@@ -73,6 +73,7 @@ const LoginForm = (props) => {
         e.preventDefault();
 
         const token = e.target.action.split("=")[1];
+        const outsourcedId = e.target.action.split("=")[2];
 
         Axios.post(
           "https://backendjuntosifpb.herokuapp.com/auth/authenticate",
@@ -80,6 +81,7 @@ const LoginForm = (props) => {
             email: emailFormData,
             password: passwordFormData,
             token: token,
+            outsourcedId: outsourcedId,
           }
         )
           .then((response) => {

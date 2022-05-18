@@ -152,8 +152,7 @@ const ContributionsCard = () => {
                                     (row.status === "Não Resolvido" && "red") ||
                                     (row.status === "Em Análise" &&
                                       "#B8860B") ||
-                                    (row.status === "Em Validação" &&
-                                      "#556B2F") ||
+                                    (row.status === "Atribuído" && "#556B2F") ||
                                     "grey",
                                 }}
                               >
