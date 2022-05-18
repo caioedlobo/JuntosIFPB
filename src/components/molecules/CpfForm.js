@@ -49,7 +49,9 @@ const CpfForm = (props) => {
           }
         )
           .then(() => {
-            localStorage.setItem("cpfValue", cpfValue);
+            isOutsourced
+              ? localStorage.setItem("cpfValue", cpfValue)
+              : localStorage.setItem("cpfValue", "");
             setPostController(false);
             props.CpfHandler();
           })
