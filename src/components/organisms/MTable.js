@@ -14,6 +14,7 @@ import { Box, Button, Typography } from "@mui/material";
 import classes2 from "./stylesheet/MTable.module.css";
 import { theme } from "../../theme";
 import Axios from "axios";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const sx = {
   table: {
@@ -70,15 +71,18 @@ const MTable = (props) => {
   const [errorHandler, setErrorHandler] = useState(false);
   const [supportNumberChange, setSupportNumberChange] = useState(false);
   const [supportedController, setSupportedController] = useState(false);
+  const [loadingAnimation, setLoadingAnimation] = useState(true);
 
   useEffect(() => {
     /* if (props.filter !== "") { */
+
     Axios.get("https://backendjuntosifpb.herokuapp.com/ranking/search", {
       params: {
         querySearch: props.searched,
       },
     })
       .then((response) => {
+        setLoadingAnimation(false);
         if (response.data !== "There are no queries found") {
           setErrorHandler(false);
           setData(response.data.demandsFiltered);
@@ -261,6 +265,9 @@ const MTable = (props) => {
           </TableContainer>
         </Box>
       </Paper>
+      {loadingAnimation ? (
+        <LinearProgress color="success" style={{ width: "100%" }} />
+      ) : null}
     </div>
   );
 };
