@@ -140,14 +140,13 @@ const MTable = (props) => {
       <Paper elevation={0}>
         <Box className={classes2.table}>
           <TableContainer /* component={Paper} */ sx={sx.tableContainer}>
-            {errorHandler ? (
+            {errorHandler || data.length === 0 ? (
               <Typography
                 sx={{
                   minWidth: "968px",
                   textAlign: "center",
-                  /* paddingTop: "50px", */
+
                   justifyContent: "center",
-                  /* background: "blue", */
                 }}
                 variant="h5"
               >
