@@ -14,7 +14,7 @@ const Layout = (props) => {
       }}
     >
       <Navbar />
-      {console.log(props.minWidth)}
+
       <div className={classes.content}>{props.children}</div>
     </div>
   );
