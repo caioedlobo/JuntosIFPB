@@ -7,7 +7,7 @@ import FloatRankingButton from "../atoms/FloatRankingButton";
 
 const Ranking = () => {
   return (
-    <Layout>
+    <Layout minWidth="1400px">
       <div
         className={`${classesCommon.form} ${classes.formRanking}`}
         data-testid="ranking"
