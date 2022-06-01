@@ -6,6 +6,12 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import LayoutUserBar from "../template/LayoutUserBar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+/* import DialogTitle from "@mui/material/DialogTitle"; */
 
 import {
   CardActions,
@@ -16,14 +22,31 @@ import {
   Toolbar,
   Menu,
   MenuItem,
+  Button,
 } from "@mui/material";
 
 import { Link } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const UserBar = () => {
-  /* const drawerWidth = 240; */
+  const [open, setOpen] = React.useState(false);
+  console.log(open);
 
   const [anchorEl, setAnchorEl] = React.useState(false);
+  const navigate = useNavigate();
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    console.log("entrou");
+    setOpen(false);
+  };
+
+  const handleDisconnect = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -33,10 +56,6 @@ const UserBar = () => {
     setAnchorEl(false);
   };
 
-  /* const toSecurity = () => {
-
-  }
- */
   return (
     <div data-testid="user-bar">
       <Card
@@ -48,9 +67,6 @@ const UserBar = () => {
           marginBottom: { md: "0", xs: "6px" },
         }}
       >
-        {/* <CardHeader>
-          <Avatar></Avatar>
-        </CardHeader> */}
         <CardActions
           sx={{
             background: "primary",
@@ -118,6 +134,38 @@ const UserBar = () => {
                       </div>
                     </Link>
                   </MenuItem>
+                  <MenuItem>
+                    <Button sx={{}} onClick={handleClickOpen}>
+                      <Dialog
+                        open={open}
+                        onClose={handleCloseDialog}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                        keepMounted
+                      >
+                        {/* <DialogTitle id="alert-dialog-title">
+                          {"Use Google's location service?"}
+                        </DialogTitle> */}
+                        <DialogContent>
+                          <DialogContentText id="alert-dialog-description">
+                            Deseja mesmo se desconectar do Juntos pelo IFPB?
+                          </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleCloseDialog}>Não</Button>
+                          <Button onClick={handleDisconnect} autoFocus>
+                            Sim
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
+                      <div style={{ display: "flex" }}>
+                        <LogoutIcon />
+                        <Typography style={{ paddingLeft: "5px" }}>
+                          Sair
+                        </Typography>
+                      </div>
+                    </Button>
+                  </MenuItem>
                 </Menu>
               </Toolbar>
 
@@ -164,6 +212,21 @@ const UserBar = () => {
                   Minhas Contribuições
                 </Typography>
               </LayoutUserBar>
+              <Button
+                sx={{
+                  display: { md: "flex", sm: "flex", xs: "none" },
+                  flexDirection: { md: "row", xs: "column" },
+                  alignItems: { md: "flex-start", xs: "center" },
+                  /* marginBottom: "15px", */
+                  justifyContent: "flex-start",
+                }}
+                onClick={handleClickOpen}
+              >
+                <LogoutIcon />
+
+                <Typography style={{ paddingLeft: "5px" }}>Sair</Typography>
+              </Button>
+
               {/* <Link 
               href="seguranca"
               sx={{ display: {md: "flex", sm: "flex", xs: "none"}, flexDirection: { md: "row", sm: "column", }, alignItems: { md: "flex-start", xs: "center" }, marginBottom: "10px"  }}>

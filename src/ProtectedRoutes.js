@@ -1,6 +1,5 @@
 import React from "react";
 import { Outlet, Navigate, useLocation } from "react-router-dom";
-import axios from "axios";
 const ProtectedRoutes = () => {
   const location = useLocation();
   //rota para verificar se o token é válido

@@ -85,11 +85,11 @@ const LoginForm = (props) => {
           }
         )
           .then((response) => {
-            const accessToken = response.data.token;
+            /* const accessToken = response.data.token;
             const userId = response.data.user._id;
             Axios.interceptors.request.use(
               (config) => {
-                //config.headers.authorization = `Bearer ${accessToken}`;
+                
                 localStorage.setItem("accessToken", accessToken);
                 localStorage.setItem("userId", userId);
                 return config;
@@ -98,8 +98,12 @@ const LoginForm = (props) => {
                 return Promise.reject(error);
               }
             );
+          }) */
+            const accessToken = response.data.token;
+            const userId = response.data.user._id;
+            localStorage.setItem("accessToken", accessToken);
+            localStorage.setItem("userId", userId);
           })
-
           .catch((error) => {
             errorControllerHandler(error.response.data.error);
           });
