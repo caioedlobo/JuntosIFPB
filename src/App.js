@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Account from "./components/Pages/Account";
 import Reset from "./components/Pages/Reset";
 import Contributions from "./components/Pages/Contributions";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 function App() {
   return (
@@ -19,11 +20,14 @@ function App() {
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/contato" element={<Contact />} />
             <Route path="/login/*" element={<Home />} />
-            <Route path="/conta" element={<Account />} />
+
             <Route path="/seguranca" element={<Security />} />
             <Route path="/contribuicoes" element={<Contributions />} />
             <Route path="/resetar_senha/*" element={<Reset />} />
             <Route path="*" element={<h1>Página não encontrada</h1>} />
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/conta" element={<Account />} />
+            </Route>
           </Routes>
         </main>
       </div>
