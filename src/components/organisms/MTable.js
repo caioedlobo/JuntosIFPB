@@ -140,7 +140,7 @@ const MTable = (props) => {
       <Paper elevation={0}>
         <Box className={classes2.table}>
           <TableContainer /* component={Paper} */ sx={sx.tableContainer}>
-            {errorHandler || data.length === 0 ? (
+            {errorHandler ? (
               <Typography
                 sx={{
                   minWidth: "968px",
@@ -151,6 +151,18 @@ const MTable = (props) => {
                 variant="h5"
               >
                 Não foi encontrada nenhuma demanda
+              </Typography>
+            ) : data.length === 0 ? (
+              <Typography
+                sx={{
+                  minWidth: "968px",
+                  textAlign: "center",
+
+                  justifyContent: "center",
+                }}
+                variant="h5"
+              >
+                Pesquisando demandas...
               </Typography>
             ) : (
               <Table sx={sx.table} aria-label="simple table">
