@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -11,7 +11,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-/* import DialogTitle from "@mui/material/DialogTitle"; */
+import DialogTitle from "@mui/material/DialogTitle";
 
 import {
   CardActions,
@@ -29,17 +29,16 @@ import { Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const UserBar = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   console.log(open);
 
-  const [anchorEl, setAnchorEl] = React.useState(false);
+  const [anchorEl, setAnchorEl] = useState(false);
   const navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleCloseDialog = () => {
-    console.log("entrou");
     setOpen(false);
   };
 
@@ -136,28 +135,6 @@ const UserBar = () => {
                   </MenuItem>
                   <MenuItem>
                     <Button sx={{}} onClick={handleClickOpen}>
-                      <Dialog
-                        open={open}
-                        onClose={handleCloseDialog}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                        keepMounted
-                      >
-                        {/* <DialogTitle id="alert-dialog-title">
-                          {"Use Google's location service?"}
-                        </DialogTitle> */}
-                        <DialogContent>
-                          <DialogContentText id="alert-dialog-description">
-                            Deseja mesmo se desconectar do Juntos pelo IFPB?
-                          </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                          <Button onClick={handleCloseDialog}>Não</Button>
-                          <Button onClick={handleDisconnect} autoFocus>
-                            Sim
-                          </Button>
-                        </DialogActions>
-                      </Dialog>
                       <div style={{ display: "flex" }}>
                         <LogoutIcon />
                         <Typography style={{ paddingLeft: "5px" }}>
@@ -165,6 +142,27 @@ const UserBar = () => {
                         </Typography>
                       </div>
                     </Button>
+                    <Dialog
+                      open={open}
+                      onClose={handleCloseDialog}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle id="alert-dialog-title">
+                        {"Deseja mesmo se desconectar do Juntos pelo IFPB?"}
+                      </DialogTitle>
+                      <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                          Clique "NÃO" para voltar e "SIM" para desconectar-se.
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={() => setOpen(false)}>Não</Button>
+                        <Button onClick={handleDisconnect} autoFocus>
+                          Sim
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
                   </MenuItem>
                 </Menu>
               </Toolbar>
