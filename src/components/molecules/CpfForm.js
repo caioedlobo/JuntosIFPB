@@ -41,13 +41,10 @@ const CpfForm = (props) => {
         setPostController(true);
 
         /* if (isOutsourced) { */
-        Axios.post(
-          "https://backendjuntosifpb.herokuapp.com/outsourced/validateCpf",
-          {
-            cpf: cpfValue,
-            isOutsourced: isOutsourced,
-          }
-        )
+        Axios.post("https://backendjuntosifpb.herokuapp.com/validateCpf", {
+          cpf: cpfValue,
+          isOutsourced: isOutsourced,
+        })
           .then(() => {
             isOutsourced
               ? localStorage.setItem("cpfValue", cpfValue)

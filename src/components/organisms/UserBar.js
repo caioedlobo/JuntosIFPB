@@ -30,7 +30,6 @@ import { useNavigate } from "react-router-dom";
 
 const UserBar = () => {
   const [open, setOpen] = useState(false);
-  console.log(open);
 
   const [anchorEl, setAnchorEl] = useState(false);
   const navigate = useNavigate();
