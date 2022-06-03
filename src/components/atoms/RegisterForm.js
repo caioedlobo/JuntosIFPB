@@ -96,42 +96,21 @@ const RegisterForm = (props) => {
     return false;
   };
 
-  const emailValidation = async (emailDataValidation) => {
-    console.log("emailDataValidation", emailDataValidation);
-
-    //if (regEx.test(emailDataValidation)){
-    //await new Promise((resolve) => setTimeout(resolve, 2000))
-    if (emailDataValidation.includes("@")) {
-      if (emailDataValidation.split("@")[1] === "academico.ifpb.edu.br") {
-        //console.log("entrou 1")
-        timeOut();
-        errorControllerHandler("Válido");
-        //console.log("foooii")
-        //setButtonController(false)
-        return true;
-      } else if (emailDataValidation.split("@")[1] === "ifpb.edu.br") {
-        //console.log("entrou 2")
-        timeOut();
-        errorControllerHandler("Válido");
-        //setButtonController(false)
-        return true;
-      } else {
-        /* setDisabledButtonController(true) */
-
-        timeOut();
-        /* errorControllerHandler("Email inválido") */
-
-        return false;
-      }
-    } else {
-      /* setDisabledButtonController(true); */
+  function emailValidation(emailDataValidation) {
+    const re =
+      /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(String(emailDataValidation).toLowerCase())) {
       timeOut();
-
-      /* errorControllerHandler("Email inválido"); */
-
-      return false;
+      setErrorEmailController(false);
+      setErrorEmailMessage(" ");
+      return true;
     }
-  };
+
+    timeOut();
+    setErrorEmailController(true);
+    setErrorEmailMessage("Email Inválido");
+    return false;
+  }
 
   const passwordValidation = async (passwordDataValidation) => {
     if (passwordDataValidation.length < 6) {
