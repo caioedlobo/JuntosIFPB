@@ -141,7 +141,7 @@ const ContributionsCard = () => {
                             </TableCell>
 
                             <TableCell sx={sx.tableCell}>
-                              {row.createdAt.split(" ")[0]}
+                              {row.dateGMT}
                             </TableCell>
                             <TableCell sx={sx.tableCell}>
                               <Typography

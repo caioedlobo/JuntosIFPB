@@ -208,9 +208,7 @@ const MTable = (props) => {
 
                       <TableCell sx={sx.tableCell}>{row.sector}</TableCell>
 
-                      <TableCell sx={sx.tableCell}>
-                        {row.createdAt.split(" ")[0]}
-                      </TableCell>
+                      <TableCell sx={sx.tableCell}>{row.dateGMT}</TableCell>
                       <TableCell sx={sx.tableCell}>
                         <Typography
                           sx={sx.status}
