@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { Zoom, Button } from "@mui/material";
@@ -19,6 +19,35 @@ import Axios from "axios";
 
 const FloatRankingButton = () => {
   const [open, setOpen] = useState(false);
+  const [presetDemands, setpresetDemands] = useState([]);
+  const [sectors, setSectors] = useState([]);
+
+  useEffect(() => {
+    Axios.get(
+      "https://backendjuntosifpb.herokuapp.com/presetDemand/listAllPresetDemands",
+      {}
+    )
+      .then((res) => {
+        setpresetDemands(res.data.ok);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    Axios.get(
+      "https://backendjuntosifpb.herokuapp.com/sector/listAllSectors",
+      {}
+    )
+      .then((res) => {
+        setSectors(res.data.ok);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  console.log(sectors);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,6 +58,7 @@ const FloatRankingButton = () => {
   };
 
   const [demand, setDemand] = useState("");
+  const [sector, setSector] = useState("");
   const [description, setDescription] = useState("");
   const [otherDemand, setOtherDemand] = useState("");
   const [checkboxController, setCheckboxController] = useState(false);
@@ -45,12 +75,16 @@ const FloatRankingButton = () => {
     setOtherDemand(event.target.value);
   };
 
+  const handleChangeSector = (event) => {
+    setSector(event.target.value);
+  };
+  console.log(demand, sector);
+
   const handleAnonymousCheckbox = () => {
     setCheckboxController(!checkboxController);
   };
 
   const submitForm = () => {
-    console.log(checkboxController);
     if (demand !== 0) {
       //console.log(demand, description);
       Axios.post(
@@ -59,6 +93,7 @@ const FloatRankingButton = () => {
           title: demand,
           description: description,
           isAnonymous: checkboxController,
+          sector: sector,
         },
         {
           headers: {
@@ -74,6 +109,7 @@ const FloatRankingButton = () => {
           title: otherDemand,
           description: description,
           isAnonymous: checkboxController,
+          sector: sector,
         },
         {
           headers: {
@@ -128,26 +164,71 @@ const FloatRankingButton = () => {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={demand}
-              label="Age"
+              label="Demand"
               onChange={handleChangeDemand}
               style={{ marginBottom: "20px" }}
             >
-              <MenuItem value={"Ar-condicionado quebrado"}>
-                Ar-condicionado quebrado
-              </MenuItem>
-              <MenuItem value={"TV quebrada"}>TV quebrada</MenuItem>
-              <MenuItem value={"Limpeza"}>Limpeza</MenuItem>
+              {presetDemands.map((presetDemand) => (
+                <MenuItem value={`${presetDemand.title}`}>
+                  {presetDemand.title}
+                </MenuItem>
+              ))}
               <MenuItem value={0}>Outra</MenuItem>
             </Select>
           </FormControl>
 
           {demand === 0 ? (
-            <TextField
-              style={{ width: "100%", marginBottom: "20px" }}
-              label="Digite a sua demanda"
-              onChange={handleOtherChangeDemand}
-            ></TextField>
-          ) : null}
+            <div>
+              <TextField
+                style={{ width: "100%", marginBottom: "20px" }}
+                label="Digite a sua demanda"
+                onChange={handleOtherChangeDemand}
+              ></TextField>
+              <FormControl fullWidth>
+                <InputLabel
+                  id="demo-simple-select-label"
+                  /* style={{ paddingTop: "10px" }} */
+                >
+                  Setor
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={sector}
+                  label="Sector"
+                  onChange={handleChangeSector}
+                  style={{ marginBottom: "20px" }}
+                >
+                  {sectors.map((sector) => (
+                    <MenuItem value={`${sector.title}`}>
+                      {sector.title}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+          ) : (
+            <FormControl fullWidth>
+              <InputLabel
+                id="demo-simple-select-label"
+                /* style={{ paddingTop: "10px" }} */
+              >
+                Setor
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={sector}
+                label="Sector"
+                onChange={handleChangeSector}
+                style={{ marginBottom: "20px" }}
+              >
+                {sectors.map((sector) => (
+                  <MenuItem value={`${sector.title}`}>{sector.title}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
           <TextField
             style={{ width: "100%", marginBottom: "20px" }}
             placeholder="Descrição da demanda"
