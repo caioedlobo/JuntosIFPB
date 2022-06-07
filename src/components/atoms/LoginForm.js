@@ -5,6 +5,8 @@ import PasswordText from "./PasswordText";
 import ImageLogin from "./ImageLogin";
 import HeightFormHandler from "./HeightFormHandler";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const LoginForm = (props) => {
   const [emailFormData, setEmailFormData] = useState();
@@ -17,6 +19,11 @@ const LoginForm = (props) => {
   const [errorPasswordController, setErrorPasswordController] = useState(false);
   const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
   let [previousPassword, setPreviousPassword] = useState("");
+
+  const navigate = useNavigate();
+  const [postController, setpostController] = useState(false);
+  const [disabledButtonController, setDisabledButtonController] =
+    useState(false);
 
   const emailLoginData = (e) => {
     setEmailFormData(e);
@@ -71,7 +78,8 @@ const LoginForm = (props) => {
       method="get"
       onSubmit={(e) => {
         e.preventDefault();
-
+        setDisabledButtonController(true);
+        setpostController(true);
         const token = e.target.action.split("=")[1];
         const outsourcedId = e.target.action.split("=")[2];
 
@@ -85,26 +93,17 @@ const LoginForm = (props) => {
           }
         )
           .then((response) => {
-            /* const accessToken = response.data.token;
-            const userId = response.data.user._id;
-            Axios.interceptors.request.use(
-              (config) => {
-                
-                localStorage.setItem("accessToken", accessToken);
-                localStorage.setItem("userId", userId);
-                return config;
-              },
-              (error) => {
-                return Promise.reject(error);
-              }
-            );
-          }) */
+            setpostController(false);
+            setDisabledButtonController(false);
             const accessToken = response.data.token;
             const userId = response.data.user._id;
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("userId", userId);
+            navigate("/conta");
           })
           .catch((error) => {
+            setpostController(false);
+            setDisabledButtonController(false);
             errorControllerHandler(error.response.data.error);
           });
       }}
@@ -126,8 +125,13 @@ const LoginForm = (props) => {
       />
       <HeightFormHandler />
 
-      <Button type="submit">Entrar</Button>
-
+      <LoadingButton
+        loading={postController}
+        type="submit"
+        disabled={disabledButtonController}
+      >
+        Entrar
+      </LoadingButton>
       <HeightFormHandler />
       <Button
         sx={{ backgroundColor: "transparent" }}
