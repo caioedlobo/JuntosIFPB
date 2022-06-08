@@ -16,7 +16,7 @@ const sx = {
     minWidth: "300px",
   },
   tableContainer: {
-    borderRadius: 0,
+    borderRadius: "5px",
     margin: "10px 0",
     maxWidth: "600px",
   },
@@ -99,7 +99,7 @@ const ContributionsCard = () => {
               display: "flex",
               flexDirection: "column",
 
-              justifyContent: "center",
+              justifyContent: "flex-start",
               alignItems: "center",
               width: "100%",
             }}
@@ -114,7 +114,7 @@ const ContributionsCard = () => {
             >
               MINHAS CONTRIBUIÇÕES
             </Typography>
-            <Paper elevation={10} style={{ overflowX: "auto" }}>
+            <Paper elevation={0} style={{ overflowX: "auto" }}>
               <Box className={classes2.table}>
                 <TableContainer /* component={Paper} */ sx={sx.tableContainer}>
                   {data != null ? (

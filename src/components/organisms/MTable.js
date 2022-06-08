@@ -21,7 +21,7 @@ const sx = {
     minWidth: "968px",
   },
   tableContainer: {
-    borderRadius: 0,
+    borderRadius: "5px",
     margin: "10px 0",
     maxWidth: "1280px",
   },
