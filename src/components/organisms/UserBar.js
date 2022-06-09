@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -27,7 +27,6 @@ import {
 
 import { Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Axios } from "axios";
 
 const UserBar = (props) => {
   const [open, setOpen] = useState(false);
