@@ -1,13 +1,32 @@
-import React from 'react'
-import UserCard from '../organisms/UserCard'
-import LayoutUserPage from '../template/LayoutUserPage'
+import React, { useEffect, useState } from "react";
+import UserCard from "../organisms/UserCard";
+import LayoutUserPage from "../template/LayoutUserPage";
+import Axios from "axios";
 
 const Account = () => {
-  return <div data-testid='account'>
-    <LayoutUserPage>
-      <UserCard/>
-    </LayoutUserPage>
-  </div>
-}
+  const [demandSectorCard, setDemandSectorCard] = useState(false);
 
-export default Account
+  useEffect(() => {
+    Axios.post(
+      "https://backendjuntosifpb.herokuapp.com/validateCpf/isOutsourced/",
+      {
+        id: localStorage.getItem("userId"),
+      }
+    )
+      .then((res) => {
+        setDemandSectorCard(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  return (
+    <div data-testid="account">
+      <LayoutUserPage isOutsourced={demandSectorCard}>
+        <UserCard />
+      </LayoutUserPage>
+    </div>
+  );
+};
+
+export default Account;

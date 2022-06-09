@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -12,7 +12,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import {
   CardActions,
   Card,
@@ -27,8 +27,9 @@ import {
 
 import { Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Axios } from "axios";
 
-const UserBar = () => {
+const UserBar = (props) => {
   const [open, setOpen] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(false);
@@ -53,6 +54,22 @@ const UserBar = () => {
   const handleClose = () => {
     setAnchorEl(false);
   };
+
+  /* useEffect(() => {
+    Axios.post(
+      "https://backendjuntosifpb.herokuapp.com/validateCpf/isOutsourced/",
+      {
+        id: localStorage.getItem("accessToken"),
+      }
+    )
+      .then((res) => {
+        setDemandSectorCard(true);
+      })
+      .catch((err) => {
+        setDemandSectorCard(false);
+      });
+  }, []); */
+  console.log(props.isOutsourced);
 
   return (
     <div data-testid="user-bar">
@@ -132,6 +149,20 @@ const UserBar = () => {
                       </div>
                     </Link>
                   </MenuItem>
+
+                  {props.isOutsourced ? (
+                    <MenuItem>
+                      <Link to="/contribuicoes">
+                        <div style={{ display: "flex" }}>
+                          <WorkOutlineIcon />
+                          <Typography style={{ paddingLeft: "5px" }}>
+                            Demandas
+                          </Typography>
+                        </div>
+                      </Link>
+                    </MenuItem>
+                  ) : null}
+
                   <MenuItem>
                     <Button sx={{}} onClick={handleClickOpen}>
                       <div style={{ display: "flex" }}>
@@ -185,12 +216,6 @@ const UserBar = () => {
                 /* background: "red" */
               }}
             >
-              {/* <Toolbar sx={{display: {md: "none", sm: "none", xs: "block"}}}>
-                 <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-        <MenuIcon />
-      </IconButton>
-                 </Toolbar> */}
-
               <LayoutUserBar linkTo={"/conta"}>
                 <AccountCircleIcon />
                 <Typography style={{ paddingLeft: "5px" }}>
@@ -209,6 +234,16 @@ const UserBar = () => {
                   Minhas Contribuições
                 </Typography>
               </LayoutUserBar>
+
+              {props.isOutsourced ? (
+                <LayoutUserBar linkTo={"/demandas"}>
+                  <WorkOutlineIcon />
+                  <Typography style={{ paddingLeft: "5px" }}>
+                    Demandas
+                  </Typography>
+                </LayoutUserBar>
+              ) : null}
+
               <Button
                 sx={{
                   display: { md: "flex", sm: "flex", xs: "none" },
@@ -223,31 +258,6 @@ const UserBar = () => {
 
                 <Typography style={{ paddingLeft: "5px" }}>Sair</Typography>
               </Button>
-
-              {/* <Link 
-              href="seguranca"
-              sx={{ display: {md: "flex", sm: "flex", xs: "none"}, flexDirection: { md: "row", sm: "column", }, alignItems: { md: "flex-start", xs: "center" }, marginBottom: "10px"  }}>
-                <LockOpenIcon />
-                <Typography sx={{paddingLeft: "5px"}}>Segurança</Typography>
-                <ArrowForwardIosIcon sx={{ display: { md: "block", sm: "none", xs: "none", marginLeft: "auto" }, marginBottom: "10px",
-               }} />
-              </Link> */}
-              {/* <LayoutUserBar link to={"/seguranca"}>
-              <LockOpenIcon />
-              <Typography sx={{paddingLeft: "5px"}}>Segurança</Typography>
-              </LayoutUserBar> */}
-              {/* Link 
-              href="contribuicoes"
-              sx={{ display: {md: "flex", sm:"flex", xs: "none"}, flexDirection: { md: "row", sm: "column" }, alignItems: { md: "center", xs: "center" } }}>
-                <BookmarkBorderIcon />
-                <Typography style={{paddingLeft: "5px"}}>Minhas Contribuições</Typography>
-
-                <ArrowForwardIosIcon sx={{ display: { md: "block", sm: "none", xs: "none", marginLeft: "auto" }, }} />
-              </Link> */}
-              {/* <LayoutUserBar>
-              <BookmarkBorderIcon />
-                <Typography style={{paddingLeft: "5px"}}>Minhas Contribuições</Typography>
-              </LayoutUserBar> */}
             </Box>
           </div>
         </CardActions>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Typography, Box /* TextField, Button */ } from "@mui/material";
+import { Card, Typography, Box } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,70 +11,78 @@ import classes2 from "./stylesheet/MTable.module.css";
 import { theme } from "../../theme";
 import Axios from "axios";
 
-const sx = {
-  table: {
-    minWidth: "300px",
-  },
-  tableContainer: {
-    borderRadius: "5px",
-    margin: "10px 0",
-    maxWidth: "600px",
-  },
-  tableHeaderCell: {
-    fontWeight: "bold",
-    background: "#2d7e27",
-    /* color: theme.palette.getContrastText(theme.palette.primary.dark), */
-    //  color: theme.palette.common.dark,
-    color: "white",
-    textAlign: "center !important",
-  },
-  tableCell: {
-    textAlign: "center !important",
-  },
-  avatar: {
-    backgroundColor: theme.palette.grey[400],
-    color: theme.palette.getContrastText(theme.palette.grey[400]),
-  },
-  name: {
-    fontWeight: "bold",
-    color: theme.palette.secondary.dark,
-  },
-  status: {
-    fontWeight: "bold",
-    color: theme.palette.common.white,
-    backgroundColor: "grey",
-    borderRadius: "8px",
-    padding: "2px 6px",
-    display: "flex",
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
-    justifyContent: "center",
+const DemandsSectorCard = () => {
+  const sx = {
+    table: {
+      minWidth: "300px",
+    },
+    tableContainer: {
+      borderRadius: "5px",
+      margin: "10px 0",
+      maxWidth: "600px",
+    },
+    tableHeaderCell: {
+      fontWeight: "bold",
+      background: "#2d7e27",
+      /* color: theme.palette.getContrastText(theme.palette.primary.dark), */
+      //  color: theme.palette.common.dark,
+      color: "white",
+      textAlign: "center !important",
+    },
+    tableCell: {
+      textAlign: "center !important",
+    },
+    avatar: {
+      backgroundColor: theme.palette.grey[400],
+      color: theme.palette.getContrastText(theme.palette.grey[400]),
+    },
+    name: {
+      fontWeight: "bold",
+      color: theme.palette.secondary.dark,
+    },
+    status: {
+      fontWeight: "bold",
+      color: theme.palette.common.white,
+      backgroundColor: "grey",
+      borderRadius: "8px",
+      padding: "2px 6px",
+      display: "flex",
 
-    /* width:"40px",
-    backgroundr: "blue" */
-  },
-};
+      justifyContent: "center",
 
-const ContributionsCard = () => {
+      /* width:"40px",
+      backgroundr: "blue" */
+    },
+  };
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log(localStorage.getItem("userId"));
+    /* console.log(localStorage.getItem("userId")); */
     //console.log(data);
-    Axios.get(
-      `https://backendjuntosifpb.herokuapp.com/auth/account/${localStorage.getItem(
-        "userId"
-      )}`
+    Axios.post(
+      "https://backendjuntosifpb.herokuapp.com/outsourced/outsourcedSector/",
+      { id: localStorage.getItem("userId") },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      }
     )
       .then((response) => {
-        setData(response.data);
+        setData(response.demands);
       })
       .catch((response) => {
         console.log(response.error);
       });
   }, []);
-
   return (
-    <div data-testid="contributions-card" style={{ width: "100%" }}>
+    <div data-testid="demands-sector-card">
       <Box
         sx={{
           display: "flex",
@@ -111,7 +119,7 @@ const ContributionsCard = () => {
                 marginTop: "20px",
               }}
             >
-              MINHAS CONTRIBUIÇÕES
+              DEMANDAS DO SETOR
             </Typography>
             <Paper elevation={0} style={{ overflowX: "auto" }}>
               <Box className={classes2.table}>
@@ -123,9 +131,9 @@ const ContributionsCard = () => {
                           <TableCell sx={sx.tableHeaderCell}>Demanda</TableCell>
                           <TableCell sx={sx.tableHeaderCell}>Setor</TableCell>
 
-                          <TableCell sx={sx.tableHeaderCell}>
+                          {/* <TableCell sx={sx.tableHeaderCell}>
                             Data de solicitação
-                          </TableCell>
+                          </TableCell> */}
                           <TableCell sx={sx.tableHeaderCell}>Status</TableCell>
                           <TableCell sx={sx.tableHeaderCell}>Apoios</TableCell>
                         </TableRow>
@@ -139,11 +147,11 @@ const ContributionsCard = () => {
                               {row.sector}
                             </TableCell>
 
-                            <TableCell sx={sx.tableCell}>
+                            {/* <TableCell sx={sx.tableCell}>
                               {row.dateGMT}
-                            </TableCell>
+                            </TableCell> */}
                             <TableCell sx={sx.tableCell}>
-                              <Typography
+                              {/* <Typography
                                 sx={sx.status}
                                 style={{
                                   backgroundColor:
@@ -156,7 +164,32 @@ const ContributionsCard = () => {
                                 }}
                               >
                                 {row.status}
-                              </Typography>
+                              </Typography> */}
+                              <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">
+                                  Status
+                                </InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="demo-simple-select"
+                                  value={row.status}
+                                  label="Status"
+                                  /* onChange={handleChange} */
+                                >
+                                  <MenuItem value={"Atribuído"}>
+                                    Atribuído
+                                  </MenuItem>
+                                  <MenuItem value={"Em Análise"}>
+                                    Em Análise
+                                  </MenuItem>
+                                  <MenuItem value={"Não Resolvido"}>
+                                    Não Resolvido
+                                  </MenuItem>
+                                  <MenuItem value={"Resolvido"}>
+                                    Resolvido
+                                  </MenuItem>
+                                </Select>
+                              </FormControl>
                             </TableCell>
                             <TableCell sx={sx.tableCell}>
                               <Box sx={sx.support}>{row.support}</Box>
@@ -171,29 +204,6 @@ const ContributionsCard = () => {
                 </TableContainer>
               </Box>
             </Paper>
-
-            {/*  <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                width: { md: "70%", xs: "90%" },
-                gap: "50px",
-              }}
-            >
-              <TextField
-                variant="outlined"
-                placeholder="Sua senha atual"
-              ></TextField>
-              <TextField
-                variant="outlined"
-                placeholder="Sua nova senha"
-              ></TextField>
-              <TextField
-                variant="outlined"
-                placeholder="Repita sua nova senha"
-              ></TextField>
-              <Button variant="contained">Salvar Alterações</Button>
-            </Box> */}
           </Box>
         </Card>
       </Box>
@@ -201,4 +211,4 @@ const ContributionsCard = () => {
   );
 };
 
-export default ContributionsCard;
+export default DemandsSectorCard;

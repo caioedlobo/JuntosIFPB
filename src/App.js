@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Account from "./components/Pages/Account";
 import Reset from "./components/Pages/Reset";
 import Contributions from "./components/Pages/Contributions";
+import DemandsSector from "./components/Pages/DemandsSector";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
 
             <Route path="/seguranca" element={<Security />} />
             <Route path="/contribuicoes" element={<Contributions />} />
+            <Route path="/demandas" element={<DemandsSector />} />
             <Route path="/resetar_senha/*" element={<Reset />} />
             <Route path="*" element={<h1>Página não encontrada</h1>} />
             <Route element={<ProtectedRoutes />}>
