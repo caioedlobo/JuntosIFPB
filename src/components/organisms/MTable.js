@@ -193,11 +193,14 @@ const MTable = (props) => {
                           <Grid item lg={2}>
                             <Avatar
                               sx={sx.avatar}
-                              alt={row.user.name}
+                              alt={row.isAnonymous ? null : row.user.name}
                               src="."
                             />
                           </Grid>
                           <Grid item lg={10}>
+                            {row.isAnonymous ? (
+                              <div style={{ marginTop: "6px" }}></div>
+                            ) : null}
                             <Typography sx={sx.name}>
                               {row.isAnonymous ? "Anônimo" : row.user.name}
                             </Typography>
@@ -223,7 +226,7 @@ const MTable = (props) => {
                               (row.status === "Resolvido" && "green") ||
                               (row.status === "Não Resolvido" && "red") ||
                               (row.status === "Em Análise" && "#B8860B") ||
-                              (row.status === "Em Validação" && "#556B2F") ||
+                              (row.status === "Atribúido" && "#556B2F") ||
                               "grey",
                           }}
                         >
