@@ -47,7 +47,7 @@ const FloatRankingButton = () => {
         console.log(err);
       });
   }, []);
-  console.log(sectors);
+  //console.log(sectors);
 
   const handleClickOpen = () => {
     setOpen(true);

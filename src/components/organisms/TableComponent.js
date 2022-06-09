@@ -11,6 +11,7 @@ import { TextField } from "@mui/material";
 import debounce from "lodash.debounce";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import Axios from "axios";
 
 const STATUSES = [
   "Em Validação",
@@ -73,6 +74,8 @@ const TableComponent = () => {
     debounce(onSearchHandler(event), 200);
   };
 
+  const [sectors, setSectors] = useState([]);
+
   useEffect(() => {
     const isDateFilter = filter === "Recentes" || filter === "Antigos";
     const getFilters = (filter) =>
@@ -81,6 +84,19 @@ const TableComponent = () => {
         .filter((row) => jobMatchFilter(row, searched));
     setRows(getFilters(filter));
   }, [filter, searched]);
+
+  useEffect(() => {
+    Axios.get(
+      "https://backendjuntosifpb.herokuapp.com/sector/listAllSectors",
+      {}
+    )
+      .then((res) => {
+        setSectors(res.data.ok);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div data-testid="table-component" className={classes.table}>
@@ -114,9 +130,12 @@ const TableComponent = () => {
               onChange={onFilterChangeHandler}
             >
               <MenuItem value={""}>Nenhum</MenuItem>
-              <MenuItem value={"Manutenção"}>Manutenção</MenuItem>
+              {sectors.map((sector) => (
+                <MenuItem value={sector.title}>{sector.title}</MenuItem>
+              ))}
+              {/* <MenuItem value={"Manutenção"}>Manutenção2</MenuItem>
               <MenuItem value={"Coordenação"}>Coordenação</MenuItem>
-              <MenuItem value={"Limpeza"}>Limpeza</MenuItem>
+              <MenuItem value={"Limpeza"}>Limpeza</MenuItem> */}
               <MenuItem value={"Recentes"}>
                 Data de Solitação (Mais recentes)
               </MenuItem>
