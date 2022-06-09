@@ -83,15 +83,15 @@ const MTable = (props) => {
     })
       .then((response) => {
         setLoadingAnimation(false);
-        if (response.data !== "There are no queries found") {
+        if (response.data !== "Não foram encontradas consultas") {
           setErrorHandler(false);
           setData(response.data.demandsFiltered);
         } else {
           setErrorHandler(true);
         }
       })
-      .catch((response) => {
-        console.log(response.error);
+      .catch((err) => {
+        console.log(err);
       });
     //}
   }, [props.searched, supportNumberChange, supportedController]);
@@ -109,6 +109,11 @@ const MTable = (props) => {
       .then((response) => {
         //console.log(response);
         setData(response.data.demandsFiltered);
+        if (response.data.demandsFiltered.length === 0) {
+          setErrorHandler(true);
+        } else {
+          setErrorHandler(false);
+        }
       })
       .catch((response) => {
         console.log(response.error);
@@ -140,6 +145,7 @@ const MTable = (props) => {
       <Paper elevation={0}>
         <Box className={classes2.table}>
           <TableContainer /* component={Paper} */ sx={sx.tableContainer}>
+            {console.log(errorHandler)}
             {errorHandler ? (
               <Typography
                 sx={{
