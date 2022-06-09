@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import { Zoom, Button } from "@mui/material";
+import { Zoom } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 /* import DialogActions from "@mui/material/DialogActions"; */
@@ -16,6 +16,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Axios from "axios";
+import { LoadingButton } from "@mui/lab";
 
 const FloatRankingButton = () => {
   const [open, setOpen] = useState(false);
@@ -84,9 +85,13 @@ const FloatRankingButton = () => {
     setCheckboxController(!checkboxController);
   };
 
+  const [postController, setPostController] = useState(false);
+
   const submitForm = () => {
+    setPostController(true);
     if (demand !== 0) {
       //console.log(demand, description);
+
       Axios.post(
         "https://backendjuntosifpb.herokuapp.com/demands",
         {
@@ -100,7 +105,14 @@ const FloatRankingButton = () => {
             Authorization: "Bearer " + localStorage.getItem("accessToken"),
           },
         }
-      );
+      )
+        .then((res) => {
+          setPostController(false);
+          handleClose();
+        })
+        .catch((err) => {
+          setPostController(false);
+        });
     } else {
       //console.log(otherDemand, description);
       Axios.post(
@@ -116,7 +128,14 @@ const FloatRankingButton = () => {
             Authorization: "Bearer " + localStorage.getItem("accessToken"),
           },
         }
-      );
+      )
+        .then((res) => {
+          setPostController(false);
+          handleClose();
+        })
+        .catch((err) => {
+          setPostController(false);
+        });
     }
   };
 
@@ -245,9 +264,16 @@ const FloatRankingButton = () => {
             />
           </FormGroup>
 
-          <Button type="submit" onClick={submitForm}>
+          {/* <Button type="submit" onClick={submitForm}>
             Enviar
-          </Button>
+          </Button> */}
+          <LoadingButton
+            type="submit"
+            onClick={submitForm}
+            loading={postController}
+          >
+            Enviar
+          </LoadingButton>
         </DialogContent>
       </Dialog>
     </div>

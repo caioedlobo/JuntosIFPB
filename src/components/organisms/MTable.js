@@ -204,9 +204,9 @@ const MTable = (props) => {
                             <Typography color="textSecondary" variant="body2">
                               {row.isAnonymous ? "" : row.user.email}
                             </Typography>
-                            <Typography color="textSecondary" variant="body2">
+                            {/* <Typography color="textSecondary" variant="body2">
                               {row.name}
-                            </Typography>
+                            </Typography> */}
                           </Grid>
                         </Grid>
                       </TableCell>
