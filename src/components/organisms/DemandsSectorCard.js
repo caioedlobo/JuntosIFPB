@@ -15,6 +15,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { LoadingButton } from "@mui/lab";
 
 const DemandsSectorCard = () => {
   const sx = {
@@ -61,7 +62,10 @@ const DemandsSectorCard = () => {
   };
 
   const [data, setData] = useState([]);
+  const [postController, setPostController] = useState(false);
+  let [statuses, setStatuses] = useState([]);
 
+  console.log(statuses);
   useEffect(() => {
     /* console.log(localStorage.gketItem("userId")); */
     //console.log(data);
@@ -76,12 +80,50 @@ const DemandsSectorCard = () => {
     )
       .then((response) => {
         setData(response.data.demands);
-        console.log(response.data.demands);
+        /* console.log(response.data.demands); */
+        for (let i = 0; i < response.data.demands.length; i++) {
+          /* setStatuses([
+            ...statuses,
+            {
+              id: response.data.demands[i]._id,
+              status: response.data.demands[i].status,
+            },
+          ]); */
+          setStatuses((statuses) => [
+            ...statuses,
+            {
+              id: response.data.demands[i]._id,
+              status: response.data.demands[i].status,
+            },
+          ]);
+        }
       })
       .catch((response) => {
         console.log(response.error);
       });
   }, []);
+
+  /* const handleChange = (event) => {}; */
+
+  const updateStatus = () => {
+    setPostController(true);
+    let newData = [];
+    for (let i = 0; i < data.length; i++) {
+      newData = [...newData, { id: data[i]._id, status: data[i].status }];
+    }
+
+    Axios.put("/demandStatus", {
+      demands: newData,
+    })
+      .then((response) => {
+        setPostController(false);
+      })
+      .catch((error) => {
+        setPostController(false);
+        console.log(error);
+      });
+  };
+
   return (
     <div data-testid="demands-sector-card">
       <Box
@@ -152,20 +194,6 @@ const DemandsSectorCard = () => {
                               {row.dateGMT}
                             </TableCell> */}
                             <TableCell sx={sx.tableCell}>
-                              {/* <Typography
-                                sx={sx.status}
-                                style={{
-                                  backgroundColor:
-                                    (row.status === "Resolvido" && "green") ||
-                                    (row.status === "Não Resolvido" && "red") ||
-                                    (row.status === "Em Análise" &&
-                                      "#B8860B") ||
-                                    (row.status === "Atribuído" && "#556B2F") ||
-                                    "grey",
-                                }}
-                              >
-                                {row.status}
-                              </Typography> */}
                               <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">
                                   Status
@@ -173,9 +201,13 @@ const DemandsSectorCard = () => {
                                 <Select
                                   labelId="demo-simple-select-label"
                                   id="demo-simple-select"
+                                  /* value={row.status} */
                                   value={row.status}
                                   label="Status"
-                                  /* onChange={handleChange} */
+                                  onChange={() => {
+                                    row.status = "Tetse";
+                                    console.log(row);
+                                  }}
                                 >
                                   <MenuItem value={"Atribuído"}>
                                     Atribuído
@@ -205,6 +237,16 @@ const DemandsSectorCard = () => {
                 </TableContainer>
               </Box>
             </Paper>
+            <LoadingButton
+              style={{
+                marginTop: "200px",
+                width: "70%",
+              }}
+              onClick={updateStatus}
+              loading={postController}
+            >
+              Salvar
+            </LoadingButton>
           </Box>
         </Card>
       </Box>

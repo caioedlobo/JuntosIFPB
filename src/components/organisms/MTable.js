@@ -39,6 +39,7 @@ const sx = {
   avatar: {
     backgroundColor: theme.palette.grey[400],
     color: theme.palette.getContrastText(theme.palette.grey[400]),
+    marginRight: "80px",
   },
   name: {
     fontWeight: "bold",
@@ -226,7 +227,7 @@ const MTable = (props) => {
                               (row.status === "Resolvido" && "green") ||
                               (row.status === "Não Resolvido" && "red") ||
                               (row.status === "Em Análise" && "#B8860B") ||
-                              (row.status === "Atribúido" && "#556B2F") ||
+                              (row.status === "Atribuído" && "#556B2F") ||
                               "grey",
                           }}
                         >

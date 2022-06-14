@@ -181,15 +181,15 @@ const RegisterForm = (props) => {
           })
             .then((response) => {
               setSuccessScreen(true);
-              console.log(successScreen);
-              console.log(response.error);
+              /*  console.log(successScreen);
+              console.log(response.error); */
               setpostController(false);
             })
 
             .catch((error) => {
               setpostController(false);
-              console.log(successScreen);
-              console.log("error:", error.response.data.error);
+              /* console.log(successScreen);
+              console.log("error:", error.response.data.error); */
               errorControllerHandler(error.response.data.error);
             });
         }
