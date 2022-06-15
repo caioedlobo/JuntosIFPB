@@ -11,7 +11,9 @@ import InputMask from "react-input-mask";
 import Axios from "axios";
 import { LoadingButton } from "@mui/lab";
 
+
 const CpfForm = (props) => {
+  
   const [isOutsourced, setIsOutsourced] = useState(false);
   const [error, setError] = useState(false);
   const [postController, setPostController] = useState(false);

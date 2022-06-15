@@ -17,7 +17,13 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { LoadingButton } from "@mui/lab";
 
+import { useIndex } from "../../hooks/useIndex";
+import { database } from "faker/lib/locales/en";
+
 const DemandsSectorCard = () => {
+
+  const [status, setStatus] = useState("");
+
   const sx = {
     table: {
       minWidth: "300px",
@@ -63,9 +69,10 @@ const DemandsSectorCard = () => {
 
   const [data, setData] = useState([]);
   const [postController, setPostController] = useState(false);
-  let [statuses, setStatuses] = useState([]);
+  const [statuses, setStatuses] = useState([]);
 
   console.log(statuses);
+  console.log(data)
   useEffect(() => {
     /* console.log(localStorage.gketItem("userId")); */
     //console.log(data);
@@ -80,30 +87,14 @@ const DemandsSectorCard = () => {
     )
       .then((response) => {
         setData(response.data.demands);
-        /* console.log(response.data.demands); */
-        for (let i = 0; i < response.data.demands.length; i++) {
-          /* setStatuses([
-            ...statuses,
-            {
-              id: response.data.demands[i]._id,
-              status: response.data.demands[i].status,
-            },
-          ]); */
-          setStatuses((statuses) => [
-            ...statuses,
-            {
-              id: response.data.demands[i]._id,
-              status: response.data.demands[i].status,
-            },
-          ]);
-        }
+        
       })
       .catch((response) => {
         console.log(response.error);
       });
   }, []);
 
-  /* const handleChange = (event) => {}; */
+
 
   const updateStatus = () => {
     setPostController(true);
@@ -182,7 +173,7 @@ const DemandsSectorCard = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {data.map((row) => (
+                        {data.map((row, index) => (
                           <TableRow key={row.name}>
                             <TableCell sx={sx.tableCell}>{row.title}</TableCell>
 
@@ -190,9 +181,6 @@ const DemandsSectorCard = () => {
                               {row.sector}
                             </TableCell>
 
-                            {/* <TableCell sx={sx.tableCell}>
-                              {row.dateGMT}
-                            </TableCell> */}
                             <TableCell sx={sx.tableCell}>
                               <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">
@@ -202,11 +190,17 @@ const DemandsSectorCard = () => {
                                   labelId="demo-simple-select-label"
                                   id="demo-simple-select"
                                   /* value={row.status} */
-                                  value={row.status}
+                                  value={statuses[index]?.value ?? row.status}  //?. se for undefined, é falso e vai para row.status
                                   label="Status"
-                                  onChange={() => {
-                                    row.status = "Tetse";
-                                    console.log(row);
+                                  onChange={(event) => {
+                                    setStatuses( prevState => {
+                                      const newStatuses = [...prevState];
+                                      newStatuses[index] = {
+                                        id: row._id,
+                                        value: event.target.value,
+                                      };
+                                      return newStatuses;
+                                    })
                                   }}
                                 >
                                   <MenuItem value={"Atribuído"}>
