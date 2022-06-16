@@ -20,6 +20,8 @@ function App() {
 
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/contato" element={<Contact />} />
+            <Route path="/faq" element={<Contact />} />
+            <Route path="/ajuda" element={<Contact />} />
             <Route path="/login/*" element={<Home />} />
 
             <Route path="/seguranca" element={<Security />} />

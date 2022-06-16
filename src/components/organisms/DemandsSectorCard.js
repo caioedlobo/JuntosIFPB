@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Typography, Box } from "@mui/material";
+import { Card, Typography, Box, Alert, Stack, Snackbar } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -17,12 +17,10 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { LoadingButton } from "@mui/lab";
 
-import { useIndex } from "../../hooks/useIndex";
-import { database } from "faker/lib/locales/en";
+
 
 const DemandsSectorCard = () => {
 
-  const [status, setStatus] = useState("");
 
   const sx = {
     table: {
@@ -94,20 +92,49 @@ const DemandsSectorCard = () => {
       });
   }, []);
 
+  const [open, setOpen] = React.useState(false);
+
+  /* const handleClick = () => {
+    setOpen(true);
+  }; */
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
 
 
   const updateStatus = () => {
     setPostController(true);
     let newData = [];
-    for (let i = 0; i < data.length; i++) {
-      newData = [...newData, { id: data[i]._id, status: data[i].status }];
-    }
+    console.log(statuses)
+    for (let i = 0; i < statuses.length; i++) {
+     /*  newData = [...newData, { id: data[i]._id, status: data[i].status }]; */
+     
 
-    Axios.put("/demandStatus", {
+
+
+     if (/* !Object.keys(statuses[i]).length === 0 || */ statuses[i] !== undefined){
+     newData = [...newData, { id: statuses[i]?.id, status: statuses[i]?.value }];
+    }
+  }
+    console.log(newData)
+    Axios.put("https://backendjuntosifpb.herokuapp.com/demands/demandStatus", {
       demands: newData,
+    },
+    {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
     })
       .then((response) => {
         setPostController(false);
+        /* setStatuses([]); */
+        setOpen(true);
       })
       .catch((error) => {
         setPostController(false);
@@ -238,12 +265,25 @@ const DemandsSectorCard = () => {
               }}
               onClick={updateStatus}
               loading={postController}
+              disabled={statuses.length > 0 ? false : true}
             >
               Salvar
             </LoadingButton>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+      
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        Status da demanda alterado com sucesso!
+        </Alert>
+      </Snackbar>
+            
+            </Stack>
           </Box>
         </Card>
+        
+
       </Box>
+      
     </div>
   );
 };

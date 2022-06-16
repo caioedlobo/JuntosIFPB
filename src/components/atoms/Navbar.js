@@ -10,6 +10,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
+import HelpIcon from '@mui/icons-material/Help';
 
 import { Typography, Menu, MenuItem } from "@mui/material";
 
@@ -54,10 +55,10 @@ const Navbar = (props) => {
                     display: "flex",
                     flexDirection: "row",
                     width: "80px",
-                    justifyContent: "space-evenly",
+                    justifyContent: "flex-start",
                   }}
                 >
-                  <HomeOutlinedIcon />
+                  <HomeOutlinedIcon style={{marginRight: "8px"}}/>
                   <Typography>Início</Typography>
                 </Box>
               </Link>
@@ -73,10 +74,10 @@ const Navbar = (props) => {
                     display: "flex",
                     flexDirection: "row",
                     width: "100px",
-                    justifyContent: "space-evenly",
+                    justifyContent: "flex-start",
                   }}
                 >
-                  <BarChartOutlinedIcon />
+                  <BarChartOutlinedIcon style={{marginRight: "8px"}}/>
                   <Typography>Ranking</Typography>
                 </Box>
               </Link>
@@ -92,11 +93,58 @@ const Navbar = (props) => {
                     display: "flex",
                     flexDirection: "row",
                     width: "95px",
-                    justifyContent: "space-evenly",
+                    justifyContent: "flex-start",
+                    
                   }}
                 >
-                  <CallOutlinedIcon />
+                  <CallOutlinedIcon style={{marginRight: "8px"}}/>
                   <Typography>Contato</Typography>
+                </Box>
+              </Link>
+            </MenuItem>
+
+            <MenuItem>
+              <Link
+                to={"/faq"}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    
+                    width: "95px",
+                    justifyContent: "flex-start",
+                    
+                    /* justifyContent: "flex-start", */
+                    marginLeft: "0px"
+                  }}
+                >
+                  <HelpIcon style={{marginRight: "8px"}}/>
+                  <Typography>FAQ</Typography>
+                </Box>
+              </Link>
+            </MenuItem>
+
+            <MenuItem>
+              <Link
+                to={"/ajuda"}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    
+                    width: "95px",
+                    justifyContent: "flex-start",
+                    
+                    /* justifyContent: "flex-start", */
+                    marginLeft: "0px"
+                  }}
+                >
+                  <HelpIcon style={{marginRight: "8px"}}/>
+                  <Typography>Ajuda</Typography>
                 </Box>
               </Link>
             </MenuItem>
@@ -111,10 +159,10 @@ const Navbar = (props) => {
                     display: "flex",
                     flexDirection: "row",
                     width: "85px",
-                    justifyContent: "space-evenly",
+                    justifyContent: "flex-start",
                   }}
                 >
-                  <AccountCircleOutlinedIcon />
+                  <AccountCircleOutlinedIcon style={{marginRight: "8px"}}/>
                   <Typography>Entrar</Typography>
                 </Box>
               </Link>
@@ -141,6 +189,12 @@ const Navbar = (props) => {
 
             <Link to={"/contato"} className={classes.typo}>
               Contato
+            </Link>
+            <Link to={"/faq"} className={classes.typo}>
+              FAQ
+            </Link>
+            <Link to={"/ajuda"} className={classes.typo}>
+              Ajuda
             </Link>
             <Link to={"/login"} className={classes.typo}>
               Entrar
