@@ -15,9 +15,7 @@ const Home = () => {
   const navigate = useNavigate();
  
   useEffect(() => {
-    Axios.get("https://backendjuntosifpb.herokuapp.com/admin/isAdmin/", {
-      adminId: localStorage.getItem("userId"),
-    },
+    Axios.get("https://backendjuntosifpb.herokuapp.com/admin/isLoggedIn/", 
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),

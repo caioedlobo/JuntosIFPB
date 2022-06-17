@@ -28,9 +28,10 @@ import {
 import { Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useOutsourced } from "../providers/outsourced";
+import { useAuth } from "../providers/auth";
 
 const UserBar = (props) => {
-
+  const {setIsLoggedIn} = useAuth();
   const {isOutsourced} = useOutsourced();
 
   const [open, setOpen] = useState(false);
@@ -46,6 +47,7 @@ const UserBar = (props) => {
   };
 
   const handleDisconnect = () => {
+    setIsLoggedIn(false);
     localStorage.clear();
     navigate("/");
   };

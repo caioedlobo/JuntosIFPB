@@ -7,8 +7,12 @@ import HeightFormHandler from "./HeightFormHandler";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { useAuth } from "../providers/auth";
 
 const LoginForm = (props) => {
+
+  const {setIsLoggedIn} = useAuth();
+
   const [emailFormData, setEmailFormData] = useState();
   const [passwordFormData, setPasswordFormData] = useState();
 
@@ -99,6 +103,7 @@ const LoginForm = (props) => {
             const userId = response.data.user._id;
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("userId", userId);
+            setIsLoggedIn(true);
             navigate("/conta");
           })
           .catch((error) => {

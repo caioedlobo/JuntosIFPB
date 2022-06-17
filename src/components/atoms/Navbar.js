@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Box from "@mui/material/Box";
 import classes from "./stylesheet/Navbar.module.css";
@@ -11,11 +11,14 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 import HelpIcon from '@mui/icons-material/Help';
+import {useAuth} from "../providers/auth";
 
 import { Typography, Menu, MenuItem } from "@mui/material";
 
 const Navbar = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(false);
+
+  const { isLoggedIn } = useAuth();
 
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -25,12 +28,15 @@ const Navbar = (props) => {
     setAnchorEl(false);
   };
 
+  useEffect(() => {}, [isLoggedIn]);
+  console.log(isLoggedIn);
+
   return (
     <div data-testid="navbar">
       <AppBar
         color={props.color}
         elevation={0}
-        position="static" /* sx={{display:  {sm: "flex", xs: "none"} }} */
+        position="static"
       >
         <Toolbar>
           <IconButton
@@ -201,8 +207,8 @@ const Navbar = (props) => {
               FAQ
             </Link>
             
-            <Link to={"/login"} className={classes.typo}>
-              Entrar
+            <Link to={isLoggedIn ? "/conta" : "/login"} className={classes.typo}>
+              {isLoggedIn ? " Conta" : "Entrar"}
             </Link>
           </Box>
         </Toolbar>
