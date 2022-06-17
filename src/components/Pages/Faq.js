@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react'
 import Layout from '../template/Layout'
 import classesCommon from "./stylesheet/Common.module.css";
@@ -9,15 +9,17 @@ const Faq = () => {
   return (
     <Layout>
         <div className={`${classesCommon.form}`} style={{width: "80%", padding: "30px"}}>
-            <div style={{
+            <Box style={{
                 display: "flex", 
-                width: "500px", 
+                maxWidth: "500px",
+                minWidth: "200px",
                 flexDirection: "column", 
-                textAlign: "center"
+                textAlign: "center",
+                marginBottom: "30px"
                 }}>
             <img src={image} alt="faq" style={{width: "100%", marginBottom: "50px"}}></img>
             <Typography variant='h4'>FAQ</Typography>
-            </div>
+            </Box>
         <div>
        <FaqAccordion>
         {"Qual o objetivo do sistema Juntos pelo IFPB?"}
