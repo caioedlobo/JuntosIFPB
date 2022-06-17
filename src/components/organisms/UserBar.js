@@ -27,8 +27,12 @@ import {
 
 import { Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useOutsourced } from "../providers/outsourced";
 
 const UserBar = (props) => {
+
+  const {isOutsourced} = useOutsourced();
+
   const [open, setOpen] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(false);
@@ -53,22 +57,6 @@ const UserBar = (props) => {
   const handleClose = () => {
     setAnchorEl(false);
   };
-
-  /* useEffect(() => {
-    Axios.post(
-      "https://backendjuntosifpb.herokuapp.com/validateCpf/isOutsourced/",
-      {
-        id: localStorage.getItem("accessToken"),
-      }
-    )
-      .then((res) => {
-        setDemandSectorCard(true);
-      })
-      .catch((err) => {
-        setDemandSectorCard(false);
-      });
-  }, []); */
-  console.log(props.isOutsourced);
 
   return (
     <div data-testid="user-bar">
@@ -234,7 +222,7 @@ const UserBar = (props) => {
                 </Typography>
               </LayoutUserBar>
 
-              {props.isOutsourced ? (
+              {isOutsourced ? (
                 <LayoutUserBar linkTo={"/demandas"}>
                   <WorkOutlineIcon />
                   <Typography style={{ paddingLeft: "5px" }}>

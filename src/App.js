@@ -12,6 +12,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import Faq from "./components/Pages/Faq";
 
 function App() {
+  
   return (
     <BrowserRouter>
       <div>
@@ -25,13 +26,13 @@ function App() {
             <Route path="/ajuda" element={<Contact />} />
             <Route path="/login/*" element={<Home />} />
 
-            <Route path="/seguranca" element={<Security />} />
+            <Route path="/seguranca" element={<Security/>} />
             <Route path="/contribuicoes" element={<Contributions />} />
             <Route path="/demandas" element={<DemandsSector />} />
             <Route path="/resetar_senha/*" element={<Reset />} />
             <Route path="*" element={<h1>Página não encontrada</h1>} />
             <Route element={<ProtectedRoutes />}>
-              <Route path="/conta" element={<Account />} />
+              <Route path="/conta" element={<Account/>} />
             </Route>
           </Routes>
         </main>
