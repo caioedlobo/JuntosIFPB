@@ -105,29 +105,6 @@ const Navbar = (props) => {
 
             <MenuItem>
               <Link
-                to={"/faq"}
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    
-                    width: "95px",
-                    justifyContent: "flex-start",
-                    
-                    /* justifyContent: "flex-start", */
-                    marginLeft: "0px"
-                  }}
-                >
-                  <HelpIcon style={{marginRight: "8px"}}/>
-                  <Typography>FAQ</Typography>
-                </Box>
-              </Link>
-            </MenuItem>
-
-            <MenuItem>
-              <Link
                 to={"/ajuda"}
                 style={{ textDecoration: "none", color: "black" }}
               >
@@ -149,6 +126,31 @@ const Navbar = (props) => {
               </Link>
             </MenuItem>
 
+
+            <MenuItem>
+              <Link
+                to={"/faq"}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    
+                    width: "95px",
+                    justifyContent: "flex-start",
+                    
+                    /* justifyContent: "flex-start", */
+                    marginLeft: "0px"
+                  }}
+                >
+                  <HelpIcon style={{marginRight: "8px"}}/>
+                  <Typography>FAQ</Typography>
+                </Box>
+              </Link>
+            </MenuItem>
+
+            
             <MenuItem>
               <Link
                 to={"/login"}
@@ -190,12 +192,15 @@ const Navbar = (props) => {
             <Link to={"/contato"} className={classes.typo}>
               Contato
             </Link>
-            <Link to={"/faq"} className={classes.typo}>
-              FAQ
-            </Link>
+
             <Link to={"/ajuda"} className={classes.typo}>
               Ajuda
             </Link>
+            
+            <Link to={"/faq"} className={classes.typo}>
+              FAQ
+            </Link>
+            
             <Link to={"/login"} className={classes.typo}>
               Entrar
             </Link>

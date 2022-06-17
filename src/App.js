@@ -9,6 +9,7 @@ import Reset from "./components/Pages/Reset";
 import Contributions from "./components/Pages/Contributions";
 import DemandsSector from "./components/Pages/DemandsSector";
 import ProtectedRoutes from "./ProtectedRoutes";
+import Faq from "./components/Pages/Faq";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
 
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/contato" element={<Contact />} />
-            <Route path="/faq" element={<Contact />} />
+            <Route path="/faq" element={<Faq />} />
             <Route path="/ajuda" element={<Contact />} />
             <Route path="/login/*" element={<Home />} />
 
