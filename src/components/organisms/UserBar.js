@@ -47,6 +47,7 @@ const UserBar = (props) => {
   };
 
   const handleDisconnect = () => {
+    localStorage.setItem("isLoggedIn", false);
     setIsLoggedIn(false);
     localStorage.clear();
     navigate("/");

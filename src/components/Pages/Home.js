@@ -23,20 +23,16 @@ const Home = () => {
       }
     )
     .then((res) => {
-      console.log("entrou")
+      localStorage.setItem("isLoggedIn", true);
       setIsLoggedIn(true);
       navigate("/");
     })
     .catch((err) => {
       console.log(err);
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/");
-    }
-  }, []);
   return (
     <div data-testid="home">
 

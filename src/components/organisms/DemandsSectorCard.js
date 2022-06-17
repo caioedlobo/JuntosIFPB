@@ -72,8 +72,7 @@ const DemandsSectorCard = () => {
   console.log(statuses);
   console.log(data)
   useEffect(() => {
-    /* console.log(localStorage.gketItem("userId")); */
-    //console.log(data);
+ 
     Axios.post(
       "https://backendjuntosifpb.herokuapp.com/outsourced/outsourcedSector/",
       { id: localStorage.getItem("userId") },

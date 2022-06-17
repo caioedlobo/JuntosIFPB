@@ -103,6 +103,7 @@ const LoginForm = (props) => {
             const userId = response.data.user._id;
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("userId", userId);
+            localStorage.setItem("isLoggedIn", true);
             setIsLoggedIn(true);
             navigate("/conta");
           })
