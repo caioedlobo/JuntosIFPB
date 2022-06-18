@@ -39,7 +39,7 @@ const sx = {
   avatar: {
     backgroundColor: theme.palette.grey[400],
     color: theme.palette.getContrastText(theme.palette.grey[400]),
-    marginRight: "80px",
+    marginRight: "10px",
   },
   name: {
     fontWeight: "bold",
@@ -190,17 +190,17 @@ const MTable = (props) => {
                   {data.map((row) => (
                     <TableRow key={row.name}>
                       <TableCell>
-                        <Grid container>
-                          <Grid item lg={2}>
+                        {/* <Grid container> */}
+                          <Grid item lg={2} sx={{/* background: "blue" */ display: "flex", alignItems: "center",}}>
                             <Avatar
                               sx={sx.avatar}
                               alt={row.user === null || row.isAnonymous ? null : row.user.name}
                               src="."
                             />
-                          </Grid>
+                          {/* </Grid> */}
                           <Grid item lg={10}>
                             {row.user === null || row.isAnonymous ? (
-                              <div style={{ marginTop: "6px" }}></div>
+                              <Box sx={{ marginTop: "6px" }}></Box>
                             ) : null}
                             <Typography sx={sx.name}>
                               {row.user === null ? "Usuário deletado" :row.isAnonymous ? "Anônimo" : row.user.name}
