@@ -6,12 +6,12 @@ import LogoImg from "../atoms/LogoImg";
 import classesCommon from "./stylesheet/Common.module.css";
 import Layout from "../template/Layout";
 import LoginFormHandler from "../atoms/LoginFormHandler";
-import { useAuth } from "../providers/auth";
+/* import { useAuth } from "../providers/auth";
 import { useNavigate } from "react-router-dom";
-import Axios from "axios";
+import Axios from "axios"; */
 
 const Home = () => {
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  /* const { isLoggedIn, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
  
   useEffect(() => {
@@ -30,8 +30,8 @@ const Home = () => {
     .catch((err) => {
       console.log(err);
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+     eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]) */
 
   return (
     <div data-testid="home">

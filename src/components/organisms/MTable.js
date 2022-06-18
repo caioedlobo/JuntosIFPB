@@ -194,19 +194,19 @@ const MTable = (props) => {
                           <Grid item lg={2}>
                             <Avatar
                               sx={sx.avatar}
-                              alt={row.isAnonymous ? null : row.user.name}
+                              alt={row.user === null || row.isAnonymous ? null : row.user.name}
                               src="."
                             />
                           </Grid>
                           <Grid item lg={10}>
-                            {row.isAnonymous ? (
+                            {row.user === null || row.isAnonymous ? (
                               <div style={{ marginTop: "6px" }}></div>
                             ) : null}
                             <Typography sx={sx.name}>
-                              {row.isAnonymous ? "Anônimo" : row.user.name}
+                              {row.user === null ? "Usuário deletado" :row.isAnonymous ? "Anônimo" : row.user.name}
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              {row.isAnonymous ? "" : row.user.email}
+                              {row.user === null ? "" : row.isAnonymous ? "" : row.user.email}
                             </Typography>
                             {/* <Typography color="textSecondary" variant="body2">
                               {row.name}

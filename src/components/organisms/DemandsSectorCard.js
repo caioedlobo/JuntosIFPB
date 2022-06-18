@@ -68,9 +68,11 @@ const DemandsSectorCard = () => {
   const [data, setData] = useState([]);
   const [postController, setPostController] = useState(false);
   const [statuses, setStatuses] = useState([]);
-
+  const [sectors, setSectors] = useState([]);
+  const [listSectors, setListSectors] = useState([]);
+  console.log(sectors)
   console.log(statuses);
-  console.log(data)
+ 
   useEffect(() => {
  
     Axios.post(
@@ -86,16 +88,32 @@ const DemandsSectorCard = () => {
         setData(response.data.demands);
         
       })
-      .catch((response) => {
-        console.log(response.error);
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
-  const [open, setOpen] = React.useState(false);
+ 
+  useEffect( () => {
+    Axios.get("https://backendjuntosifpb.herokuapp.com/sector/listAllSectors",
+    {},
+    {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      }
+    }
+    ).then((response) => {
+      setListSectors(response.data.ok.map((item) => item.title));
+      
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [data]);
+  
 
-  /* const handleClick = () => {
-    setOpen(true);
-  }; */
+
+  const [open, setOpen] = React.useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -105,24 +123,21 @@ const DemandsSectorCard = () => {
     setOpen(false);
   };
 
-
-
   const updateStatus = () => {
     setPostController(true);
     let newData = [];
-    console.log(statuses)
+    
     for (let i = 0; i < statuses.length; i++) {
-     /*  newData = [...newData, { id: data[i]._id, status: data[i].status }]; */
-     
-
-
-
-     if (/* !Object.keys(statuses[i]).length === 0 || */ statuses[i] !== undefined){
+    
+     if ( statuses[i] !== undefined){
      newData = [...newData, { id: statuses[i]?.id, status: statuses[i]?.value }];
     }
+    if ( sectors[i] !== undefined){
+      newData = [...newData, { id: sectors[i]?.id, sector: sectors[i]?.value }];
+     }
   }
     console.log(newData)
-    Axios.put("https://backendjuntosifpb.herokuapp.com/demands/demandStatus", {
+    Axios.put("https://backendjuntosifpb.herokuapp.com/demands/updateDemand", {
       demands: newData,
     },
     {
@@ -140,6 +155,17 @@ const DemandsSectorCard = () => {
         console.log(error);
       });
   };
+
+  const updateSector = () => {
+    setPostController(true);
+    let newData = [];
+    console.log(statuses)
+    for (let i = 0; i < sectors.length; i++) {
+      if ( sectors[i] !== undefined){
+        newData = [...newData, { id: sectors[i]?.id, sector: sectors[i]?.value }];
+       }
+  }
+}
 
   return (
     <div data-testid="demands-sector-card">
@@ -183,7 +209,7 @@ const DemandsSectorCard = () => {
             </Typography>
             <Paper elevation={0} style={{ overflowX: "auto" }}>
               <Box className={classes2.table}>
-                <TableContainer /* component={Paper} */ sx={sx.tableContainer}>
+                <TableContainer  sx={sx.tableContainer}>
                   {data != null ? (
                     <Table sx={sx.table} aria-label="simple table">
                       <TableHead>
@@ -204,11 +230,40 @@ const DemandsSectorCard = () => {
                             <TableCell sx={sx.tableCell}>{row.title}</TableCell>
 
                             <TableCell sx={sx.tableCell}>
-                              {row.sector}
+                              
+                              <FormControl sx={{width: "130px"}}>
+                                <InputLabel id="demo-simple-select-label">
+                                  Setor
+                                </InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="demo-simple-select"
+                                  value={sectors[index]?.value ?? row.sector}  //?. se for undefined, é falso e vai para row.status
+                                  label="Sector"
+                                  onChange={(event) => {
+                                    setSectors( prevState => {
+                                      const newSectors = [...prevState];
+                                      newSectors[index] = {
+                                        id: row._id,
+                                        value: event.target.value,
+                                      };
+                                      return newSectors;
+                                    })
+                                  }}
+                                >
+                                  
+                                  {listSectors.map((sector) => (
+                                    <MenuItem value={sector}>
+                                    {sector}
+                                  </MenuItem>
+                                  ))}
+                                  
+                                </Select>
+                              </FormControl>
                             </TableCell>
 
                             <TableCell sx={sx.tableCell}>
-                              <FormControl fullWidth>
+                              <FormControl sx={{width: "130px"}}>
                                 <InputLabel id="demo-simple-select-label">
                                   Status
                                 </InputLabel>
