@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
-import { Box, Button, Typography } from "@mui/material";
+import {  Box, Button, Link, Typography } from "@mui/material";
 import classes2 from "./stylesheet/MTable.module.css";
 import { theme } from "../../theme";
 import Axios from "axios";
@@ -35,6 +35,7 @@ const sx = {
   },
   tableCell: {
     textAlign: "center !important",
+    
   },
   avatar: {
     backgroundColor: theme.palette.grey[400],
@@ -188,9 +189,12 @@ const MTable = (props) => {
                 </TableHead>
                 <TableBody>
                   {data.map((row) => (
-                    <TableRow key={row.name}>
+                    
+                    <TableRow key={row.name} >
+
+                        
                       <TableCell>
-                        {/* <Grid container> */}
+
                           <Grid item lg={2} sx={{/* background: "blue" */ display: "flex", alignItems: "center",}}>
                             <Avatar
                               sx={sx.avatar}
@@ -213,8 +217,17 @@ const MTable = (props) => {
                             </Typography> */}
                           </Grid>
                         </Grid>
+                        
                       </TableCell>
-                      <TableCell sx={sx.tableCell}>{row.title}</TableCell>
+                      
+                      <TableCell sx={sx.tableCell}>
+                     
+                      <Link to={`/demanda/${row._id}`} target="_blank" rel="noopener noreferrer" 
+                      style={{display: "flex", /* background: "blue" */ height: "80px", justifyContent: "center", alignItems: "center"}}>
+                        {row.title}
+                      </Link>
+                        </TableCell>
+                      
 
                       <TableCell sx={sx.tableCell}>{row.sector}</TableCell>
 
@@ -275,7 +288,9 @@ const MTable = (props) => {
                             </Button>
                           )}
                         </Box>
+                        
                       </TableCell>
+  
                     </TableRow>
                   ))}
                 </TableBody>

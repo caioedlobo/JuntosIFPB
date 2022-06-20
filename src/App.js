@@ -10,6 +10,7 @@ import Contributions from "./components/Pages/Contributions";
 import DemandsSector from "./components/Pages/DemandsSector";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Faq from "./components/Pages/Faq";
+import Demand from "./components/Pages/Demand";
 
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
             <Route path="/contribuicoes" element={<Contributions />} />
             <Route path="/demandas" element={<DemandsSector />} />
             <Route path="/resetar_senha/*" element={<Reset />} />
+            <Route path="/demanda/*" element={<Demand />} />
             <Route path="*" element={<h1>Página não encontrada</h1>} />
             <Route element={<ProtectedRoutes />}>
               <Route path="/conta" element={<Account/>} />
