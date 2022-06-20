@@ -156,16 +156,7 @@ const DemandsSectorCard = () => {
       });
   };
 
-  const updateSector = () => {
-    setPostController(true);
-    let newData = [];
-    console.log(statuses)
-    for (let i = 0; i < sectors.length; i++) {
-      if ( sectors[i] !== undefined){
-        newData = [...newData, { id: sectors[i]?.id, sector: sectors[i]?.value }];
-       }
-  }
-}
+
 
   return (
     <div data-testid="demands-sector-card">
@@ -323,15 +314,14 @@ const DemandsSectorCard = () => {
             >
               Salvar
             </LoadingButton>
-            <Stack spacing={2} sx={{ width: '100%' }}>
-      
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-        Status da demanda alterado com sucesso!
-        </Alert>
-      </Snackbar>
-            
-            </Stack>
+
+        <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Status da demanda alterado com sucesso!
+          </Alert>
+        </Snackbar>
+              </Stack>
           </Box>
         </Card>
         

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Card, Typography, Box, TextField, Button } from "@mui/material";
+import { Card, Typography, Box, TextField, Button, Stack, Snackbar, Alert } from "@mui/material";
 import Axios from "axios";
+import { LoadingButton } from "@mui/lab";
 
 const UserCard = () => {
   const [name, setName] = useState("");
@@ -14,8 +15,24 @@ const UserCard = () => {
     setPassword(event.target.value);
   };
 
+  const [open, setOpen] = React.useState(false);
+  const [openOnFail, setOpenOnFail] = React.useState(false);
+  const [openOnInfo, setOpenOnInfo] = React.useState(false);
+  const [postController, setPostController] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+    setOpenOnFail(false)
+    setOpenOnInfo(false)
+  };
+
   const handleSubmit = () => {
     if (password.length > 5 && name.length > 1) {
+      setPostController(true);
       Axios.put(
         `https://backendjuntosifpb.herokuapp.com/auth/DataModify/${localStorage.getItem(
           "userId"
@@ -25,10 +42,15 @@ const UserCard = () => {
           password: password,
         }
       ).then((response) => {
-        console.log(response);
+        setPostController(false)
+        setOpen(true)
+      }).catch((response) => {
+        setOpenOnFail(true)
+        setPostController(false)
+        
       });
     } else {
-      console.log("Senha muito curta");
+      setOpenOnInfo(true)
     }
   };
 
@@ -50,9 +72,7 @@ const UserCard = () => {
             display: "flex",
 
             flex: "7.5",
-            /* paddingBottom: {xs: "10px"} */
-            /*  margin: "0 auto", */
-            /* marginLeft: "calc(50vw - 270px - 400px)", */
+
           }}
         >
           <Box
@@ -69,7 +89,7 @@ const UserCard = () => {
               variant="h6"
               style={{ fontSize: "22px", marginBottom: "20px" }}
             >
-              ALTERAR DADOS
+              ALTERAR NOME
             </Typography>
             <Box
               sx={{
@@ -84,6 +104,7 @@ const UserCard = () => {
                 placeholder="Seu nome"
                 fullWidth
                 onChange={handleName}
+                required={true}
               ></TextField>
 
               <TextField
@@ -91,11 +112,37 @@ const UserCard = () => {
                 placeholder="Sua senha"
                 onChange={handlePassword}
                 type="password"
+                required={true}
               ></TextField>
-              <Button variant="contained" type="submit" onClick={handleSubmit}>
+              <LoadingButton variant="contained" type="submit" loading={postController} onClick={handleSubmit}>
                 Salvar Alterações
-              </Button>
+              </LoadingButton>
             </Box>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Nome alterado com sucesso!
+          </Alert>
+        </Snackbar>
+              </Stack>
+
+              <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={openOnFail} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          Erro ao modificar o nome.
+          </Alert>
+        </Snackbar>
+              </Stack>
+
+              <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={openOnInfo} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
+          <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
+          Preencha todos os campos.
+          </Alert>
+        </Snackbar>
+              </Stack>
+
+              
           </Box>
         </Card>
       </Box>

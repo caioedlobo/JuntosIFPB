@@ -111,7 +111,7 @@ const UserBar = (props) => {
                       <div style={{ display: "flex" }}>
                         <AccountCircleIcon />
                         <Typography style={{ paddingLeft: "5px" }}>
-                          Alterar Dados
+                          Alterar Nome
                         </Typography>
                       </div>
                     </Link>
@@ -209,7 +209,7 @@ const UserBar = (props) => {
               <LayoutUserBar linkTo={"/conta"}>
                 <AccountCircleIcon />
                 <Typography style={{ paddingLeft: "5px" }}>
-                  Alterar Dados
+                  Alterar Nome
                 </Typography>
               </LayoutUserBar>
 
