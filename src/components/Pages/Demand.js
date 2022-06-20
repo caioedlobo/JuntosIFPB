@@ -1,18 +1,36 @@
 import { Box, Typography } from '@mui/material';
-import { Axios } from 'axios';
-import React, { useEffect } from 'react'
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import Layout from '../template/Layout'
 import classesCommon from "./stylesheet/Common.module.css";
 const Demand = () => {
-
+  const [data, setData] = useState({
     
+    id: '',
+    title: '',
+    
+    description: '',
+    user: {
+        name: '',
+    },
+    status: ''
+    
+  });
+  console.log(data)
     useEffect(() => {
-       /*  Axios.get(`url`,{
-
-        }).then(res => {
-    
+        const id = window.location.pathname.split("/")[2];
+        Axios.get(`https://backendjuntosifpb.herokuapp.com/demands/${id}`,
+        {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("accessToken"),
+            },
+          }   
+        ).then(res => {
+            setData(res.data.demands)
+            
         })
-        .catch(err => {}) */
+        .catch(err => {})
+        
     }, [])
 
   return (
@@ -33,10 +51,27 @@ const Demand = () => {
         </Typography>
         </Box>
         <div style={{display: "flex", flexDirection: "column",}}>
-            <div style={{marginBottom: "10px"}}>Usuário: caio</div>
-            <div style={{marginBottom: "10px"}}>Demanda: lorem l lorem l lorem llorem llorem llorem llorem llorem llorem llorem llorem llorem l</div>
-            <div style={{marginBottom: "10px"}}>Descrição: lorem l lorem l lorem lloremlorem l lorem l lorem lloremlorem l lorem l lorem lloremlorem l lorem l lorem llorem</div>
-            <div style={{marginBottom: "10px"}}>Status: Atribuído</div>
+            <div style={{display:"flex", flexDirection: "row", marginBottom: "10px"}}>
+            <p style={{fontWeight:"bold"}}> Usuário:&nbsp;
+            </p>
+            <Typography variant='h7'>{data.isAnonymous ? "Anônimo": data.user.name}</Typography>
+            </div>
+            <div style={{display:"flex", flexDirection: "row", marginBottom: "10px"}}>
+            <p style={{fontWeight:"bold"}}> Demanda:&nbsp;
+            </p>
+            <Typography variant='h7'>{data.title}</Typography>
+            </div>
+            <div style={{display:"flex", flexDirection: "row", marginBottom: "10px"}}>
+            <p style={{fontWeight:"bold"}}> Descrição:&nbsp;
+            </p>
+            <Typography variant='h7'>{data.description}</Typography>
+            </div>
+            <div style={{display:"flex", flexDirection: "row", marginBottom: "10px"}}>
+            <p style={{fontWeight:"bold"}}> Status:&nbsp;
+            </p>
+            <Typography variant='h7'>{data.status}</Typography>
+            </div>
+            
         </div>
         </div>
         </Box>
