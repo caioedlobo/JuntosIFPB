@@ -7,9 +7,13 @@ import {
   Stack,
   Snackbar,
   Alert,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import Axios from "axios";
 import { LoadingButton } from '@mui/lab';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const Security = () => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -42,6 +46,37 @@ const Security = () => {
     setOpen(false);
     setOpenOnFail(false)
     setOpenOnInfo(false)
+  };
+
+  const [showCurrentPassword, setShowCurrentPassword] = useState("password")
+  const [showPassword, setShowPassword] = useState("password")
+  const [showConfirmPassword, setShowConfirmPassword] = useState("password")
+
+  const handleShowCurrentPassword = () => {
+    if (showCurrentPassword === "password"){
+      setShowCurrentPassword("text")
+    }
+    else{
+      setShowCurrentPassword("password")
+    } 
+  };
+
+  const handleShowPassword = () => {
+    if (showPassword === "password"){
+      setShowPassword("text")
+    }
+    else{
+      setShowPassword("password")
+    } 
+  };
+
+  const handleShowConfirmPassword = () => {
+    if (showConfirmPassword === "password"){
+      setShowConfirmPassword("text")
+    }
+    else{
+      setShowConfirmPassword("password")
+    } 
   };
 
   const handleSubmit = (event) => {
@@ -113,9 +148,40 @@ const Security = () => {
               }}
             >
 
-              <TextField variant="outlined" placeholder="Sua senha atual" required={true} onChange={handleCurrentPassword}></TextField>
-              <TextField variant="outlined" placeholder="Sua nova senha" required={true} onChange={handlePassword}></TextField>
-              <TextField variant="outlined" placeholder="Repita sua nova senha" required={true} onChange={handleConfirmPassword}></TextField>
+              <TextField 
+              variant="outlined" 
+              placeholder="Sua senha atual" 
+              required={true} 
+              onChange={handleCurrentPassword}
+              type={showCurrentPassword}
+              InputProps={{
+                endAdornment: 
+                <InputAdornment position='end'>
+                  <IconButton onClick={handleShowCurrentPassword}>
+                    {showCurrentPassword === "text" ? <VisibilityOff/> : <Visibility/>}
+                  </IconButton>
+              </InputAdornment>}}
+              ></TextField>
+
+              <TextField variant="outlined" placeholder="Sua nova senha" type={showPassword} required={true} onChange={handlePassword}
+              InputProps={{
+                endAdornment: 
+                <InputAdornment position='end'>
+                  <IconButton onClick={handleShowPassword}>
+                    {showPassword === "text" ? <VisibilityOff/> : <Visibility/>}
+                  </IconButton>
+              </InputAdornment>}}
+              ></TextField>
+              
+              <TextField variant="outlined" placeholder="Repita sua nova senha" type={showConfirmPassword} required={true} onChange={handleConfirmPassword}
+              InputProps={{
+                endAdornment: 
+                <InputAdornment position='end'>
+                  <IconButton onClick={handleShowConfirmPassword}>
+                    {showConfirmPassword === "text" ? <VisibilityOff/> : <Visibility/>}
+                  </IconButton>
+              </InputAdornment>}}
+              ></TextField>
 
               <LoadingButton variant="contained" type="submit" onClick={handleSubmit} loading={postController}>Salvar Alterações</LoadingButton>
 
