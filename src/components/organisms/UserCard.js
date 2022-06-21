@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Typography, Box, TextField, Button, Stack, Snackbar, Alert } from "@mui/material";
+import { Card, Typography, Box, TextField, Stack, Snackbar, Alert } from "@mui/material";
 import Axios from "axios";
 import { LoadingButton } from "@mui/lab";
 
@@ -129,7 +129,7 @@ const UserCard = () => {
               <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar open={openOnFail} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
           <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-          Erro ao modificar o nome.
+          Erro ao alterar o nome.
           </Alert>
         </Snackbar>
               </Stack>
