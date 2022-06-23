@@ -20,7 +20,7 @@ const LoginText = (props) => {
     <div data-testid="login-text" style={{ width: "100%" }}>
       <TextField
         required
-        label="Digite o Email"
+        label="Digite o email"
         margin="normal"
         fullWidth
         variant="standard"
