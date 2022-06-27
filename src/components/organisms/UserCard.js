@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Card, Typography, Box, TextField, Stack, Snackbar, Alert } from "@mui/material";
+import { Card, Typography, Box, TextField, Stack, Snackbar, Alert, InputAdornment, IconButton } from "@mui/material";
 import Axios from "axios";
 import { LoadingButton } from "@mui/lab";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const UserCard = () => {
   const [name, setName] = useState("");
@@ -19,6 +21,17 @@ const UserCard = () => {
   const [openOnFail, setOpenOnFail] = React.useState(false);
   const [openOnInfo, setOpenOnInfo] = React.useState(false);
   const [postController, setPostController] = useState(false);
+
+  const [showPassword, setShowPassword] = useState("password")
+
+  const handleShowPassword = () => {
+    if (showPassword === "password"){
+      setShowPassword("text")
+    }
+    else{
+      setShowPassword("password")
+    } 
+  };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -111,8 +124,15 @@ const UserCard = () => {
                 variant="outlined"
                 placeholder="Sua senha"
                 onChange={handlePassword}
-                type="password"
+                type={showPassword}
                 required={true}
+                InputProps={{
+                  endAdornment: 
+                  <InputAdornment position='end'>
+                    <IconButton onClick={handleShowPassword}>
+                      {showPassword === "text" ? <VisibilityOff/> : <Visibility/>}
+                    </IconButton>
+                </InputAdornment>}}
               ></TextField>
               <LoadingButton variant="contained" type="submit" loading={postController} onClick={handleSubmit}>
                 Salvar Alterações
