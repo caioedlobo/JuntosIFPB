@@ -310,7 +310,7 @@ const DemandsSectorCard = () => {
               }}
               onClick={updateStatus}
               loading={postController}
-              disabled={statuses.length > 0 ? false : true}
+              disabled={statuses.length > 0 || sectors.length > 0 ? false : true}
             >
               Salvar
             </LoadingButton>
