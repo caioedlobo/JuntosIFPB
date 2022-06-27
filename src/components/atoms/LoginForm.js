@@ -90,7 +90,7 @@ const LoginForm = (props) => {
         setpostController(true);
         const token = e.target.action.split("=")[1];
         const outsourcedId = e.target.action.split("=")[2];
-
+        
         Axios.post(
           "https://backendjuntosifpb.herokuapp.com/auth/authenticate",
           {
@@ -108,6 +108,7 @@ const LoginForm = (props) => {
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("userId", userId);
             localStorage.setItem("isLoggedIn", true);
+            
             setIsLoggedIn(true);
             setIsOutsourced(response.data.user.isOutsourced)
             navigate("/conta");
