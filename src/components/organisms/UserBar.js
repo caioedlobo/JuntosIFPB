@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -30,14 +30,20 @@ import { useNavigate } from "react-router-dom";
 import { useOutsourced } from "../providers/outsourced";
 import { useAuth } from "../providers/auth";
 
+
 const UserBar = (props) => {
-  const {setIsLoggedIn} = useAuth();
+
   const {isOutsourced} = useOutsourced();
+  const {setIsLoggedIn} = useAuth();
 
   const [open, setOpen] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(false);
   const navigate = useNavigate();
+
+
+  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -60,6 +66,7 @@ const UserBar = (props) => {
   const handleClose = () => {
     setAnchorEl(false);
   };
+  console.log(isOutsourced)
 
   return (
     <div data-testid="user-bar">
@@ -140,7 +147,7 @@ const UserBar = (props) => {
                     </Link>
                   </MenuItem>
 
-                  {props.isOutsourced ? (
+                  {isOutsourced ? (
                     <MenuItem>
                       <Link to="/contribuicoes">
                         <div style={{ display: "flex" }}>

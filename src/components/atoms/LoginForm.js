@@ -8,10 +8,12 @@ import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useAuth } from "../providers/auth";
+import { useOutsourced } from "../providers/outsourced";
 
 const LoginForm = (props) => {
 
   const {setIsLoggedIn} = useAuth();
+  const {setIsOutsourced} = useOutsourced();
 
   const [emailFormData, setEmailFormData] = useState();
   const [passwordFormData, setPasswordFormData] = useState();
@@ -107,7 +109,11 @@ const LoginForm = (props) => {
             localStorage.setItem("userId", userId);
             localStorage.setItem("isLoggedIn", true);
             setIsLoggedIn(true);
+            setIsOutsourced(response.data.user.isOutsourced)
             navigate("/conta");
+            
+            
+            
           })
           .catch((error) => {
             setpostController(false);
