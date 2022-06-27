@@ -206,8 +206,8 @@ const Navbar = (props) => {
               FAQ
             </Link>
             
-            <Link to={isLoggedIn ? "/conta" : "/login"} className={classes.typo}>
-              {isLoggedIn ? " Conta" : "Entrar"}
+            <Link to={localStorage.getItem("isLoggedIn") ? "/conta" : "/login"} className={classes.typo}>
+              {localStorage.getItem("isLoggedIn") ? " Conta" : "Entrar"}
             </Link>
           </Box>
         </Toolbar>

@@ -40,7 +40,7 @@ const LoginForm = (props) => {
   };
 
   const errorControllerHandler = (e) => {
-    if (e === "Invalid password") {
+    if (e === "Senha inválida") {
       setErrorPasswordController(true);
       setErrorPasswordMessage(e);
       setPreviousPassword(passwordFormData);
@@ -107,7 +107,7 @@ const LoginForm = (props) => {
             const userId = response.data.user._id;
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("userId", userId);
-            localStorage.setItem("isLoggedIn", true);
+            
             
             setIsLoggedIn(true);
             setIsOutsourced(response.data.user.isOutsourced)
