@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import Description from "../atoms/Description";
 import classes from "./stylesheet/Home.module.css";

@@ -11,14 +11,14 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 import HelpIcon from '@mui/icons-material/Help';
-import {useAuth} from "../providers/auth";
+
 
 import { Typography, Menu, MenuItem } from "@mui/material";
 
 const Navbar = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(false);
 
-  const { isLoggedIn } = useAuth();
+  
 
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
