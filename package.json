@@ -30,7 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --silent --noStackTrace --maxWorkers=50%",
-    "test:ci": "react-scripts test --watchAll=false",
+    "test:ci": "react-scripts test --watchAll=false --silent --maxWorkers=2",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "test:commit": "react-scripts test --watchAll=false --bail --findRelatedTests"
