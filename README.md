@@ -1,5 +1,4 @@
 
-# Deploy realizado em: https://juntosifpb.netlify.app/
 
 
 # Getting Started with Create React App
