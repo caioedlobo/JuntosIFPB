@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@mui/material";
+import { Alert, Button, Snackbar, Stack } from "@mui/material";
 import LoginText from "./LoginText";
 import ImageLogin from "./ImageLogin";
 import HeightFormHandler from "./HeightFormHandler";
@@ -23,6 +23,17 @@ const ForgotPasswordForm = (props) => {
   const emailForgotPassword = (e) => {
     setEmailForgotPasswordData(e)
   }
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   return (
     <form
       data-testid="forgot-password-form"
@@ -39,6 +50,11 @@ const ForgotPasswordForm = (props) => {
          await Axios.post(`https://backendjuntosifpb.herokuapp.com/auth/forgot_password`, {
           email: emailForgotPasswordData,
           
+        }).then(() => {
+          console.log("teste")
+          setOpen(true)
+        }).catch(() => {
+          setOpen(true)
         })
         
       }
@@ -47,7 +63,7 @@ const ForgotPasswordForm = (props) => {
       <ImageLogin />
       <HeightFormHandler />
       <p /* style={{marginTop: "30px"}} */>	
-        Insira seu e-mail para procurar a sua conta.
+        Insira seu e-mail para recuperar a sua conta.
       </p>
       <LoginText emailLoginData={emailForgotPassword}/>
 
@@ -55,6 +71,13 @@ const ForgotPasswordForm = (props) => {
       <Button type="submit" >Enviar</Button>
       <HeightFormHandler />
       <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerPassword}>Voltar para o Login</Button>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Um email foi enviado para recuperar sua conta
+          </Alert>
+        </Snackbar>
+              </Stack>
     </form>
   );
 };

@@ -65,21 +65,6 @@ const LoginFormHandler = () => {
     );
   }
 
-  /* if (isLoginForm && !isForgotPasswordForm) {
-    return (
-      <div data-testid="login-form-handler"> */
-
-  /* {isLoginForm ? (
-        <LoginForm FormHandlerRegister={FormHandler} />
-      ) : isForgotPasswordForm ? (
-        <ForgotPasswordForm FormHandlerPassword={FormHandlerForgotPassword} />
-      ) : (
-        <RegisterForm FormHandlerRegister={FormHandler} />
-      )} */
-
-  /* {<RegisterForm />}
-      </div>
-    ); */
 };
 
 export default LoginFormHandler;
