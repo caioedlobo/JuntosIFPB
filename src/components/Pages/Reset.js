@@ -2,12 +2,21 @@ import React, { useState } from "react";
 import Layout from "../template/Layout";
 import classesCommon from "./stylesheet/Common.module.css";
 import imageReset from "./../../assets/undraw_forgot_password_re_hxwm.svg";
-import { Box, Button } from "@mui/material";
+import { Alert, Box, Button, Snackbar, Stack } from "@mui/material";
 import ResetPasswordText from "../atoms/ResetPasswordText";
 import Axios from "axios";
 
 const Reset = () => {
   const [resetPassword, setResetPassword] = useState();
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const resetPasswordData = (e) => {
     setResetPassword(e);
@@ -48,7 +57,9 @@ const Reset = () => {
                 password: resetPassword,
                 token: token,
               }
-            );
+            ).then(() => {
+              setOpen(true)
+            });
           }}
         >
           <Box
@@ -74,6 +85,13 @@ const Reset = () => {
             <Button type="submit">Enviar</Button>
           </Box>
         </form>
+        <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Status da demanda alterado com sucesso!
+          </Alert>
+        </Snackbar>
+              </Stack>
       </Box>
     </Layout>
   );

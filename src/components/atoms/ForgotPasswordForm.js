@@ -55,6 +55,7 @@ const ForgotPasswordForm = (props) => {
       <Button type="submit" >Enviar</Button>
       <HeightFormHandler />
       <Button sx={{backgroundColor:"transparent"}} onClick={props.FormHandlerPassword}>Voltar para o Login</Button>
+      
     </form>
   );
 };
