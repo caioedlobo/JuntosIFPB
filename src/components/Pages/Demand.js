@@ -3,6 +3,8 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Layout from '../template/Layout'
 import classesCommon from "./stylesheet/Common.module.css";
+import CircularProgress from '@mui/material/CircularProgress';
+
 const Demand = () => {
   const [data, setData] = useState({
     
@@ -19,7 +21,7 @@ const Demand = () => {
   console.log(data)
     useEffect(() => {
         const id = window.location.pathname.split("/")[2];
-        Axios.get(`https://backendjuntosifpb.herokuapp.com/demands/${id}`,
+        Axios.get(`https://backendjuntosifpb.herokuapp.com/ranking/${id}`,
         {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("accessToken"),
@@ -50,7 +52,12 @@ const Demand = () => {
             Demanda
         </Typography>
         </Box>
-        <div style={{display: "flex", flexDirection: "column",}}>
+        {data.id === "" ? 
+        <div style={{textAlign: "center"}}>
+          <CircularProgress color="success" /> 
+          </div>
+          : 
+          <div style={{display: "flex", flexDirection: "column",}}>
             <div style={{display:"flex", flexDirection: "row", marginBottom: "10px"}}>
             <p style={{fontWeight:"bold"}}> Usuário:&nbsp;
             </p>
@@ -71,8 +78,8 @@ const Demand = () => {
             </p>
             <Typography variant='h7'>{data.status}</Typography>
             </div>
-            
-        </div>
+        </div>}
+
         </div>
         </Box>
     </Layout>
