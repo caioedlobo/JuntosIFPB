@@ -55,7 +55,7 @@ const CpfForm = (props) => {
             props.CpfHandler();
           })
           .catch((err) => {
-            //Mensagem de erro
+            
             setError(true);
             setHelperText(err.response.data.error);
             setPostController(false);
@@ -84,7 +84,7 @@ const CpfForm = (props) => {
           <FormControlLabel
             value="Terceirizado"
             control={<Radio />}
-            label="Terceirizado"
+            label="Téc.Adm/Terceirizado"
           />
         </RadioGroup>
       </FormControl>
