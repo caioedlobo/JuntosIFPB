@@ -88,7 +88,7 @@ const Reset = () => {
         <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
           <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          Status da demanda alterado com sucesso!
+          Senha alterada com sucesso!
           </Alert>
         </Snackbar>
               </Stack>
