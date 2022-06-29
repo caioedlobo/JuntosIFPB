@@ -84,7 +84,7 @@ const CpfForm = (props) => {
           <FormControlLabel
             value="Terceirizado"
             control={<Radio />}
-            label="Terceirizado"
+            label="Téc Administrativo/Terceirizado"
           />
         </RadioGroup>
       </FormControl>
