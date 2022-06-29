@@ -9,6 +9,7 @@ import Axios from "axios";
 const Reset = () => {
   const [resetPassword, setResetPassword] = useState();
   const [open, setOpen] = useState(false);
+  const [openError, setOpenError] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -16,6 +17,7 @@ const Reset = () => {
     }
 
     setOpen(false);
+    setOpenError(false);
   };
 
   const resetPasswordData = (e) => {
@@ -23,12 +25,18 @@ const Reset = () => {
   };
 
   function hex_to_ascii(str1) {
-    const hex = str1.toString();
-    let str = "";
-    for (var n = 0; n < hex.length; n += 2) {
-      str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
+    try{
+      const hex = str1.toString();
+      let str = "";
+      for (var n = 0; n < hex.length; n += 2) {
+        str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
+      }
+      return str;
     }
-    return str;
+    catch{
+      
+      setOpenError(true)
+    }
   }
 
   return (
@@ -58,7 +66,10 @@ const Reset = () => {
                 token: token,
               }
             ).then(() => {
-              setOpen(true)
+              setOpen(true);
+            }).catch(() => {
+              
+              setOpen(false);
             });
           }}
         >
@@ -89,6 +100,14 @@ const Reset = () => {
         <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
           <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           Senha alterada com sucesso!
+          </Alert>
+        </Snackbar>
+              </Stack>
+
+              <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={openError} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          Erro ao alterar senha!
           </Alert>
         </Snackbar>
               </Stack>
