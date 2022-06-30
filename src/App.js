@@ -10,6 +10,7 @@ import Contributions from "./components/Pages/Contributions";
 import DemandsSector from "./components/Pages/DemandsSector";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Faq from "./components/Pages/Faq";
+import Help from "./components/Pages/Help";
 import Demand from "./components/Pages/Demand";
 /* import Axios from "axios";
 Axios.create({baseURL: "https://backendjuntosifpb.herokuapp.com"}) */
@@ -25,7 +26,7 @@ function App() {
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/contato" element={<Contact />} />
             <Route path="/faq" element={<Faq />} />
-            <Route path="/ajuda" element={<Contact />} />
+            <Route path="/ajuda" element={<Help/>} />
             <Route path="/login/*" element={<Home />} />
 
             <Route path="/seguranca" element={<Security/>} />
