@@ -1,10 +1,22 @@
-import React from "react";
-import { TextField } from "@mui/material";
+import React, {useState} from "react";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const ResetPasswordText = (props) => {
   const handlePasswordData = (event) => {
     props.passwordData(event.target.value);
   };
+
+const [showPassword, setShowPassword] = useState("password")
+
+const handleShowPassword = () => {
+  if (showPassword === "password"){
+    setShowPassword("text")
+  }
+  else{
+    setShowPassword("password")
+  }     
+}
 
   return (
     <div
@@ -17,7 +29,14 @@ const ResetPasswordText = (props) => {
         style={{ width: "70%", margin: " 30px 50px" }}
         onChange={handlePasswordData}
         required
-        type="password"
+        type={showPassword}
+        InputProps={{
+          endAdornment: 
+          <InputAdornment position='end'>
+            <IconButton onClick={handleShowPassword} size="small">
+              {showPassword === "text" ? <VisibilityOff/> : <Visibility/>}
+            </IconButton>
+        </InputAdornment>}}
       >
         Email
       </TextField>
