@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import { Zoom } from "@mui/material";
+import { Alert, Snackbar, Stack, Zoom } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 /* import DialogActions from "@mui/material/DialogActions"; */
@@ -87,11 +87,30 @@ const FloatRankingButton = () => {
 
   const [postController, setPostController] = useState(false);
 
-  const submitForm = () => {
-    setPostController(true);
-    if (demand !== 0) {
-      //console.log(demand, description);
+  const [openSucess, setOpenSucess] = useState(false);
+  const [openError, setOpenError] = useState(false);
+  const [openInfo, setOpenInfo] = useState(false);
 
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSucess(false);
+    setOpenError(false);
+    setOpenInfo(false);
+  };
+
+  const submitForm = () => {
+    
+
+    if (demand.length === 0 || description.length === 0 || sector.length === 0){
+      setOpenInfo(true)
+    }
+    else if (demand !== 0) {
+      //console.log(demand, description);
+      setPostController(true);
+      
       Axios.post(
         "https://backendjuntosifpb.herokuapp.com/demands",
         {
@@ -108,12 +127,15 @@ const FloatRankingButton = () => {
       )
         .then((res) => {
           setPostController(false);
+          setOpenSucess(true)
           handleClose();
         })
         .catch((err) => {
+          setOpenError(true)
           setPostController(false);
         });
     } else {
+      setPostController(true);
       //console.log(otherDemand, description);
       Axios.post(
         "https://backendjuntosifpb.herokuapp.com/demands",
@@ -130,10 +152,12 @@ const FloatRankingButton = () => {
         }
       )
         .then((res) => {
+          setOpenSucess(true)
           setPostController(false);
           handleClose();
         })
         .catch((err) => {
+          setOpenError(true)
           setPostController(false);
         });
     }
@@ -202,6 +226,7 @@ const FloatRankingButton = () => {
                 style={{ width: "100%", marginBottom: "20px" }}
                 label="Digite a sua demanda"
                 onChange={handleOtherChangeDemand}
+                required={true}
               ></TextField>
               <FormControl fullWidth>
                 <InputLabel
@@ -255,6 +280,7 @@ const FloatRankingButton = () => {
             rows={3}
             variant="outlined"
             onChange={descriptionChangeHandler}
+            required={true}
           ></TextField>
 
           <FormGroup sx={{ marginBottom: "15px" }}>
@@ -276,6 +302,31 @@ const FloatRankingButton = () => {
           </LoadingButton>
         </DialogContent>
       </Dialog>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={openSucess} autoHideDuration={3000} onClose={handleCloseSnackbar} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
+          <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+          Demanda enviada com sucesso!
+          </Alert>
+        </Snackbar>
+      </Stack>
+
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseSnackbar} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
+          <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
+          Erro ao enviar demanda!
+          </Alert>
+        </Snackbar>
+      </Stack>
+
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={openInfo} autoHideDuration={3000} onClose={handleCloseSnackbar} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
+          <Alert onClose={handleCloseSnackbar} severity="info" sx={{ width: '100%' }}>
+          Preencha todos os campos!
+          </Alert>
+        </Snackbar>
+      </Stack>
+
+          
     </div>
   );
 };
