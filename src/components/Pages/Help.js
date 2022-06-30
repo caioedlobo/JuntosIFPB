@@ -3,12 +3,22 @@ import Layout from "../template/Layout";
 import YouTube from 'react-youtube';
 import classesCommon from "./stylesheet/Common.module.css";
 import { Box, Typography } from '@mui/material';
+
 const Help = () => {
 
-    /* const opts = {height: '200', width: '150'} */
 
   return (
     <Layout>
+        <Box className={classesCommon.form} sx={{marginBottom: "30px", width: {sm: "620px", xs: "320px"}, padding: "20px"}}>
+        <Typography variant='h5' style={{ lineHeight: "22px", marginBottom: "15px"  }}>Olá, como podemos ajudar você? 
+            </Typography>
+            <Typography variant='h7' style={{ lineHeight: "22px", marginBottom: "10px"  }}>Nessa página será disponibilizado um manual que auxilia a utilização das funções básicas do sistema, além disso, também há tutoriais gravados demonstrando o funcionamento do sistema. Para acessar o PDF do manual, clique no link abaixo:
+            </Typography>
+            
+            <a  style={{lineHeight: "22px"}}href="https://drive.google.com/file/d/1h0jYBjhz_5HdAFj-C-64rZ6I6TyqXu5x/view?usp=sharing">Clique aqui para acessar o manual</a>
+
+            
+        </Box>
         <div className={classesCommon.form} style={{marginBottom: "30px"}}>
         <Box
         sx={{padding: "30px 0px", width:{ sm: "600px", xs: "300px"}}} >
