@@ -13,6 +13,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+/* import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'; */
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import AddModeratorIcon from '@mui/icons-material/AddModerator';
 import {
   CardActions,
   Card,
@@ -33,8 +36,8 @@ import { useAuth } from "../providers/auth";
 
 const UserBar = (props) => {
 
-  const {isOutsourced} = useOutsourced();
-  const {setIsLoggedIn} = useAuth();
+  const { isOutsourced } = useOutsourced();
+  const { setIsLoggedIn } = useAuth();
 
   const [open, setOpen] = useState(false);
 
@@ -42,7 +45,7 @@ const UserBar = (props) => {
   const navigate = useNavigate();
 
 
-  
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -53,7 +56,7 @@ const UserBar = (props) => {
   };
 
   const handleDisconnect = () => {
-    
+
     setIsLoggedIn(false);
     localStorage.clear();
     navigate("/");
@@ -240,6 +243,34 @@ const UserBar = (props) => {
                   </Typography>
                 </LayoutUserBar>
               ) : null}
+
+              <LayoutUserBar linkTo={"/servidores"}>
+                <HowToRegIcon />
+                <Typography style={{ paddingLeft: "5px" }}>
+                  Servidores
+                </Typography>
+              </LayoutUserBar>
+
+              <LayoutUserBar linkTo={"/setor"}>
+                <AddModeratorIcon />
+                <Typography style={{ paddingLeft: "5px" }}>
+                  Setor
+                </Typography>
+              </LayoutUserBar>
+
+              <LayoutUserBar linkTo={"/demandas"}>
+                <AddModeratorIcon />
+                <Typography style={{ paddingLeft: "5px" }}>
+                  Status
+                </Typography>
+              </LayoutUserBar>
+
+              <LayoutUserBar linkTo={"/demandas"}>
+                <AddModeratorIcon />
+                <Typography style={{ paddingLeft: "5px" }}>
+                  Demandas
+                </Typography>
+              </LayoutUserBar>
 
               <Button
                 sx={{
