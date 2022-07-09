@@ -1,13 +1,13 @@
 import React from 'react'
 import { LoadingButton } from '@mui/lab'
-import { Box, Card, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material'
+import { Alert, Box, Card, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Snackbar, Stack, TextField, Typography } from '@mui/material'
 import Axios from "axios"
 const StatusAdminCard = () => {
 
     const [status, setStatus] = React.useState("")
 
     const [postController, setPostController] = React.useState(false)
-    const [isRegister, setIsRegister] = React.useState(true)
+    const [isRegister, setIsRegister] = React.useState(undefined)
 
     const valueChangeHandler = (event) => {
         if ("Cadastrar" === event.target.value) {
@@ -16,43 +16,64 @@ const StatusAdminCard = () => {
         return setIsRegister(false);
     };
 
+    const [open, setOpen] = React.useState(false);
+    const [openError, setOpenError] = React.useState(false);
+    const [openInfo, setOpenInfo] = React.useState(false);
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen(false);
+      setOpenError(false);
+      setOpenInfo(false);
+    };
+
     const handleSubmit = () => {
-        if(isRegister){
+
+        if(status.length === 0 || isRegister === undefined) {
+            setOpenInfo(true);
+        }
+
+        else if (isRegister) {
             setPostController(true)
             Axios.post("https://backendjuntosifpb.herokuapp.com/admin/status", {
                 title: status
-            },{
+            }, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
             }
-                
+
             )
-            .then(() => {
-                setPostController(false)
-                setIsRegister(false)
-                setStatus("")
-            })
-            .catch(() => {
-                setPostController(false)
-            }
-            )
-        }
-        else{
-            setPostController(true)
-                Axios.put("https://backendjuntosifpb.herokuapp.com/admin//:statusName",{
-                    
+                .then(() => {
+                    setOpen(true);
+                    setPostController(false)
+                    setIsRegister(false)
+                    setStatus("")
                 })
-            .then(() => {
-                setPostController(false)
-                setIsRegister(false)
-                setStatus("")
-            }
-            )
-            .catch(() => {
-                setPostController(false)
-            }
-            )
+                .catch(() => {
+                    setOpenError(true);
+                    setPostController(false)
+                }
+                )
+        }
+        else {
+            setPostController(true)
+            Axios.put("https://backendjuntosifpb.herokuapp.com/admin//:statusName", {
+
+            })
+                .then(() => {
+                    setPostController(false)
+                    setIsRegister(false)
+                    setStatus("")
+                }
+                )
+                .catch(() => {
+                    setPostController(false)
+                }
+                )
         }
     }
 
@@ -94,15 +115,16 @@ const StatusAdminCard = () => {
                         >
                             GERENCIAMENTO DE STATUS
                         </Typography>
-                        <FormControl sx={{marginTop: "70px", marginBottom: "30px"}}>
+                        <FormControl sx={{ marginTop: "70px", marginBottom: "30px" }}>
                             <FormLabel id="demo-radio-buttons-group-label">
                                 Selecione a ação:
                             </FormLabel>
                             <RadioGroup
                                 aria-labelledby="demo-radio-buttons-group-label"
-                                defaultValue="Docente/Discente"
                                 name="radio-buttons-group"
-                            onChange={valueChangeHandler}
+                                onChange={valueChangeHandler}
+                                defaultValue="Cadastrar"
+                                
                             >
                                 <FormControlLabel
                                     value="Cadastrar"
@@ -126,14 +148,14 @@ const StatusAdminCard = () => {
                                 gap: "30px",
                             }}
                         >
-                            <TextField required={true} label={isRegister ? "Digite o nome do status que deseja adicionar": "Digite o nome do status que deseja remover"}
-                            onChange={(event) => setStatus(event.target.value)}
+                            <TextField required={true} label={isRegister === false ? "Digite o nome do status que deseja remover" : "Digite o nome do status que deseja adicionar"}
+                                onChange={(event) => setStatus(event.target.value)}
                             />
 
 
 
                         </Box>
-                        
+
                         <Box
                             sx={{
                                 display: "flex",
@@ -145,10 +167,34 @@ const StatusAdminCard = () => {
                         >
 
 
-                            <LoadingButton variant="contained"  sx={{marginTop: "40px"}}type="submit" loading={postController} onClick={handleSubmit}>
+                            <LoadingButton variant="contained" sx={{ marginTop: "40px" }} type="submit" loading={postController} onClick={handleSubmit}>
                                 Salvar Alterações
                             </LoadingButton>
                         </Box>
+
+                        <Stack spacing={2} sx={{ width: '100%' }}>
+                            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
+                                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                                    Ação realizada com sucesso!
+                                </Alert>
+                            </Snackbar>
+                        </Stack>
+
+                        <Stack spacing={2} sx={{ width: '100%' }}>
+                            <Snackbar open={openError} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
+                                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                                    Erro ao criar status. Tente novamente
+                                </Alert>
+                            </Snackbar>
+                        </Stack>
+
+                        <Stack spacing={2} sx={{ width: '100%' }}>
+                            <Snackbar open={openInfo} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
+                                <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
+                                   Preencha todos os campos!
+                                </Alert>
+                            </Snackbar>
+                        </Stack>
                     </Box>
                 </Card>
             </Box>

@@ -268,7 +268,7 @@ const UserBar = (props) => {
               <LayoutUserBar linkTo={"/demandas"}>
                 <AddModeratorIcon />
                 <Typography style={{ paddingLeft: "5px" }}>
-                  Demandas
+                  Gerenciar Demandas
                 </Typography>
               </LayoutUserBar>
 
