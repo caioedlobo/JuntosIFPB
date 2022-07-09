@@ -14,6 +14,7 @@ import Help from "./components/Pages/Help";
 import Demand from "./components/Pages/Demand";
 import Outsourced from "./components/Pages/Outsourced";
 import SectorAdmin from "./components/Pages/SectorAdmin";
+import StatusAdmin from "./components/Pages/StatusAdmin";
 /* import Axios from "axios";
 Axios.create({baseURL: "https://backendjuntosifpb.herokuapp.com"}) */
 function App() {
@@ -30,12 +31,12 @@ function App() {
             <Route path="/faq" element={<Faq />} />
             <Route path="/ajuda" element={<Help/>} />
             <Route path="/login/*" element={<Home />} />
-
             <Route path="/seguranca" element={<Security/>} />
             <Route path="/contribuicoes" element={<Contributions />} />
             <Route path="/demandas" element={<DemandsSector />} />
             <Route path="/servidores" element={<Outsourced />} />
             <Route path="/setor" element={<SectorAdmin />} />
+            <Route path="/status" element={<StatusAdmin />} />
             <Route path="/resetar_senha/*" element={<Reset />} />
             <Route path="/demanda/*" element={<Demand />} />
             <Route path="*" element={<h1>Página não encontrada</h1>} />
