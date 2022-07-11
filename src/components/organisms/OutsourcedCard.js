@@ -1,4 +1,4 @@
-import { Box, Card, Typography } from '@mui/material'
+import { Box, Card, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography, TextField } from '@mui/material'
 import React from 'react'
 import { theme } from '../../theme';
 
@@ -42,9 +42,17 @@ const OutsourcedCard = () => {
 
             justifyContent: "center",
 
-            /* width:"40px",
-            backgroundr: "blue" */
+
         },
+    };
+
+    const [isOutsourced, setIsOutsourced] = React.useState(false);
+    const [server, setServer] = React.useState("");
+    const valueChangeHandler = (event) => {
+        if ("Terceirizado" === event.target.value) {
+            return setIsOutsourced(true);
+        }
+        return setIsOutsourced(false);
     };
     return (
         <div>
@@ -84,6 +92,46 @@ const OutsourcedCard = () => {
                         >
                             CADASTRO DE SERVIDORES
                         </Typography>
+
+                        <FormControl sx={{ marginTop: "70px", marginBottom: "30px" }}>
+                            <FormLabel id="demo-radio-buttons-group-label">
+                                Selecione uma opção:
+                            </FormLabel>
+                            <RadioGroup
+                                aria-labelledby="demo-radio-buttons-group-label"
+                                name="radio-buttons-group"
+                                onChange={valueChangeHandler}
+                                defaultValue="Terceirizado"
+                                
+                            >
+                                <FormControlLabel
+                                    value="Terceirizado"
+                                    control={<Radio />}
+                                    label="Terceirizado"
+                                />
+                                <FormControlLabel
+                                    value="Tec Administrativo"
+                                    control={<Radio />}
+                                    label="Téc Administrativo"
+                                />
+                            </RadioGroup>
+                        </FormControl>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                marginTop: "20px",
+                                width: { md: "70%", xs: "90%" },
+                                gap: "30px",
+                            }}
+                        >
+                            <TextField required={true} label={isOutsourced === false ? "Digite o email do Téc Administrativo que deseja adicionar" : "Digite o CPF do terceirizado que deseja adicionar"}
+                                onChange={(event) => setServer(event.target.value)}
+                            />
+
+
+
+                        </Box>
                     </Box>
                 </Card>
             </Box>
