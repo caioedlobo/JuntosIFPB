@@ -1,59 +1,151 @@
-import { Box, Card, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography, TextField } from '@mui/material'
+import { Box, Card, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography, TextField, Stack, Snackbar, Alert } from '@mui/material'
 import React from 'react'
-import { theme } from '../../theme';
+import InputMask from "react-input-mask";
+import { LoadingButton } from '@mui/lab';
+import Axios from "axios"
 
 const OutsourcedCard = () => {
 
-    const sx = {
-        table: {
-            minWidth: "300px",
-        },
-        tableContainer: {
-            borderRadius: "5px",
-            margin: "10px 0",
-            maxWidth: "600px",
-        },
-        tableHeaderCell: {
-            fontWeight: "bold",
-            background: "#2d7e27",
-            /* color: theme.palette.getContrastText(theme.palette.primary.dark), */
-            //  color: theme.palette.common.dark,
-            color: "white",
-            textAlign: "center !important",
-        },
-        tableCell: {
-            textAlign: "center !important",
-        },
-        avatar: {
-            backgroundColor: theme.palette.grey[400],
-            color: theme.palette.getContrastText(theme.palette.grey[400]),
-        },
-        name: {
-            fontWeight: "bold",
-            color: theme.palette.secondary.dark,
-        },
-        status: {
-            fontWeight: "bold",
-            color: theme.palette.common.white,
-            backgroundColor: "grey",
-            borderRadius: "8px",
-            padding: "2px 6px",
-            display: "flex",
-
-            justifyContent: "center",
 
 
-        },
-    };
+    const [isOutsourced, setIsOutsourced] = React.useState(true);
+    const [isRegister, setIsRegister] = React.useState(true);
+    const [sector, setSector] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [cpfValue, setCpfValue] = React.useState("");
+    const [postController, setPostController] = React.useState(false);
 
-    const [isOutsourced, setIsOutsourced] = React.useState(false);
-    const [server, setServer] = React.useState("");
+    const [open, setOpen] = React.useState(false);
+    const [openError, setOpenError] = React.useState(false);
+    const [openInfo, setOpenInfo] = React.useState(false);
+    console.log(isOutsourced)
     const valueChangeHandler = (event) => {
         if ("Terceirizado" === event.target.value) {
             return setIsOutsourced(true);
         }
         return setIsOutsourced(false);
     };
+
+    const actionChangeHandler = (event) => {
+        if ("Cadastrar" === event.target.value) {
+            return setIsRegister(true);
+        }
+        return setIsRegister(false);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+        setOpenError(false);
+        setOpenInfo(false);
+    };
+
+    const handleSubmit = () => {
+        if (isRegister) { //cadastrar
+            if (isOutsourced) {       //terceirizado
+                if (cpfValue.length !== 0 && sector.length !== 0) { //cpf e setor preenchidos
+                    setPostController(true);
+                    Axios.post("https://backendjuntosifpb.herokuapp.com/admin/outsourced", {
+                        cpf: cpfValue,
+                        sector: sector
+                    }, {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                        }
+                    }).then(() => {
+                        setOpen(true);
+                        setPostController(false);
+                        setCpfValue("");
+                        setSector("");
+                    })
+                        .catch(() => {
+                            setOpenError(true);
+                            setPostController(false);
+
+                        })
+                }
+
+                else {       //sem cpf ou sem setor
+                    setOpenInfo(true);
+                }
+
+            }
+            else {       // tec administrativo
+                if (email.length !== 0 && sector.length !== 0) { //email e setor preenchidos
+                    setPostController(true);
+                    Axios.post("https://backendjuntosifpb.herokuapp.com/admin/tecAdmin", {
+                        email: email,
+                        sector: sector
+                    }, {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                        }
+                    }).then(() => {
+                        setOpen(true);
+                        setPostController(false);
+                        setCpfValue("");
+                        setSector("");
+                    })
+                        .catch(() => {
+                            setOpenError(true);
+                            setPostController(false);
+
+                        })
+                }
+                else {       //sem email ou sem setor
+                    setOpenInfo(true);
+                }
+            }
+        }
+        else {       //remover
+            if (isOutsourced) {       //terceirizado
+                if (cpfValue.length !== 0) { //cpf  preenchido
+                    setPostController(true);
+                    Axios.delete(`https://backendjuntosifpb.herokuapp.com/admin/${"teste"}`)
+                        .then(() => {
+                            setOpen(true);
+                            setPostController(false);
+                            setCpfValue("");
+                            setSector("");
+                        })
+                        .catch(() => {
+                            setOpenError(true);
+                            setPostController(false);
+
+                        })
+                }
+
+                else {       //sem cpf
+                    setOpenInfo(true);
+                }
+
+            }
+            else {       // tec administrativo
+                if (email.length !== 0) { //email preenchido
+                    setPostController(true);
+                    Axios.delete(`https://backendjuntosifpb.herokuapp.com/admin/${"teste"}`)
+                        .then(() => {
+                            setOpen(true);
+                            setPostController(false);
+                            setCpfValue("");
+                            setSector("");
+                        })
+                        .catch(() => {
+                            setOpenError(true);
+                            setPostController(false);
+
+                        })
+                }
+                else {       //sem email
+                    setOpenInfo(true);
+                }
+            }
+
+        }
+    }
     return (
         <div>
             <Box
@@ -92,46 +184,173 @@ const OutsourcedCard = () => {
                         >
                             CADASTRO DE SERVIDORES
                         </Typography>
+                        <Box sx={{ display: "flex", flexDirection: "row", marginLeft: "20px" }}>
 
-                        <FormControl sx={{ marginTop: "70px", marginBottom: "30px" }}>
-                            <FormLabel id="demo-radio-buttons-group-label">
-                                Selecione uma opção:
-                            </FormLabel>
-                            <RadioGroup
-                                aria-labelledby="demo-radio-buttons-group-label"
-                                name="radio-buttons-group"
-                                onChange={valueChangeHandler}
-                                defaultValue="Terceirizado"
-                                
-                            >
-                                <FormControlLabel
-                                    value="Terceirizado"
-                                    control={<Radio />}
-                                    label="Terceirizado"
-                                />
-                                <FormControlLabel
-                                    value="Tec Administrativo"
-                                    control={<Radio />}
-                                    label="Téc Administrativo"
-                                />
-                            </RadioGroup>
-                        </FormControl>
+                            <FormControl sx={{ marginTop: "70px", marginBottom: "30px", marginRight: "20px" }}>
+                                <FormLabel id="demo-radio-buttons-group-label">
+                                    Selecione uma ação:
+                                </FormLabel>
+                                <RadioGroup
+                                    aria-labelledby="demo-radio-buttons-group-label"
+                                    name="radio-buttons-group"
+                                    onChange={actionChangeHandler}
+                                    defaultValue="Cadastrar"
+
+                                >
+                                    <FormControlLabel
+                                        value="Cadastrar"
+                                        control={<Radio />}
+                                        label="Cadastrar"
+                                    />
+                                    <FormControlLabel
+                                        value="Remover"
+                                        control={<Radio />}
+                                        label="Remover"
+                                    />
+                                </RadioGroup>
+                            </FormControl>
+                            <FormControl sx={{ marginTop: "70px", marginBottom: "30px" }}>
+                                <FormLabel id="demo-radio-buttons-group-label">
+                                    Selecione o tipo de servidor:
+                                </FormLabel>
+                                <RadioGroup
+                                    aria-labelledby="demo-radio-buttons-group-label"
+                                    name="radio-buttons-group"
+                                    onChange={valueChangeHandler}
+                                    defaultValue="Terceirizado"
+
+                                >
+                                    <FormControlLabel
+                                        value="Terceirizado"
+                                        control={<Radio />}
+                                        label="Terceirizado"
+                                    />
+                                    <FormControlLabel
+                                        value="Tec Administrativo"
+                                        control={<Radio />}
+                                        label="Téc Administrativo"
+                                    />
+                                </RadioGroup>
+                            </FormControl>
+
+
+                        </Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                marginTop: "20px",
+                                width: { md: "70%", xs: "90%" },
+                                gap: "30px",
+                            }}
+                        >
+                            {/* <TextField required={true} label={isOutsourced === false ? "Digite o email do Téc Administrativo que deseja adicionar" : "Digite o CPF do terceirizado que deseja adicionar"}
+                                onChange={(event) => setServer(event.target.value)}
+                            /> */}
+                            {isOutsourced ? (
+                                <Box sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+
+                                    marginTop: "20px",
+                                    width: { md: "70%", xs: "90%" },
+                                    gap: "30px",
+                                }}>
+                                    <Box sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignSelf: "center",
+                                        width: { md: "40%", xs: "40%" },
+
+                                    }}>
+                                        <InputMask
+
+                                            mask="999.999.999-99"
+                                            value={cpfValue}
+                                            /* maskChar=" " */
+                                            alwaysShowMask={true}
+                                            disabled={false}
+
+                                            onChange={(e) => {
+                                                setCpfValue(e.target.value);
+                                                /*                  setError(false);
+                                                                 setHelperText(""); */
+                                            }}
+                                        >
+                                            {() => (
+                                                <TextField
+                                                    variant="outlined"
+                                                    label="Digite o CPF do terceirizado"
+                                                    required
+                                                /*                                         error={error}
+                                                                                        helperText={helperText}
+                                                                                        color={numbers.includes(cpfValue[13]) ? "success" : null} */
+                                                />
+                                            )}
+                                        </InputMask>
+                                    </Box>
+                                    {isRegister ? <TextField required={true} label="Digite o setor do Téc Administrativo"
+                                        onChange={(event) => setSector(event.target.value)} /> : null}
+                                </Box>
+
+
+                            )
+                                : <Box sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    marginTop: "20px",
+                                    width: { md: "70%", xs: "90%" },
+                                    gap: "30px",
+                                }}>
+                                    <TextField required={true} label="Digite o email do Téc Administrativo que deseja adicionar"
+                                        onChange={(event) => setEmail(event.target.value)} />
+
+                                    {isRegister ? <TextField required={true} label="Digite o setor do Téc Administrativo"
+                                        onChange={(event) => setSector(event.target.value)} /> : null}
+
+
+                                </Box>}
+
+                        </Box>
                         <Box
                             sx={{
                                 display: "flex",
                                 flexDirection: "column",
                                 marginTop: "20px",
                                 width: { md: "70%", xs: "90%" },
-                                gap: "30px",
+                                gap: "50px",
                             }}
                         >
-                            <TextField required={true} label={isOutsourced === false ? "Digite o email do Téc Administrativo que deseja adicionar" : "Digite o CPF do terceirizado que deseja adicionar"}
-                                onChange={(event) => setServer(event.target.value)}
-                            />
 
-
-
+                            <LoadingButton variant="contained" sx={{ marginTop: "40px" }} type="submit" loading={postController} onClick={handleSubmit}>
+                                Salvar Alterações
+                            </LoadingButton>
                         </Box>
+
+                        <Stack spacing={2} sx={{ width: '100%' }}>
+                            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
+                                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                                    Ação realizada com sucesso!
+                                </Alert>
+                            </Snackbar>
+                        </Stack>
+
+                        <Stack spacing={2} sx={{ width: '100%' }}>
+                            <Snackbar open={openError} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
+                                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                                    Erro ao realizar ação. Tente novamente.
+                                </Alert>
+                            </Snackbar>
+                        </Stack>
+
+                        <Stack spacing={2} sx={{ width: '100%' }}>
+                            <Snackbar open={openInfo} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
+                                <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
+                                    Preencha todos os campos!
+                                </Alert>
+                            </Snackbar>
+                        </Stack>
                     </Box>
                 </Card>
             </Box>

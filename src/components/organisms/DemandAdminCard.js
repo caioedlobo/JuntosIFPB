@@ -155,7 +155,7 @@ const DemandAdminCard = () => {
                                 gap: "30px",
                             }}
                         >
-                            <TextField required={true} label={isRegister === false ? "Digite o nome do status que deseja remover" : "Digite o nome do status que deseja adicionar"}
+                            <TextField required={true} label={isRegister === false ? "Digite o nome da demanda que deseja remover" : "Digite o nome da demanda que deseja adicionar"}
                                 onChange={(event) => setDemand(event.target.value)}
                             />
 
