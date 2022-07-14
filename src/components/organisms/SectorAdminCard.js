@@ -32,7 +32,6 @@ const SectorAdminCard = () => {
     };
 
     const handleSubmit = () => {
-        console.log(isRegister, sector.length, emailSector.length)
 
         if (!isRegister && sector.length === 0) {
             setOpenInfo(true);
@@ -61,7 +60,7 @@ const SectorAdminCard = () => {
 
         else {
             setPostController(true);
-            Axios.delete(`https://backendjuntosifpb.herokuapp.com/admin/deleteSector`,
+            Axios.delete(`https://backendjuntosifpb.herokuapp.com/admin/deleteSector/${sector}`, 
                 { headers: { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` } }
             ).then(() => {
                 setOpen(true)

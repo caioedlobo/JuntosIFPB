@@ -69,7 +69,8 @@ const UserBar = (props) => {
   const handleClose = () => {
     setAnchorEl(false);
   };
-  console.log(isOutsourced)
+  
+  console.log(isAdmin)
 
   return (
     <div data-testid="user-bar">
