@@ -12,7 +12,7 @@ import { useOutsourced } from "../providers/outsourced";
 
 const LoginForm = (props) => {
 
-  const {setIsLoggedIn} = useAuth();
+  const {setIsLoggedIn, setIsAdmin} = useAuth();
   const {setIsOutsourced} = useOutsourced();
 
   const [emailFormData, setEmailFormData] = useState();
@@ -111,6 +111,10 @@ const LoginForm = (props) => {
             
             setIsLoggedIn(true);
             setIsOutsourced(response.data.user.isOutsourced)
+            // verificar se é admin
+            Axios.post("https://backendjuntosifpb.herokuapp.com/", {
+              id: userId,
+            })
             navigate("/conta");
             
             

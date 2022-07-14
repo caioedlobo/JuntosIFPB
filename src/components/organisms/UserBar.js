@@ -37,7 +37,7 @@ import { useAuth } from "../providers/auth";
 const UserBar = (props) => {
 
   const { isOutsourced } = useOutsourced();
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn, isAdmin } = useAuth();
 
   const [open, setOpen] = useState(false);
 
@@ -244,33 +244,36 @@ const UserBar = (props) => {
                 </LayoutUserBar>
               ) : null}
 
-              <LayoutUserBar linkTo={"/servidores"}>
+              {isAdmin ? <Box><LayoutUserBar linkTo={"/servidores"}>
                 <HowToRegIcon />
                 <Typography style={{ paddingLeft: "5px" }}>
                   Servidores
                 </Typography>
               </LayoutUserBar>
 
-              <LayoutUserBar linkTo={"/setor"}>
-                <AddModeratorIcon />
-                <Typography style={{ paddingLeft: "5px" }}>
-                  Setor
-                </Typography>
-              </LayoutUserBar>
+                <LayoutUserBar linkTo={"/setor"}>
+                  <AddModeratorIcon />
+                  <Typography style={{ paddingLeft: "5px" }}>
+                    Setor
+                  </Typography>
+                </LayoutUserBar>
 
-              <LayoutUserBar linkTo={"/status"}>
-                <AddModeratorIcon />
-                <Typography style={{ paddingLeft: "5px" }}>
-                  Status
-                </Typography>
-              </LayoutUserBar>
+                <LayoutUserBar linkTo={"/status"}>
+                  <AddModeratorIcon />
+                  <Typography style={{ paddingLeft: "5px" }}>
+                    Status
+                  </Typography>
+                </LayoutUserBar>
 
-              <LayoutUserBar linkTo={"/demandas_admin"}>
-                <AddModeratorIcon />
-                <Typography style={{ paddingLeft: "5px" }}>
-                  Gerenciar Demandas
-                </Typography>
-              </LayoutUserBar>
+                <LayoutUserBar linkTo={"/demandas_admin"}>
+                  <AddModeratorIcon />
+                  <Typography style={{ paddingLeft: "5px" }}>
+                    Gerenciar Demandas
+                  </Typography>
+                </LayoutUserBar>
+                
+                </Box> 
+                : null}
 
               <Button
                 sx={{

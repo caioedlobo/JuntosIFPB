@@ -61,7 +61,7 @@ const SectorAdminCard = () => {
 
         else {
             setPostController(true);
-            Axios.delete(`https://backendjuntosifpb.herokuapp.com/admin/sector/${sector}`,
+            Axios.delete(`https://backendjuntosifpb.herokuapp.com/admin/deleteSector`,
                 { headers: { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` } }
             ).then(() => {
                 setOpen(true)
@@ -186,7 +186,7 @@ const SectorAdminCard = () => {
                         <Stack spacing={2} sx={{ width: '100%' }}>
                             <Snackbar open={openError} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
                                 <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                                    Erro ao criar setor. Tente novamente.
+                                    Erro ao realizar ação. Tente novamente.
                                 </Alert>
                             </Snackbar>
                         </Stack>

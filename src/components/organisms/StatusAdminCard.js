@@ -61,7 +61,7 @@ const StatusAdminCard = () => {
         }
         else {
             setPostController(true)
-            Axios.put("https://backendjuntosifpb.herokuapp.com/admin//:statusName", {
+            Axios.delete("https://backendjuntosifpb.herokuapp.com/admin/deleteStatus", {
 
             })
                 .then(() => {
