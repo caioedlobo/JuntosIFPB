@@ -7,7 +7,7 @@ const StatusAdminCard = () => {
     const [status, setStatus] = React.useState("")
 
     const [postController, setPostController] = React.useState(false)
-    const [isRegister, setIsRegister] = React.useState(undefined)
+    const [isRegister, setIsRegister] = React.useState(true)
 
     const valueChangeHandler = (event) => {
         if ("Cadastrar" === event.target.value) {
@@ -21,18 +21,18 @@ const StatusAdminCard = () => {
     const [openInfo, setOpenInfo] = React.useState(false);
 
     const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-  
-      setOpen(false);
-      setOpenError(false);
-      setOpenInfo(false);
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+        setOpenError(false);
+        setOpenInfo(false);
     };
 
     const handleSubmit = () => {
 
-        if(status.length === 0 || isRegister === undefined) {
+        if (status.length === 0 || isRegister === undefined) {
             setOpenInfo(true);
         }
 
@@ -61,16 +61,20 @@ const StatusAdminCard = () => {
         }
         else {
             setPostController(true)
-            Axios.delete("https://backendjuntosifpb.herokuapp.com/admin/deleteStatus", {
-
+            Axios.delete(`https://backendjuntosifpb.herokuapp.com/admin/deleteStatus/${status}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
             })
                 .then(() => {
+                    setOpen(true)
                     setPostController(false)
                     setIsRegister(false)
                     setStatus("")
                 }
                 )
                 .catch(() => {
+                    setOpenError(true);
                     setPostController(false)
                 }
                 )
@@ -124,7 +128,7 @@ const StatusAdminCard = () => {
                                 name="radio-buttons-group"
                                 onChange={valueChangeHandler}
                                 defaultValue="Cadastrar"
-                                
+
                             >
                                 <FormControlLabel
                                     value="Cadastrar"
@@ -183,7 +187,7 @@ const StatusAdminCard = () => {
                         <Stack spacing={2} sx={{ width: '100%' }}>
                             <Snackbar open={openError} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
                                 <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                                    Erro ao criar status. Tente novamente
+                                    Erro ao realizar ação. Tente novamente.
                                 </Alert>
                             </Snackbar>
                         </Stack>
@@ -191,7 +195,7 @@ const StatusAdminCard = () => {
                         <Stack spacing={2} sx={{ width: '100%' }}>
                             <Snackbar open={openInfo} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
                                 <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
-                                   Preencha todos os campos!
+                                    Preencha todos os campos!
                                 </Alert>
                             </Snackbar>
                         </Stack>
