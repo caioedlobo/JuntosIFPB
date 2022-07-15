@@ -25,11 +25,13 @@ const DemandsSectorCard = () => {
   const sx = {
     table: {
       minWidth: "300px",
+      
     },
     tableContainer: {
       borderRadius: "5px",
       margin: "10px 0",
       maxWidth: "600px",
+      /* maxHeight: "800px", */
     },
     tableHeaderCell: {
       fontWeight: "bold",
@@ -305,7 +307,7 @@ const DemandsSectorCard = () => {
             </Paper>
             <LoadingButton
               style={{
-                marginTop: "200px",
+                marginTop: "50px",
                 width: "70%",
               }}
               onClick={updateStatus}

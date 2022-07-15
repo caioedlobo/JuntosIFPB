@@ -29,12 +29,9 @@ const Navbar = (props) => {
     setAnchorEl(false);
   };
 
-  /* useEffect(() => {
-    setIsLoggedIn(true);
-  }, []); */
 
   useEffect(() => {
-    //função com o accessToken
+
     Axios.get("https://backendjuntosifpb.herokuapp.com/admin/isLoggedIn",{
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
