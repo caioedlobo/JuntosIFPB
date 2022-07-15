@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Box from "@mui/material/Box";
 import classes from "./stylesheet/Navbar.module.css";
@@ -14,11 +14,12 @@ import HelpIcon from '@mui/icons-material/Help';
 import { useAuth } from "../providers/auth";
 
 import { Typography, Menu, MenuItem } from "@mui/material";
+import Axios from "axios";
 
 const Navbar = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(false);
 
-  const {isLoggedIn} = useAuth();
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
 
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,7 +29,25 @@ const Navbar = (props) => {
     setAnchorEl(false);
   };
 
- 
+  /* useEffect(() => {
+    setIsLoggedIn(true);
+  }, []); */
+
+  useEffect(() => {
+    //função com o accessToken
+    Axios.get("https://backendjuntosifpb.herokuapp.com/admin/isLoggedIn",{
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+    .then((response) => {
+      setIsLoggedIn(true);
+    })
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
 
   return (
     <div data-testid="navbar">
@@ -63,7 +82,7 @@ const Navbar = (props) => {
                     justifyContent: "flex-start",
                   }}
                 >
-                  <HomeOutlinedIcon style={{marginRight: "8px"}}/>
+                  <HomeOutlinedIcon style={{ marginRight: "8px" }} />
                   <Typography>Início</Typography>
                 </Box>
               </Link>
@@ -82,7 +101,7 @@ const Navbar = (props) => {
                     justifyContent: "flex-start",
                   }}
                 >
-                  <BarChartOutlinedIcon style={{marginRight: "8px"}}/>
+                  <BarChartOutlinedIcon style={{ marginRight: "8px" }} />
                   <Typography>Ranking</Typography>
                 </Box>
               </Link>
@@ -99,10 +118,10 @@ const Navbar = (props) => {
                     flexDirection: "row",
                     width: "95px",
                     justifyContent: "flex-start",
-                    
+
                   }}
                 >
-                  <CallOutlinedIcon style={{marginRight: "8px"}}/>
+                  <CallOutlinedIcon style={{ marginRight: "8px" }} />
                   <Typography>Contato</Typography>
                 </Box>
               </Link>
@@ -117,15 +136,15 @@ const Navbar = (props) => {
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    
+
                     width: "95px",
                     justifyContent: "flex-start",
-                    
+
                     /* justifyContent: "flex-start", */
                     marginLeft: "0px"
                   }}
                 >
-                  <HelpIcon style={{marginRight: "8px"}}/>
+                  <HelpIcon style={{ marginRight: "8px" }} />
                   <Typography>Ajuda</Typography>
                 </Box>
               </Link>
@@ -141,21 +160,21 @@ const Navbar = (props) => {
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    
+
                     width: "95px",
                     justifyContent: "flex-start",
-                    
+
                     /* justifyContent: "flex-start", */
                     marginLeft: "0px"
                   }}
                 >
-                  <HelpIcon style={{marginRight: "8px"}}/>
+                  <HelpIcon style={{ marginRight: "8px" }} />
                   <Typography>FAQ</Typography>
                 </Box>
               </Link>
             </MenuItem>
 
-            
+
             <MenuItem>
               <Link
                 to={"/login"}
@@ -169,7 +188,7 @@ const Navbar = (props) => {
                     justifyContent: "flex-start",
                   }}
                 >
-                  <AccountCircleOutlinedIcon style={{marginRight: "8px"}}/>
+                  <AccountCircleOutlinedIcon style={{ marginRight: "8px" }} />
                   <Typography>Entrar</Typography>
                 </Box>
               </Link>
@@ -201,11 +220,11 @@ const Navbar = (props) => {
             <Link to={"/ajuda"} className={classes.typo}>
               Ajuda
             </Link>
-            
+
             <Link to={"/faq"} className={classes.typo}>
               FAQ
             </Link>
-            
+
             <Link to={isLoggedIn ? "/conta" : "/login"} className={classes.typo}>
               {isLoggedIn ? " Conta" : "Entrar"}
             </Link>
