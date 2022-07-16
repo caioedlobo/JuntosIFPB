@@ -13,18 +13,31 @@ import { LoadingButton } from "@mui/lab";
 
 
 const CpfForm = (props) => {
-  
+
+  const [emailTec, setEmailTec] = useState("");
   const [isOutsourced, setIsOutsourced] = useState(false);
+  const [isTec, setIsTec] = useState(false);
   const [error, setError] = useState(false);
   const [postController, setPostController] = useState(false);
   const [helperText, setHelperText] = useState("");
   const [cpfValue, setCpfValue] = useState("");
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
+  console.log(emailTec)
   const valueChangeHandler = (event) => {
     if ("Terceirizado" === event.target.value) {
+      setIsTec(false);
       return setIsOutsourced(true);
     }
+    else if ("Tec" === event.target.value) {
+      setIsOutsourced(false);
+      return setIsTec(true);
+    }
+    else if ("Docente/Discente" === event.target.value) {
+
+      setIsTec(false);
+      return setIsOutsourced(false);
+    }
+
     return setIsOutsourced(false);
   };
 
@@ -55,7 +68,7 @@ const CpfForm = (props) => {
             props.CpfHandler();
           })
           .catch((err) => {
-            
+
             setError(true);
             setHelperText(err.response.data.error);
             setPostController(false);
@@ -84,7 +97,12 @@ const CpfForm = (props) => {
           <FormControlLabel
             value="Terceirizado"
             control={<Radio />}
-            label="Téc.Adm/Terceirizado"
+            label="Terceirizado"
+          />
+          <FormControlLabel
+            value="Tec"
+            control={<Radio />}
+            label="Téc Administrativo"
           />
         </RadioGroup>
       </FormControl>
@@ -116,19 +134,23 @@ const CpfForm = (props) => {
           </InputMask>
         </div>
       ) : (
-        <div style={{ marginBottom: "36px" }}>
-          <HeightFormHandler />
-        </div>
+        null
       )}
 
-      <HeightFormHandler />
+      {isTec ?
+        <div>
+          <TextField label="Digite seu email" onChange={(event) => setEmailTec(event.target.value)} />
+        </div>
+        : null}
 
       <HeightFormHandler />
+      <HeightFormHandler />
+      {!isOutsourced && !isTec ? <HeightFormHandler /> : null}
 
       <LoadingButton type="submit" loading={postController}>
         Continuar
       </LoadingButton>
-      <HeightFormHandler />
+      {!isOutsourced && !isTec ? <HeightFormHandler /> : null}
       <Button
         sx={{ backgroundColor: "transparent" }}
         onClick={props.FormHandlerRegister}
