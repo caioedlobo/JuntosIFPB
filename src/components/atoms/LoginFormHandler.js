@@ -15,6 +15,7 @@ const LoginFormHandler = () => {
   const FormHandlerLogin = () => {
     setIsLoginForm(true);
     setIsCpfForm(false);
+    localStorage.setItem("emailTec", "");
   };
   const FormCpfHandler = () => {
     setIsLoginForm(false);

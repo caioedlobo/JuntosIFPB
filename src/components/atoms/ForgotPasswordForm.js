@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Button, Snackbar, Stack } from "@mui/material";
+import { Alert, Button, Snackbar, Stack, Typography } from "@mui/material";
 import LoginText from "./LoginText";
 import ImageLogin from "./ImageLogin";
 import HeightFormHandler from "./HeightFormHandler";
@@ -62,9 +62,9 @@ const ForgotPasswordForm = (props) => {
     >
       <ImageLogin />
       <HeightFormHandler />
-      <p /* style={{marginTop: "30px"}} */>	
+      <Typography /* style={{marginTop: "30px"}} */>	
         Insira seu e-mail para recuperar a sua conta.
-      </p>
+      </Typography>
       <LoginText emailLoginData={emailForgotPassword}/>
 
       <HeightFormHandler />

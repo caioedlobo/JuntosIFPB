@@ -12,8 +12,8 @@ import { useOutsourced } from "../providers/outsourced";
 
 const LoginForm = (props) => {
 
-  const {setIsLoggedIn} = useAuth();
-  const {setIsOutsourced} = useOutsourced();
+  const { setIsLoggedIn, setIsAdmin } = useAuth();
+  const { setIsOutsourced } = useOutsourced();
 
   const [emailFormData, setEmailFormData] = useState();
   const [passwordFormData, setPasswordFormData] = useState();
@@ -90,7 +90,7 @@ const LoginForm = (props) => {
         setpostController(true);
         const token = e.target.action.split("=")[1];
         const outsourcedId = e.target.action.split("=")[2];
-        
+
         Axios.post(
           "https://backendjuntosifpb.herokuapp.com/auth/authenticate",
           {
@@ -107,14 +107,25 @@ const LoginForm = (props) => {
             const userId = response.data.user._id;
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("userId", userId);
-            
-            
+
+
             setIsLoggedIn(true);
             setIsOutsourced(response.data.user.isOutsourced)
+            // verificar se é admin
+            Axios.get("https://backendjuntosifpb.herokuapp.com/admin/isAdmin/", {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              }
+            }).then((response) => {;
+              
+              setIsAdmin(response.data.ok);
+              localStorage.setItem("isAdmin", response.data.ok);
+            }
+            ).catch((err) => { console.log(err) })
             navigate("/conta");
-            
-            
-            
+
+
+
           })
           .catch((error) => {
             setpostController(false);

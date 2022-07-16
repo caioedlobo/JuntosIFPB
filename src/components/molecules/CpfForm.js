@@ -4,7 +4,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageLogin from "../atoms/ImageLogin";
 import HeightFormHandler from "../atoms/HeightFormHandler";
 import InputMask from "react-input-mask";
@@ -13,20 +13,49 @@ import { LoadingButton } from "@mui/lab";
 
 
 const CpfForm = (props) => {
-  
+
+  const [emailTec, setEmailTec] = useState("");
   const [isOutsourced, setIsOutsourced] = useState(false);
+  const [isTec, setIsTec] = useState(false);
+  const [isDoc, setIsDoc] = useState(false);
   const [error, setError] = useState(false);
   const [postController, setPostController] = useState(false);
   const [helperText, setHelperText] = useState("");
   const [cpfValue, setCpfValue] = useState("");
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
+  const validEmail = (email) => {
+    if (email.split("@").length === 2) {
+      if (email.split("@")[1] === "academico.ifpb.edu.br" || email.split("@")[1] === "ifpb.edu.br") {
+        return true;
+      }
+    }
+  }
+
   const valueChangeHandler = (event) => {
     if ("Terceirizado" === event.target.value) {
+      setIsTec(false);
       return setIsOutsourced(true);
     }
+    else if ("Tec" === event.target.value) {
+      setIsOutsourced(false);
+      return setIsTec(true);
+    }
+    else if ("Docente/Discente" === event.target.value) {
+      setIsOutsourced(false)
+      setIsTec(false);
+      return setIsDoc(true);
+    }
+
     return setIsOutsourced(false);
   };
+
+  useEffect(() => {
+    if (emailTec.length === 0) {
+      setError(false);
+      setHelperText("");
+    }
+  }, [emailTec]);
 
   return (
     <form
@@ -42,25 +71,50 @@ const CpfForm = (props) => {
         event.preventDefault();
         setPostController(true);
 
-        /* if (isOutsourced) { */
-        Axios.post("https://backendjuntosifpb.herokuapp.com/validateCpf", {
-          cpf: cpfValue,
-          isOutsourced: isOutsourced,
-        })
-          .then(() => {
-            isOutsourced
-              ? localStorage.setItem("cpfValue", cpfValue)
-              : localStorage.setItem("cpfValue", "");
+        if (isOutsourced || isDoc) {
+
+          Axios.post("https://backendjuntosifpb.herokuapp.com/validateCpf", {
+            cpf: cpfValue,
+            isOutsourced: isOutsourced,
+          })
+            .then(() => {
+              localStorage.setItem("emailTec", emailTec);
+              isOutsourced
+                ? localStorage.setItem("cpfValue", cpfValue)
+                : localStorage.setItem("cpfValue", "");
+              setPostController(false);
+              props.CpfHandler();
+            })
+            .catch((err) => {
+
+              setError(true);
+              setHelperText(err.response.data.error);
+              setPostController(false);
+            });
+        }
+        else if (isTec) {
+          if (validEmail(emailTec)) {
+            localStorage.setItem("emailTec", emailTec);
             setPostController(false);
             props.CpfHandler();
-          })
-          .catch((err) => {
-            
-            setError(true);
-            setHelperText(err.response.data.error);
+          }
+          else {
             setPostController(false);
-          });
-        /* } */
+            setError(true);
+            setHelperText("Email inválido");
+          }
+          /* Axios.post("https://backendjuntosifpb.herokuapp.com/", {
+            email: emailTec,
+            isOutsourced: true,
+          })
+            .then(() => {
+              localStorage.setItem("emailTec", emailTec);
+              setPostController(false);
+              props.CpfHandler();
+            })
+            .catch((err) => { }) */
+
+        }
       }}
     >
       <ImageLogin />
@@ -84,7 +138,12 @@ const CpfForm = (props) => {
           <FormControlLabel
             value="Terceirizado"
             control={<Radio />}
-            label="Téc.Adm/Terceirizado"
+            label="Terceirizado"
+          />
+          <FormControlLabel
+            value="Tec"
+            control={<Radio />}
+            label="Téc Administrativo"
           />
         </RadioGroup>
       </FormControl>
@@ -107,7 +166,7 @@ const CpfForm = (props) => {
               <TextField
                 variant="outlined"
                 label="Digite seu CPF"
-                required
+                required={true}
                 error={error}
                 helperText={helperText}
                 color={numbers.includes(cpfValue[13]) ? "success" : null}
@@ -116,19 +175,28 @@ const CpfForm = (props) => {
           </InputMask>
         </div>
       ) : (
-        <div style={{ marginBottom: "36px" }}>
-          <HeightFormHandler />
-        </div>
+        null
       )}
 
-      <HeightFormHandler />
+      {isTec ?
+        <div>
+          <TextField label="Digite seu email"
+            required={true}
+            error={error}
+            helperText={helperText}
+            onChange={(event) => setEmailTec(event.target.value)}
+          />
+        </div>
+        : null}
 
       <HeightFormHandler />
+      <HeightFormHandler />
+      {!isOutsourced && !isTec ? <HeightFormHandler /> : null}
 
       <LoadingButton type="submit" loading={postController}>
         Continuar
       </LoadingButton>
-      <HeightFormHandler />
+      {!isOutsourced && !isTec ? <HeightFormHandler /> : null}
       <Button
         sx={{ backgroundColor: "transparent" }}
         onClick={props.FormHandlerRegister}
