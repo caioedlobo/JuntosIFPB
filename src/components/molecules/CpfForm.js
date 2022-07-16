@@ -17,12 +17,13 @@ const CpfForm = (props) => {
   const [emailTec, setEmailTec] = useState("");
   const [isOutsourced, setIsOutsourced] = useState(false);
   const [isTec, setIsTec] = useState(false);
+  const [isDoc, setIsDoc] = useState(false);
   const [error, setError] = useState(false);
   const [postController, setPostController] = useState(false);
   const [helperText, setHelperText] = useState("");
   const [cpfValue, setCpfValue] = useState("");
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  console.log(emailTec)
+  
   const valueChangeHandler = (event) => {
     if ("Terceirizado" === event.target.value) {
       setIsTec(false);
@@ -33,9 +34,9 @@ const CpfForm = (props) => {
       return setIsTec(true);
     }
     else if ("Docente/Discente" === event.target.value) {
-
+      setIsOutsourced(false)
       setIsTec(false);
-      return setIsOutsourced(false);
+      return setIsDoc(true);
     }
 
     return setIsOutsourced(false);
@@ -53,27 +54,43 @@ const CpfForm = (props) => {
       }}
       onSubmit={(event) => {
         event.preventDefault();
-        setPostController(true);
 
-        /* if (isOutsourced) { */
-        Axios.post("https://backendjuntosifpb.herokuapp.com/validateCpf", {
-          cpf: cpfValue,
-          isOutsourced: isOutsourced,
-        })
-          .then(() => {
-            isOutsourced
-              ? localStorage.setItem("cpfValue", cpfValue)
-              : localStorage.setItem("cpfValue", "");
-            setPostController(false);
-            props.CpfHandler();
+
+        if (isOutsourced || isDoc) {
+          setPostController(true);
+          Axios.post("https://backendjuntosifpb.herokuapp.com/validateCpf", {
+            cpf: cpfValue,
+            isOutsourced: isOutsourced,
           })
-          .catch((err) => {
+            .then(() => {
+              localStorage.setItem("emailTec", emailTec);
+              isOutsourced
+                ? localStorage.setItem("cpfValue", cpfValue)
+                : localStorage.setItem("cpfValue", "");
+              setPostController(false);
+              props.CpfHandler();
+            })
+            .catch((err) => {
 
-            setError(true);
-            setHelperText(err.response.data.error);
-            setPostController(false);
-          });
-        /* } */
+              setError(true);
+              setHelperText(err.response.data.error);
+              setPostController(false);
+            });
+        }
+        else if (isTec) {
+          Axios.post("https://backendjuntosifpb.herokuapp.com/", {
+            email: emailTec,
+            isOutsourced: isOutsourced,
+          })
+            .then(() => {
+              isOutsourced
+                ? localStorage.setItem("cpfValue", cpfValue)
+                : localStorage.setItem("cpfValue", "");
+              setPostController(false);
+              props.CpfHandler();
+            })
+            .catch((err) => { })
+        }
       }}
     >
       <ImageLogin />
@@ -125,7 +142,7 @@ const CpfForm = (props) => {
               <TextField
                 variant="outlined"
                 label="Digite seu CPF"
-                required
+                required={true}
                 error={error}
                 helperText={helperText}
                 color={numbers.includes(cpfValue[13]) ? "success" : null}
@@ -139,7 +156,7 @@ const CpfForm = (props) => {
 
       {isTec ?
         <div>
-          <TextField label="Digite seu email" onChange={(event) => setEmailTec(event.target.value)} />
+          <TextField label="Digite seu email" required={true} error={error} helperText={helperText} onChange={(event) => setEmailTec(event.target.value)} />
         </div>
         : null}
 

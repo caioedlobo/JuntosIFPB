@@ -6,7 +6,7 @@ const DemandAdminCard = () => {
 
     const [demand, setDemand] = React.useState("")
     const [postController, setPostController] = React.useState(false)
-    const [isRegister, setIsRegister] = React.useState(undefined)
+    const [isRegister, setIsRegister] = React.useState(true)
 
     const [open, setOpen] = React.useState(false);
     const [openError, setOpenError] = React.useState(false);
@@ -31,12 +31,12 @@ const DemandAdminCard = () => {
 
     const handleSubmit = () => {
 
-        if (demand.length === 0 || isRegister === undefined) {
+        if (demand.length === 0) {
             setOpenInfo(true);
         }
-        else if (demand === "Cadastrar") {
+        else if (isRegister) {
             setPostController(true)
-            Axios.post("https://backendjuntosifpb.herokuapp.com/admin/demand", {
+            Axios.post("https://backendjuntosifpb.herokuapp.com/admin/presetDemand", {
                 title: demand
             }, {
                 headers: {
@@ -60,7 +60,7 @@ const DemandAdminCard = () => {
         }
         else {
             setPostController(true)
-            Axios.delete("https://backendjuntosifpb.herokuapp.com/admin/demand", {
+            Axios.delete(`https://backendjuntosifpb.herokuapp.com/admin/deletePresetDemand/${demand}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
