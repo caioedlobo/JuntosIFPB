@@ -25,7 +25,7 @@ const DemandsSectorCard = () => {
   const sx = {
     table: {
       minWidth: "300px",
-      
+
     },
     tableContainer: {
       borderRadius: "5px",
@@ -72,11 +72,11 @@ const DemandsSectorCard = () => {
   const [statuses, setStatuses] = useState([]);
   const [sectors, setSectors] = useState([]);
   const [listSectors, setListSectors] = useState([]);
-  console.log(sectors)
-  console.log(statuses);
- 
+  const [listStatuses, setListStatuses] = useState([]);
+
+
   useEffect(() => {
- 
+
     Axios.post(
       "https://backendjuntosifpb.herokuapp.com/outsourced/outsourcedSector/",
       { id: localStorage.getItem("userId") },
@@ -88,31 +88,51 @@ const DemandsSectorCard = () => {
     )
       .then((response) => {
         setData(response.data.demands);
-        
+
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
- 
-  useEffect( () => {
+
+  useEffect(() => {
     Axios.get("https://backendjuntosifpb.herokuapp.com/sector/listAllSectors",
-    {},
-    {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        }
       }
-    }
     ).then((response) => {
       setListSectors(response.data.ok.map((item) => item.title));
-      
+
     })
-    .catch((err) => {
-      console.log(err)
-    })
+      .catch((err) => {
+        console.log(err)
+      })
   }, [data]);
-  
+
+  useEffect(() => {
+    Axios.get("https://backendjuntosifpb.herokuapp.com/ranking/getStatuses",
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        }
+      }
+    ).then((response) => {
+      console.log(response)
+      setListStatuses(response.data.statuses.map((item) => item.title));
+
+    })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, []);
+
+  console.log(listStatuses)
+
 
 
   const [open, setOpen] = React.useState(false);
@@ -128,25 +148,25 @@ const DemandsSectorCard = () => {
   const updateStatus = () => {
     setPostController(true);
     let newData = [];
-    
+
     for (let i = 0; i < statuses.length; i++) {
-    
-     if ( statuses[i] !== undefined){
-     newData = [...newData, { id: statuses[i]?.id, status: statuses[i]?.value }];
+
+      if (statuses[i] !== undefined) {
+        newData = [...newData, { id: statuses[i]?.id, status: statuses[i]?.value }];
+      }
+      if (sectors[i] !== undefined) {
+        newData = [...newData, { id: sectors[i]?.id, sector: sectors[i]?.value }];
+      }
     }
-    if ( sectors[i] !== undefined){
-      newData = [...newData, { id: sectors[i]?.id, sector: sectors[i]?.value }];
-     }
-  }
     console.log(newData)
     Axios.put("https://backendjuntosifpb.herokuapp.com/demands/updateDemand", {
       demands: newData,
     },
-    {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-    })
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      })
       .then((response) => {
         setPostController(false);
         /* setStatuses([]); */
@@ -202,7 +222,7 @@ const DemandsSectorCard = () => {
             </Typography>
             <Paper elevation={0} style={{ overflowX: "auto" }}>
               <Box className={classes2.table}>
-                <TableContainer  sx={sx.tableContainer}>
+                <TableContainer sx={sx.tableContainer}>
                   {data != null ? (
                     <Table sx={sx.table} aria-label="simple table">
                       <TableHead>
@@ -223,8 +243,8 @@ const DemandsSectorCard = () => {
                             <TableCell sx={sx.tableCell}>{row.title}</TableCell>
 
                             <TableCell sx={sx.tableCell}>
-                              
-                              <FormControl sx={{width: "130px"}}>
+
+                              <FormControl sx={{ width: "130px" }}>
                                 <InputLabel id="demo-simple-select-label">
                                   Setor
                                 </InputLabel>
@@ -234,7 +254,7 @@ const DemandsSectorCard = () => {
                                   value={sectors[index]?.value ?? row.sector}  //?. se for undefined, é falso e vai para row.status
                                   label="Sector"
                                   onChange={(event) => {
-                                    setSectors( prevState => {
+                                    setSectors(prevState => {
                                       const newSectors = [...prevState];
                                       newSectors[index] = {
                                         id: row._id,
@@ -244,19 +264,19 @@ const DemandsSectorCard = () => {
                                     })
                                   }}
                                 >
-                                  
+
                                   {listSectors.map((sector) => (
                                     <MenuItem value={sector}>
-                                    {sector}
-                                  </MenuItem>
+                                      {sector}
+                                    </MenuItem>
                                   ))}
-                                  
+
                                 </Select>
                               </FormControl>
                             </TableCell>
 
                             <TableCell sx={sx.tableCell}>
-                              <FormControl sx={{width: "130px"}}>
+                              <FormControl sx={{ width: "130px" }}>
                                 <InputLabel id="demo-simple-select-label">
                                   Status
                                 </InputLabel>
@@ -267,7 +287,7 @@ const DemandsSectorCard = () => {
                                   value={statuses[index]?.value ?? row.status}  //?. se for undefined, é falso e vai para row.status
                                   label="Status"
                                   onChange={(event) => {
-                                    setStatuses( prevState => {
+                                    setStatuses(prevState => {
                                       const newStatuses = [...prevState];
                                       newStatuses[index] = {
                                         id: row._id,
@@ -277,7 +297,15 @@ const DemandsSectorCard = () => {
                                     })
                                   }}
                                 >
-                                  <MenuItem value={"Atribuído"}>
+                                  
+                                  {listStatuses.map((status) => (
+                                  <MenuItem value={status}>
+                                    {status}
+                                  </MenuItem>
+                                  )
+                                  )}
+                                  
+                                  {/* <MenuItem value={"Atribuído"}>
                                     Atribuído
                                   </MenuItem>
                                   <MenuItem value={"Em Análise"}>
@@ -288,7 +316,7 @@ const DemandsSectorCard = () => {
                                   </MenuItem>
                                   <MenuItem value={"Resolvido"}>
                                     Resolvido
-                                  </MenuItem>
+                                  </MenuItem> */}
                                 </Select>
                               </FormControl>
                             </TableCell>
@@ -317,19 +345,19 @@ const DemandsSectorCard = () => {
               Salvar
             </LoadingButton>
 
-        <Stack spacing={2} sx={{ width: '100%' }}>
-        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
-          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          Status da demanda alterado com sucesso!
-          </Alert>
-        </Snackbar>
-              </Stack>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+              <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  Status da demanda alterado com sucesso!
+                </Alert>
+              </Snackbar>
+            </Stack>
           </Box>
         </Card>
-        
+
 
       </Box>
-      
+
     </div>
   );
 };

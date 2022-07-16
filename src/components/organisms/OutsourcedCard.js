@@ -19,6 +19,9 @@ const OutsourcedCard = () => {
     const [openError, setOpenError] = React.useState(false);
     const [openInfo, setOpenInfo] = React.useState(false);
     console.log(isOutsourced)
+    console.log(isRegister)
+    console.log(cpfValue.length)
+    console.log(sector.length)
     const valueChangeHandler = (event) => {
         if ("Terceirizado" === event.target.value) {
             return setIsOutsourced(true);
@@ -48,7 +51,7 @@ const OutsourcedCard = () => {
             if (isOutsourced) {       //terceirizado
                 if (cpfValue.length !== 0 && sector.length !== 0) { //cpf e setor preenchidos
                     setPostController(true);
-                    Axios.post("https://backendjuntosifpb.herokuapp.com/admin/outsourced", {
+                    Axios.post("https://backendjuntosifpb.herokuapp.com/outsourced", {
                         cpf: cpfValue,
                         sector: sector
                     }, {
@@ -58,8 +61,7 @@ const OutsourcedCard = () => {
                     }).then(() => {
                         setOpen(true);
                         setPostController(false);
-                        setCpfValue("");
-                        setSector("");
+                        
                     })
                         .catch(() => {
                             setOpenError(true);
@@ -76,9 +78,10 @@ const OutsourcedCard = () => {
             else {       // tec administrativo
                 if (email.length !== 0 && sector.length !== 0) { //email e setor preenchidos
                     setPostController(true);
-                    Axios.post("https://backendjuntosifpb.herokuapp.com/admin/tecAdmin", {
+                    Axios.post("https://backendjuntosifpb.herokuapp.com/outsourced", {
                         email: email,
-                        sector: sector
+                        sector: sector,
+                        cpf: ""
                     }, {
                         headers: {
                             'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -104,12 +107,16 @@ const OutsourcedCard = () => {
             if (isOutsourced) {       //terceirizado
                 if (cpfValue.length !== 0) { //cpf  preenchido
                     setPostController(true);
-                    Axios.delete(`https://backendjuntosifpb.herokuapp.com/admin/${"teste"}`)
+                    Axios.delete(`https://backendjuntosifpb.herokuapp.com/outsourced/deleteCpf/${cpfValue}`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                        }
+                    })
                         .then(() => {
                             setOpen(true);
                             setPostController(false);
-                            setCpfValue("");
-                            setSector("");
+                            
                         })
                         .catch(() => {
                             setOpenError(true);
@@ -126,12 +133,16 @@ const OutsourcedCard = () => {
             else {       // tec administrativo
                 if (email.length !== 0) { //email preenchido
                     setPostController(true);
-                    Axios.delete(`https://backendjuntosifpb.herokuapp.com/admin/${"teste"}`)
+                    Axios.delete(`https://backendjuntosifpb.herokuapp.com/outsourced/deleteEmail/${email}`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                        }
+                    })
                         .then(() => {
                             setOpen(true);
                             setPostController(false);
-                            setCpfValue("");
-                            setSector("");
+                          
                         })
                         .catch(() => {
                             setOpenError(true);

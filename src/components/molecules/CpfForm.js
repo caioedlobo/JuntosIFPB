@@ -4,7 +4,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageLogin from "../atoms/ImageLogin";
 import HeightFormHandler from "../atoms/HeightFormHandler";
 import InputMask from "react-input-mask";
@@ -23,7 +23,15 @@ const CpfForm = (props) => {
   const [helperText, setHelperText] = useState("");
   const [cpfValue, setCpfValue] = useState("");
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  
+
+  const validEmail = (email) => {
+    if (email.split("@").length === 2) {
+      if (email.split("@")[1] === "academico.ifpb.edu.br" || email.split("@")[1] === "ifpb.edu.br") {
+        return true;
+      }
+    }
+  }
+
   const valueChangeHandler = (event) => {
     if ("Terceirizado" === event.target.value) {
       setIsTec(false);
@@ -42,6 +50,13 @@ const CpfForm = (props) => {
     return setIsOutsourced(false);
   };
 
+  useEffect(() => {
+    if (emailTec.length === 0) {
+      setError(false);
+      setHelperText("");
+    }
+  }, [emailTec]);
+
   return (
     <form
       data-testid="cpf-form"
@@ -54,10 +69,10 @@ const CpfForm = (props) => {
       }}
       onSubmit={(event) => {
         event.preventDefault();
-
+        setPostController(true);
 
         if (isOutsourced || isDoc) {
-          setPostController(true);
+
           Axios.post("https://backendjuntosifpb.herokuapp.com/validateCpf", {
             cpf: cpfValue,
             isOutsourced: isOutsourced,
@@ -78,18 +93,27 @@ const CpfForm = (props) => {
             });
         }
         else if (isTec) {
-          Axios.post("https://backendjuntosifpb.herokuapp.com/", {
+          if (validEmail(emailTec)) {
+            localStorage.setItem("emailTec", emailTec);
+            setPostController(false);
+            props.CpfHandler();
+          }
+          else {
+            setPostController(false);
+            setError(true);
+            setHelperText("Email inválido");
+          }
+          /* Axios.post("https://backendjuntosifpb.herokuapp.com/", {
             email: emailTec,
-            isOutsourced: isOutsourced,
+            isOutsourced: true,
           })
             .then(() => {
-              isOutsourced
-                ? localStorage.setItem("cpfValue", cpfValue)
-                : localStorage.setItem("cpfValue", "");
+              localStorage.setItem("emailTec", emailTec);
               setPostController(false);
               props.CpfHandler();
             })
-            .catch((err) => { })
+            .catch((err) => { }) */
+
         }
       }}
     >
@@ -156,7 +180,12 @@ const CpfForm = (props) => {
 
       {isTec ?
         <div>
-          <TextField label="Digite seu email" required={true} error={error} helperText={helperText} onChange={(event) => setEmailTec(event.target.value)} />
+          <TextField label="Digite seu email"
+            required={true}
+            error={error}
+            helperText={helperText}
+            onChange={(event) => setEmailTec(event.target.value)}
+          />
         </div>
         : null}
 

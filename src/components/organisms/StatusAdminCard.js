@@ -15,6 +15,7 @@ const StatusAdminCard = () => {
         }
         return setIsRegister(false);
     };
+    console.log(isRegister)
 
     const [open, setOpen] = React.useState(false);
     const [openError, setOpenError] = React.useState(false);
@@ -32,7 +33,7 @@ const StatusAdminCard = () => {
 
     const handleSubmit = () => {
 
-        if (status.length === 0 || isRegister === undefined) {
+        if (status.length === 0) {
             setOpenInfo(true);
         }
 
