@@ -98,23 +98,17 @@ const CpfForm = (props) => {
             localStorage.setItem("cpfValue", "");
             setPostController(false);
             props.CpfHandler();
+            return
           }
           else {
             setPostController(false);
             setError(true);
             setHelperText("Email inválido");
+            return
           }
-          /* Axios.post("https://backendjuntosifpb.herokuapp.com/", {
-            email: emailTec,
-            isOutsourced: true,
-          })
-            .then(() => {
-              localStorage.setItem("emailTec", emailTec);
-              setPostController(false);
-              props.CpfHandler();
-            })
-            .catch((err) => { }) */
-
+        }
+        else{
+          props.CpfHandler();
         }
       }}
     >
