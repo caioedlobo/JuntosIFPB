@@ -304,19 +304,7 @@ const DemandsSectorCard = () => {
                                   </MenuItem>
                                   )
                                   )}
-                                  
-                                  {/* <MenuItem value={"Atribuído"}>
-                                    Atribuído
-                                  </MenuItem>
-                                  <MenuItem value={"Em Análise"}>
-                                    Em Análise
-                                  </MenuItem>
-                                  <MenuItem value={"Não Resolvido"}>
-                                    Não Resolvido
-                                  </MenuItem>
-                                  <MenuItem value={"Resolvido"}>
-                                    Resolvido
-                                  </MenuItem> */}
+                                 
                                 </Select>
                               </FormControl>
                             </TableCell>
