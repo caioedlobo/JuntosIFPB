@@ -95,6 +95,7 @@ const CpfForm = (props) => {
         else if (isTec) {
           if (validEmail(emailTec)) {
             localStorage.setItem("emailTec", emailTec);
+            localStorage.setItem("cpfValue", "");
             setPostController(false);
             props.CpfHandler();
           }

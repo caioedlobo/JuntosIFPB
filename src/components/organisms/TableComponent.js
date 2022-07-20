@@ -137,10 +137,10 @@ const TableComponent = () => {
               <MenuItem value={"Coordenação"}>Coordenação</MenuItem>
               <MenuItem value={"Limpeza"}>Limpeza</MenuItem> */}
               <MenuItem value={"Recentes"}>
-                Data de Solitação (Mais recentes)
+                Data de Solicitação (Mais recentes)
               </MenuItem>
               <MenuItem value={"Antigos"}>
-                Data de Solitação (Mais antigos)
+                Data de Solicitação (Mais antigos)
               </MenuItem>
             </Select>
           </FormControl>
