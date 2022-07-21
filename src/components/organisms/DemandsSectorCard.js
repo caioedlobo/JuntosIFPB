@@ -79,7 +79,7 @@ const DemandsSectorCard = () => {
 
     Axios.post(
       "https://backendjuntosifpb.herokuapp.com/outsourced/outsourcedSector/",
-      { id: localStorage.getItem("userId") },
+      
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
@@ -131,7 +131,9 @@ const DemandsSectorCard = () => {
       })
   }, []);
 
+  console.log(data)
   console.log(listStatuses)
+  console.log(listSectors)
 
 
 
