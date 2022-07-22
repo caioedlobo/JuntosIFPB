@@ -70,7 +70,7 @@ const UserBar = (props) => {
     setAnchorEl(false);
   };
 
-  console.log(isAdmin)
+
 
   return (
     <div data-testid="user-bar">
@@ -166,7 +166,7 @@ const UserBar = (props) => {
 
                   {isAdmin ? (
                     <MenuItem>
-                      <Link to="/contribuicoes">
+                      <Link to="/servidores">
                         <div style={{ display: "flex" }}>
                           <AddModeratorIcon />
                           <Typography style={{ paddingLeft: "5px" }}>
@@ -179,7 +179,7 @@ const UserBar = (props) => {
 
                   {isAdmin ? (
                     <MenuItem>
-                      <Link to="/contribuicoes">
+                      <Link to="/setor">
                         <div style={{ display: "flex" }}>
                           <AddModeratorIcon />
                           <Typography style={{ paddingLeft: "5px" }}>
@@ -192,7 +192,7 @@ const UserBar = (props) => {
 
                   {isAdmin ? (
                     <MenuItem>
-                      <Link to="/contribuicoes">
+                      <Link to="/status">
                         <div style={{ display: "flex" }}>
                           <AddModeratorIcon />
                           <Typography style={{ paddingLeft: "5px" }}>
@@ -205,7 +205,7 @@ const UserBar = (props) => {
 
                   {isAdmin ? (
                     <MenuItem>
-                      <Link to="/contribuicoes">
+                      <Link to="/demandas_admin">
                         <div style={{ display: "flex" }}>
                           <AddModeratorIcon />
                           <Typography style={{ paddingLeft: "5px" }}>
@@ -267,25 +267,24 @@ const UserBar = (props) => {
                 display: "flex",
                 flexDirection: { md: "column", sm: "row" },
                 justifyContent: "space-around",
-                
-                /* background: "red" */
+                textAlign: { md: "start", sm: "center" },
               }}
             >
               <LayoutUserBar linkTo={"/conta"}>
                 <AccountCircleIcon />
-                <Typography style={{ paddingLeft: "5px" }}>
+                <Typography sx={{ paddingLeft: {md: "5px", sm: "0px"} }}>
                   Alterar Nome
                 </Typography>
               </LayoutUserBar>
 
               <LayoutUserBar linkTo={"/seguranca"}>
                 <LockOpenIcon />
-                <Typography sx={{ paddingLeft: "5px" }}>Segurança</Typography>
+                <Typography sx={{ paddingLeft: {md: "5px", sm: "0px"} }}>Segurança</Typography>
               </LayoutUserBar>
 
               <LayoutUserBar linkTo={"/contribuicoes"}>
                 <BookmarkBorderIcon />
-                <Typography style={{ paddingLeft: "5px" }}>
+                <Typography sx={{ paddingLeft: {md: "5px", sm: "0px"} }}>
                   Minhas Contribuições
                 </Typography>
               </LayoutUserBar>
@@ -293,42 +292,41 @@ const UserBar = (props) => {
               {isOutsourced ? (
                 <LayoutUserBar linkTo={"/demandas"}>
                   <WorkOutlineIcon />
-                  <Typography style={{ paddingLeft: "5px" }}>
+                  <Typography sx={{ paddingLeft: {md: "5px", sm: "0px"} }}>
                     Demandas
                   </Typography>
                 </LayoutUserBar>
               ) : null}
 
-              {isAdmin ? <Box><LayoutUserBar linkTo={"/servidores"}>
+              {isAdmin ? <LayoutUserBar linkTo={"/servidores"}>
                 <HowToRegIcon />
-                <Typography style={{ paddingLeft: "5px" }}>
+                <Typography sx={{ paddingLeft: {md: "5px", sm: "0px"} }}>
                   Servidores
                 </Typography>
-              </LayoutUserBar>
+              </LayoutUserBar> : null}
 
-                <LayoutUserBar linkTo={"/setor"}>
-                  <AddModeratorIcon />
-                  <Typography style={{ paddingLeft: "5px" }}>
-                    Setor
-                  </Typography>
-                </LayoutUserBar>
+              {isAdmin ? <LayoutUserBar linkTo={"/setor"}>
+                <AddModeratorIcon />
+                <Typography sx={{ paddingLeft: {md: "5px", sm: "0px"} }}>
+                  Setor
+                </Typography>
+              </LayoutUserBar> : null}
 
-                <LayoutUserBar linkTo={"/status"}>
-                  <AddModeratorIcon />
-                  <Typography style={{ paddingLeft: "5px" }}>
-                    Status
-                  </Typography>
-                </LayoutUserBar>
+              {isAdmin ? <LayoutUserBar linkTo={"/status"}>
+                <AddModeratorIcon />
+                <Typography sx={{ paddingLeft: {md: "5px", sm: "0px"} }}>
+                  Status
+                </Typography>
+              </LayoutUserBar> : null}
 
-                <LayoutUserBar linkTo={"/demandas_admin"}>
-                  <AddModeratorIcon />
-                  <Typography style={{ paddingLeft: "5px" }}>
-                    Gerenciar Demandas
-                  </Typography>
-                </LayoutUserBar>
+              {isAdmin ? <LayoutUserBar linkTo={"/demandas_admin"}>
+                <AddModeratorIcon />
+                <Typography sx={{ paddingLeft: {md: "5px", sm: "0px"} }}>
+                  Gerenciar Demandas
+                </Typography>
+              </LayoutUserBar> : null}
 
-              </Box>
-                : null}
+
 
               <Button
                 sx={{
@@ -342,7 +340,7 @@ const UserBar = (props) => {
               >
                 <LogoutIcon />
 
-                <Typography style={{ paddingLeft: "5px" }}>Sair</Typography>
+                <Typography style={{ /* paddingLeft: "5px" */ }}>Sair</Typography>
               </Button>
             </Box>
           </div>
