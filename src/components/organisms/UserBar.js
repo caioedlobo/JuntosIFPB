@@ -69,7 +69,7 @@ const UserBar = (props) => {
   const handleClose = () => {
     setAnchorEl(false);
   };
-  
+
   console.log(isAdmin)
 
   return (
@@ -164,6 +164,59 @@ const UserBar = (props) => {
                     </MenuItem>
                   ) : null}
 
+                  {isAdmin ? (
+                    <MenuItem>
+                      <Link to="/contribuicoes">
+                        <div style={{ display: "flex" }}>
+                          <AddModeratorIcon />
+                          <Typography style={{ paddingLeft: "5px" }}>
+                            Servidores
+                          </Typography>
+                        </div>
+                      </Link>
+                    </MenuItem>
+                  ) : null}
+
+                  {isAdmin ? (
+                    <MenuItem>
+                      <Link to="/contribuicoes">
+                        <div style={{ display: "flex" }}>
+                          <AddModeratorIcon />
+                          <Typography style={{ paddingLeft: "5px" }}>
+                            Setor
+                          </Typography>
+                        </div>
+                      </Link>
+                    </MenuItem>
+                  ) : null}
+
+                  {isAdmin ? (
+                    <MenuItem>
+                      <Link to="/contribuicoes">
+                        <div style={{ display: "flex" }}>
+                          <AddModeratorIcon />
+                          <Typography style={{ paddingLeft: "5px" }}>
+                            Status
+                          </Typography>
+                        </div>
+                      </Link>
+                    </MenuItem>
+                  ) : null}
+
+                  {isAdmin ? (
+                    <MenuItem>
+                      <Link to="/contribuicoes">
+                        <div style={{ display: "flex" }}>
+                          <AddModeratorIcon />
+                          <Typography style={{ paddingLeft: "5px" }}>
+                            Gerenciar Demandas
+                          </Typography>
+                        </div>
+                      </Link>
+                    </MenuItem>
+                  ) : null}
+
+
                   <MenuItem>
                     <Button sx={{}} onClick={handleClickOpen}>
                       <div style={{ display: "flex" }}>
@@ -214,6 +267,7 @@ const UserBar = (props) => {
                 display: "flex",
                 flexDirection: { md: "column", sm: "row" },
                 justifyContent: "space-around",
+                
                 /* background: "red" */
               }}
             >
@@ -272,8 +326,8 @@ const UserBar = (props) => {
                     Gerenciar Demandas
                   </Typography>
                 </LayoutUserBar>
-                
-                </Box> 
+
+              </Box>
                 : null}
 
               <Button
