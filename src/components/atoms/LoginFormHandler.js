@@ -16,6 +16,7 @@ const LoginFormHandler = () => {
     setIsLoginForm(true);
     setIsCpfForm(false);
     localStorage.setItem("emailTec", "");
+    localStorage.setItem("isTec", "");
   };
   const FormCpfHandler = () => {
     setIsLoginForm(false);
@@ -65,7 +66,6 @@ const LoginFormHandler = () => {
       </div>
     );
   }
-
 };
 
 export default LoginFormHandler;

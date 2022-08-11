@@ -178,6 +178,7 @@ const RegisterForm = (props) => {
             email: emailFormData,
             password: passwordFormData,
             cpf: localStorage.getItem("cpfValue") ? null : "",
+            isTec: localStorage.getItem("isTec"),
           })
             .then((response) => {
               setSuccessScreen(true);

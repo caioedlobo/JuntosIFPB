@@ -11,9 +11,7 @@ import InputMask from "react-input-mask";
 import Axios from "axios";
 import { LoadingButton } from "@mui/lab";
 
-
 const CpfForm = (props) => {
-
   const [emailTec, setEmailTec] = useState("");
   const [isOutsourced, setIsOutsourced] = useState(false);
   const [isTec, setIsTec] = useState(false);
@@ -26,23 +24,24 @@ const CpfForm = (props) => {
 
   const validEmail = (email) => {
     if (email.split("@").length === 2) {
-      if (email.split("@")[1] === "academico.ifpb.edu.br" || email.split("@")[1] === "ifpb.edu.br") {
+      if (
+        email.split("@")[1] === "academico.ifpb.edu.br" ||
+        email.split("@")[1] === "ifpb.edu.br"
+      ) {
         return true;
       }
     }
-  }
+  };
 
   const valueChangeHandler = (event) => {
     if ("Terceirizado" === event.target.value) {
       setIsTec(false);
       return setIsOutsourced(true);
-    }
-    else if ("Tec" === event.target.value) {
+    } else if ("Tec" === event.target.value) {
       setIsOutsourced(false);
       return setIsTec(true);
-    }
-    else if ("Docente/Discente" === event.target.value) {
-      setIsOutsourced(false)
+    } else if ("Docente/Discente" === event.target.value) {
+      setIsOutsourced(false);
       setIsTec(false);
       return setIsDoc(true);
     }
@@ -72,7 +71,6 @@ const CpfForm = (props) => {
         setPostController(true);
 
         if (isOutsourced || isDoc) {
-
           Axios.post("https://backendjuntosifpb.herokuapp.com/validateCpf", {
             cpf: cpfValue,
             isOutsourced: isOutsourced,
@@ -82,32 +80,30 @@ const CpfForm = (props) => {
               isOutsourced
                 ? localStorage.setItem("cpfValue", cpfValue)
                 : localStorage.setItem("cpfValue", "");
+              localStorage.setItem("isTec", "");
               setPostController(false);
               props.CpfHandler();
             })
             .catch((err) => {
-
               setError(true);
               setHelperText(err.response.data.error);
               setPostController(false);
             });
-        }
-        else if (isTec) {
+        } else if (isTec) {
           if (validEmail(emailTec)) {
             localStorage.setItem("emailTec", emailTec);
             localStorage.setItem("cpfValue", "");
+            localStorage.setItem("isTec", true);
             setPostController(false);
             props.CpfHandler();
-            return
-          }
-          else {
+            return;
+          } else {
             setPostController(false);
             setError(true);
             setHelperText("Email inválido");
-            return
+            return;
           }
-        }
-        else{
+        } else {
           props.CpfHandler();
         }
       }}
@@ -169,20 +165,19 @@ const CpfForm = (props) => {
             )}
           </InputMask>
         </div>
-      ) : (
-        null
-      )}
+      ) : null}
 
-      {isTec ?
+      {isTec ? (
         <div>
-          <TextField label="Digite seu email"
+          <TextField
+            label="Digite seu email"
             required={true}
             error={error}
             helperText={helperText}
             onChange={(event) => setEmailTec(event.target.value)}
           />
         </div>
-        : null}
+      ) : null}
 
       <HeightFormHandler />
       <HeightFormHandler />
