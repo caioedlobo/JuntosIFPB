@@ -177,7 +177,7 @@ const RegisterForm = (props) => {
             name: nameFormData,
             email: emailFormData,
             password: passwordFormData,
-            cpf: localStorage.getItem("cpfValue") ? null : "",
+            cpf: localStorage.getItem("cpfValue"),
             isTec: localStorage.getItem("isTec"),
           })
             .then((response) => {
