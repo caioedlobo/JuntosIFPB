@@ -272,7 +272,7 @@ const OutsourcedCard = () => {
                                         display: "flex",
                                         flexDirection: "column",
                                         alignSelf: "center",
-                                        width: { md: "40%", xs: "40%" },
+                                        width: { md: "45%", xs: "40%" },
 
                                     }}>
                                         <InputMask
@@ -292,7 +292,7 @@ const OutsourcedCard = () => {
                                             {() => (
                                                 <TextField
                                                     variant="outlined"
-                                                    label="Digite o CPF do terceirizado"
+                                                    label="CPF do terceirizado"
                                                     required
                                                 /*                                         error={error}
                                                                                         helperText={helperText}
@@ -301,7 +301,7 @@ const OutsourcedCard = () => {
                                             )}
                                         </InputMask>
                                     </Box>
-                                    {isRegister ? <TextField required={true} label="Digite o setor do Téc Administrativo"
+                                    {isRegister ? <TextField required={true} label="Digite o setor do Terceirizado"
                                         onChange={(event) => setSector(event.target.value)} /> : null}
                                 </Box>
 
